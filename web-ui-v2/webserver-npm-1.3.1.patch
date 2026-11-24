@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+diff --git a/webserver.js b/webserver.js
+--- a/webserver.js
++++ b/webserver.js
+@@ -12,6 +12,8 @@
+ /*jshint -W097 */
+ /*jshint esversion: 6 */
+ 'use strict';
++
++const webUiV2 = require('./web-ui-v2/server.cjs');
+ 
+ // SerialTunnel object is used to embed TLS within another connection.
+ function SerialTunnel(options) {
+@@ -3119,7 +3121,12 @@
+                 }
+         }
+ 
+-        res.end('<html><head><meta http-equiv="refresh" content=0;url="' + url + '"></head><body></body></html>');
++        url = webUiV2.returnFromLogin(req, domain, url, hasVersionedWebUI(domain), () => obj.generateBaseURL(domain, req));
++        res.end('<html><head><meta http-equiv="refresh" content="0;url=' + EscapeHtml(url) + '"></head><body></body></html>');
++    }
++
++    function hasVersionedWebUI(domain) {
++        return webUiV2.enabled(domain, parent.config.domains.v2);
+     }
+ 
+     // Indicates that any request to "/" should render "default" or "login" depending on login state
+@@ -3446,15 +3453,17 @@
+                 // Load default page style or new modern ui
+                 var uiViewMode = 'default';
+                 var webstateJSON = JSON.parse(webstate);
+-                if (req.query.sitestyle != null) {
++                if (req.webUiV2 === true) {
++                    uiViewMode = 'default3';
++                } else if (req.query.sitestyle != null) {
+                     if (req.query.sitestyle == 3) { uiViewMode = 'default3'; }
+-                } else if (webstateJSON && webstateJSON.uiViewMode == 3) {
++                } else if (!hasVersionedWebUI(domain) && ((webstateJSON && webstateJSON.uiViewMode == 3) || (domain.sitestyle == 3))) {
+                     uiViewMode = 'default3';
+-                } else if (domain.sitestyle == 3) {
+-                    uiViewMode = 'default3';
+-                }
++                }
++                webUiV2.clearLogin(req);
+                 // Refresh the session
+-                render(dbGetFunc.req, dbGetFunc.res, getRenderPage(uiViewMode, dbGetFunc.req, domain), getRenderArgs({
++                const consolePage = req.webUiV2 === true ? getRenderPage('default3-v2', req, domain) : null;
++                render(dbGetFunc.req, dbGetFunc.res, consolePage || getRenderPage(uiViewMode, dbGetFunc.req, domain), getRenderArgs({
+                     authCookie: authCookie,
+                     authRelayCookie: authRelayCookie,
+                     viewmode: viewmode,
+@@ -3616,7 +3625,7 @@
+         if (domain.scrolltotop == true) { features2 += 0x08000000; } // Show the "Scroll to top" button
+         if (domain.devicesearchbargroupname === true) { features2 += 0x10000000; } // Search bar will find by group name too
+         if (((typeof domain.passwordrequirements != 'object') || (domain.passwordrequirements.duo2factor != false)) && (typeof domain.duo2factor == 'object') && (typeof domain.duo2factor.integrationkey == 'string') && (typeof domain.duo2factor.secretkey == 'string') && (typeof domain.duo2factor.apihostname == 'string')) { features2 += 0x20000000; } // using Duo for 2FA is allowed
+-        if (domain.showmodernuitoggle == true) { features2 += 0x40000000; } // Indicates that the new UI should be shown
++        if ((domain.showmodernuitoggle == true) || hasVersionedWebUI(domain)) { features2 += 0x40000000; } // Show the UI switcher
+         if (domain.sitestyle === 3) { features2 |= 0x80000000; } // Indicates that Modern UI is forced (siteStyle = 3)
+         if ((typeof domain.desktop == 'object') && (domain.desktop.disableconnectall == true)) { features3 += 0x00000001; } // Disable "Connect All" button when multiple sessions are active on a device
+         if (domain.upninsteadofuser === true) { features3 += 0x00000002; } // Show UPN instead of username in General tab
+@@ -3690,6 +3699,7 @@
+             if (typeof domain.authstrategies.jumpcloud == 'object') { authStrategies.push('jumpcloud'); }
+             if (typeof domain.authstrategies.saml == 'object') { authStrategies.push('saml'); }
+         }
++        if (authStrategies.length > 0) { webUiV2.rememberLogin(req); }
+ 
+         // Custom user interface
+         var customui = '';
+@@ -7553,6 +7563,10 @@
+                     obj.app.get(url, handleRootRequest);
+                     obj.app.post(url, obj.bodyParser.urlencoded({ extended: false }), handleRootPostRequest);
+                 }
++                webUiV2.registerRoutes(obj.app, url, obj.bodyParser.urlencoded({ extended: false }), {
++                    getDomain, isEnabled: hasVersionedWebUI, queryPortion: getQueryPortion, redirectRoot: handleRootRedirect,
++                    getRoot: handleRootRequest, postRoot: handleRootPostRequest
++                });
+                 obj.app.get(url + 'refresh.ashx', function (req, res) { res.sendStatus(200); });
+                 if ((domain.myserver !== false) && ((domain.myserver == null) || (domain.myserver.backup === true))) { obj.app.get(url + 'backup.zip', handleBackupRequest); }
+                 if ((domain.myserver !== false) && ((domain.myserver == null) || (domain.myserver.restore === true))) { obj.app.post(url + 'restoreserver.ashx', obj.bodyParser.urlencoded({ extended: false }), handleRestoreRequest); }
+@@ -10473,6 +10487,9 @@
+         }
+         xargs.customCSSTags += generateThemePackCSSTags(domain, page);
+         xargs.customJSTags += generateThemePackJSTags(domain, page);
++        if ((page === 'default') && hasVersionedWebUI(domain)) {
++            xargs.customJSTags += '<script defer src="scripts/console-v2-legacy-switch.js"></script>';
++        }
+         return xargs;
+     }
+ 

@@ -1,0 +1,682 @@
+# SPDX-License-Identifier: Apache-2.0
+diff --git a/views/default3.handlebars b/views/default3.handlebars
+--- a/views/default3.handlebars
++++ b/views/default3.handlebars
+@@ -1,4 +1,5 @@
+ <!DOCTYPE html>
++{{! SPDX-License-Identifier: Apache-2.0. Navigation and device views updated for the fork. }}
+ <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+ 
+ <head>
+@@ -18,6 +19,7 @@
+     <link id="theme-stylesheet" href="styles/bootstrap{{{min}}}.css" rel="stylesheet" title="CSS">
+     <link href="styles/select2.min.css" rel="stylesheet" title="CSS">
+     <link href="styles/select2-bootstrap-5-theme.min.css" rel="stylesheet" title="CSS">
++    <link href="styles/console-v2-devices.css" rel="stylesheet" title="CSS">
+     {{{customCSSTags}}}
+     <link rel="apple-touch-icon" href="/favicon-303x303.png" />
+     <script type="text/javascript" src="scripts/common-0.0.1{{{min}}}.js"></script>
+@@ -359,34 +361,27 @@
+             </div>
+         </div>
+         <div class="sidebar flex-column" id="page_leftbar">
+-            <div style="height:24px"></div>
+-            <nav class="nav flex-column">
+-                <a class="nav-link active text-center text-white lbbuttonsel" id="LeftMenuMyDevices" href="#" data-target="general" onclick=go(1,event) onkeypress="if (event.key=='Enter') { go(1); }"><i class="fa-solid fa-computer me-2"></i></a>
+-                <a class="nav-link text-center text-white" id="LeftMenuMyAccount" href="#" data-target="account" onclick=go(2,event) onkeypress="if (event.key=='Enter') { go(2); }"><i class="fa-solid fa-user-gear me-2"></i></a>
+-                <a class="nav-link text-center text-white" id="LeftMenuMyEvents" href="#" data-target="events" onclick=go(3,event) onkeypress="if (event.key=='Enter') { go(3); }"><i class="fa-solid fa-calendar-alt me-2"></i></a>
+-                <a class="nav-link text-center text-white" id="LeftMenuMyFiles" href="#" data-target="files" onclick=go(5,event) onkeypress="if (event.key=='Enter') { go(5); }"><i class="fa-solid fa-folder-open me-2"></i></a>
+-                <a class="nav-link text-center text-white" id="LeftMenuMyUsers" href="#" data-target="users" onclick=go(4,event) onkeypress="if (event.key=='Enter') { go(4); }"><i class="fa-solid fa-users me-2"></i></a>
+-                <a class="nav-link text-center text-white" id="LeftMenuMyServer" href="#" data-target="server" onclick=go(6,event) onkeypress="if (event.key=='Enter') { go(6); }"><i class="fa-solid fa-server me-2"></i></a>
++            <nav class="nav flex-column" aria-label="Main navigation">
++                <a class="nav-link lbbuttonsel" id="LeftMenuMyDevices" href="#" data-target="general" title="My Devices" aria-current="page" onclick="go(1,event); return false"><i class="fa-solid fa-computer" aria-hidden="true"></i><span class="console-nav-label">My Devices</span></a>
++                <a class="nav-link" id="LeftMenuMyAccount" href="#" data-target="account" title="My Account" onclick="go(2,event); return false"><i class="fa-solid fa-user-gear" aria-hidden="true"></i><span class="console-nav-label">My Account</span></a>
++                <a class="nav-link" id="LeftMenuMyEvents" href="#" data-target="events" title="My Events" onclick="go(3,event); return false"><i class="fa-solid fa-calendar-alt" aria-hidden="true"></i><span class="console-nav-label">My Events</span></a>
++                <a class="nav-link" id="LeftMenuMyFiles" href="#" data-target="files" title="My Files" onclick="go(5,event); return false"><i class="fa-solid fa-folder-open" aria-hidden="true"></i><span class="console-nav-label">My Files</span></a>
++                <a class="nav-link" id="LeftMenuMyUsers" href="#" data-target="users" title="My Users" onclick="go(4,event); return false"><i class="fa-solid fa-users" aria-hidden="true"></i><span class="console-nav-label">My Users</span></a>
++                <a class="nav-link" id="LeftMenuMyServer" href="#" data-target="server" title="My Server" onclick="go(6,event); return false"><i class="fa-solid fa-server" aria-hidden="true"></i><span class="console-nav-label">My Server</span></a>
+             </nav>
+         </div>
+         <div id=topbar class=noselect>
+             <div>
+                 <div style="position:relative">
+                     <span id=logoutControlSpan2></span>
+-                    <table id=MainMenuSpan cellpadding=0 cellspacing=0 class=style1>
++                    <table id=MainMenuSpan cellpadding=0 cellspacing=0 class=style1 role="presentation">
+                         <tr>
+-                            <td tabindex=0 id=MainMenuMyDevices class="topbar_td style3x" onmouseup=go(1,event)
+-                                onkeypress="if (event.key == 'Enter') go(1)">My Devices</td>
+-                            <td tabindex=0 id=MainMenuMyAccount class="topbar_td style3x" onmouseup=go(2,event)
+-                                onkeypress="if (event.key == 'Enter') go(2)">My Account</td>
+-                            <td tabindex=0 id=MainMenuMyEvents class="topbar_td style3x" onmouseup=go(3,event)
+-                                onkeypress="if (event.key == 'Enter') go(3)">My Events</td>
+-                            <td tabindex=0 id=MainMenuMyFiles class="topbar_td style3x" onmouseup=go(5,event)
+-                                onkeypress="if (event.key == 'Enter') go(5)">My Files</td>
+-                            <td tabindex=0 id=MainMenuMyUsers class="topbar_td style3x" onmouseup=go(4,event)
+-                                onkeypress="if (event.key == 'Enter') go(4)">My Users</td>
+-                            <td tabindex=0 id=MainMenuMyServer class="topbar_td style3x" onmouseup=go(6,event)
+-                                onkeypress="if (event.key == 'Enter') go(6)">My Server</td>
++                            <td id=MainMenuMyDevices class="topbar_td style3x"><button type="button" onclick=go(1,event) onauxclick=go(1,event)>My Devices</button></td>
++                            <td id=MainMenuMyAccount class="topbar_td style3x"><button type="button" onclick=go(2,event) onauxclick=go(2,event)>My Account</button></td>
++                            <td id=MainMenuMyEvents class="topbar_td style3x"><button type="button" onclick=go(3,event) onauxclick=go(3,event)>My Events</button></td>
++                            <td id=MainMenuMyFiles class="topbar_td style3x"><button type="button" onclick=go(5,event) onauxclick=go(5,event)>My Files</button></td>
++                            <td id=MainMenuMyUsers class="topbar_td style3x"><button type="button" onclick=go(4,event) onauxclick=go(4,event)>My Users</button></td>
++                            <td id=MainMenuMyServer class="topbar_td style3x"><button type="button" onclick=go(6,event) onauxclick=go(6,event)>My Server</button></td>
+                             <td class="topbar_td_end style3">&nbsp;</td>
+                         </tr>
+                     </table>
+@@ -394,36 +389,26 @@
+                         <div class="mobile-submenu-scroll">
+                             <button class="mobile-submenu-arrow" onclick="mobileSubMenuScroll('MainSubMenu',-1)" aria-label="Scroll left"><i class="fa fa-caret-square-left"></i></button>
+                             <div class="mobile-submenu-scroll-inner" id="MainSubMenuScrollInner">
+-                                <table id=MainSubMenu cellpadding=0 cellspacing=0 class=style1>
++                                <table id=MainSubMenu cellpadding=0 cellspacing=0 class=style1 role="presentation">
+                                     <tr>
+-                                        <td tabindex=0 id=MainDev class="topbar_td style3x" onmouseup=go(10,event)
+-                                            onkeypress="if (event.key == 'Enter') go(10)">General</td>
+-                                        <td tabindex=0 id=MainDevDesktop class="topbar_td style3x" onmouseup=go(11,event)
+-                                            onkeypress="if (event.key == 'Enter') go(11)">Desktop</td>
+-                                        <td tabindex=0 id=MainDevTerminal class="topbar_td style3x" onmouseup=go(12,event)
+-                                            onkeypress="if (event.key == 'Enter') go(12)">Terminal</td>
+-                                        <td tabindex=0 id=MainDevFiles class="topbar_td style3x" onmouseup=go(13,event)
+-                                            onkeypress="if (event.key == 'Enter') go(13)">Files</td>
+-                                        <td tabindex=0 id=MainDevRegistry class="topbar_td style3x" onmouseup=go(9,event)
+-                                            onkeypress="if (event.key == 'Enter') go(9)">Registry</td>
+-                                        <td tabindex=0 id=MainDevApps class="topbar_td style3x" onmouseup=go(18,event)
+-                                            onkeypress="if (event.key == 'Enter') go(18)">Software</td>
+-                                        <td tabindex=0 id=MainDevEvents class="topbar_td style3x" onmouseup=go(16,event)
+-                                            onkeypress="if (event.key == 'Enter') go(16)">Events</td>
+-                                        <td tabindex=0 id=MainDevInfo class="topbar_td style3x" onmouseup=go(17,event)
+-                                            onkeypress="if (event.key == 'Enter') go(17)">Details</td>
+-                                        <td tabindex=0 id=MainDevAmt class="topbar_td style3x" onmouseup=go(14,event)
+-                                            onkeypress="if (event.key == 'Enter') go(14)">Intel&reg;AMT</td>
+-                                        <td tabindex=0 id=MainDevConsole class="topbar_td style3x" onmouseup=go(15,event)
+-                                            onkeypress="if (event.key == 'Enter') go(15)">Console</td>
+-                                        <td tabindex=0 id=MainDevPlugins class="topbar_td style3x" onmouseup=go(19,event)
+-                                            onkeypress="if (event.key == 'Enter') go(19)">Plugins</td>
++                                        <td id=MainDev class="topbar_td style3x"><button type="button" onclick=go(10,event) onauxclick=go(10,event)>General</button></td>
++                                        <td id=MainDevDesktop class="topbar_td style3x"><button type="button" onclick=go(11,event) onauxclick=go(11,event)>Desktop</button></td>
++                                        <td id=MainDevTerminal class="topbar_td style3x"><button type="button" onclick=go(12,event) onauxclick=go(12,event)>Terminal</button></td>
++                                        <td id=MainDevFiles class="topbar_td style3x"><button type="button" onclick=go(13,event) onauxclick=go(13,event)>Files</button></td>
++                                        <td id=MainDevRegistry class="topbar_td style3x"><button type="button" onclick=go(9,event) onauxclick=go(9,event)>Registry</button></td>
++                                        <td id=MainDevApps class="topbar_td style3x"><button type="button" onclick=go(18,event) onauxclick=go(18,event)>Software</button></td>
++                                        <td id=MainDevEvents class="topbar_td style3x"><button type="button" onclick=go(16,event) onauxclick=go(16,event)>Events</button></td>
++                                        <td id=MainDevInfo class="topbar_td style3x"><button type="button" onclick=go(17,event) onauxclick=go(17,event)>Details</button></td>
++                                        <td id=MainDevAmt class="topbar_td style3x"><button type="button" id=MainDevAmtButton onclick=go(14,event) onauxclick=go(14,event)>Intel&reg;AMT</button></td>
++                                        <td id=MainDevConsole class="topbar_td style3x"><button type="button" onclick=go(15,event) onauxclick=go(15,event)>Console</button></td>
++                                        <td id=MainDevPlugins class="topbar_td style3x"><button type="button" onclick=go(19,event) onauxclick=go(19,event)>Plugins</button></td>
+                                         <td class="topbar_td_end style3">&nbsp;</td>
+                                     </tr>
+                                 </table>
+                             </div>
+                             <button class="mobile-submenu-arrow" onclick="mobileSubMenuScroll('MainSubMenu',1)" aria-label="Scroll right"><i class="fa fa-caret-square-right"></i></button>
+                         </div>
++                        <button type="button" id=deviceFullPage class="btn btn-outline-secondary btn-sm" style="display:none" onclick=openDeviceFullPage()>Open full page</button>
+                     </div>
+                     <div id=MeshSubMenuSpan style="display:none">
+                         <table id=MeshSubMenu cellpadding=0 cellspacing=0 class=style1>
+@@ -498,7 +483,7 @@
+             </div>
+             <div id=p1 style="display:none">
+                 <div id="p1title" class="d-flex justify-content-between align-items-center">
+-                    <div class="fs-4 fw-bold">My Devices</div>
++                    <h1 class="console-heading">My Devices</h1>
+                     <div style="display:none" id="devListToolbarViewIcons">
+                         <div id=devViewPageState style="float:left;line-height:32px;height:32px;font-size:16px;display:none"></div>
+                         <div tabindex=0 id=devViewPageButton1 class=viewSelector onclick=onDeviceViewPageChange(1)
+@@ -549,37 +534,42 @@
+                         </span>
+                     </div>
+                 </div>
+-                <div id="devListToolbarSpan" class="noselect d-flex align-items-center p-1">
+-                    <div id=devListToolbar class="d-flex align-items-center visually-hidden"></td>
+-                        <button class="btn btn-secondary btn-sm fa-layers fa-fw me-1" style="width: 30px; height: 31px; display:none" title="Collapse All" id="CollapseAllButton" onclick="cmexpandaction(2)">
++                <div id="devListToolbarSpan" class="noselect d-flex align-items-center">
++                    <div id=devListToolbar class="d-flex visually-hidden">
++                        <div class="device-query-field">
++                            <label for="SearchInput">Filter devices</label>
++                            <div class="device-search">
++                                <input type="text" id=SearchInput class="form-control form-control-sm" placeholder="Filter" oninput=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="Filter devices by name or prefix: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:) - Prefix with ! to negate, e.g. !tag:abc - Separate terms with `,`, `or`, or `and`: `device1,device2` or `device1 or device2` = OR; `device1 and device2` = AND; prefix with `!` to exclude, e.g. `u:user1 and !g:group1`.">
++                                <button type="button" id=SearchInputClearButton class="device-search-clear" style="display:none" title="Clear search filter" onclick="clearDeviceSearch(); Q('SearchInput').focus()">
++                                    <i class="fa-solid fa-xmark" aria-hidden="true"></i><span class="visually-hidden">Clear search filter</span>
++                                </button>
++                            </div>
++                        </div>
++                        <div class="device-filter-field">
++                            <label for="DevFilterSelect">Status</label>
++                            <select class="form-select form-select-sm device-filter" id=DevFilterSelect onchange=onOnlineCheckBox(event)>
++                                <option value=0 selected>All</option>
++                                <option value=1>Online</option>
++                                <option value=5>Offline</option>
++                                <option value=2>Sessions</option>
++                                <option value=3>Starred</option>
++                                <option value=4>Intel&reg; AMT</option>
++                                <option value=6>Help</option>
++                                <option value=7>Tagged</option>
++                                <option value=8>Untagged</option>
++                            </select>
++                        </div>
++                        <button class="btn btn-outline-secondary btn-sm fa-layers fa-fw me-1" style="width: 30px; height: 31px; display:none" title="Collapse All" id="CollapseAllButton" onclick="cmexpandaction(2)">
+                             <i class="fa-solid fa-chevron-up" data-fa-transform="down-6"></i>
+                             <i class="fa-solid fa-chevron-down" data-fa-transform="up-6"></i>
+                         </button>
+-                        <button class="btn btn-secondary btn-sm fa-layers fa-fw me-1" style="width: 30px; height: 31px; display:none" title="Expand All" id="ExpandAllButton" onclick="cmexpandaction(1)">
++                        <button class="btn btn-outline-secondary btn-sm fa-layers fa-fw me-1" style="width: 30px; height: 31px; display:none" title="Expand All" id="ExpandAllButton" onclick="cmexpandaction(1)">
+                             <i class="fa-solid fa-chevron-up" data-fa-transform="up-6"></i>
+                             <i class="fa-solid fa-chevron-down" data-fa-transform="down-6"></i>
+                         </button>
+-                        <input type=button class="btn btn-secondary me-1 btn-sm" id=SelectAllButton onclick="selectallButtonFunction();" value="Select All" />
++                        <input type=button class="btn btn-outline-secondary me-1 btn-sm" id=SelectAllButton onclick="selectallButtonFunction();" value="Select All" />
+                         <input type=button class="btn btn-primary me-1 btn-sm" id=GroupActionButton disabled="disabled" value="Group Action" onclick=groupActionFunction() />
+-                        <input type=button class="btn btn-secondary me-1 btn-sm" id=ScrollToTopButton onclick="onDevicesScroll(true);" value="Scroll To Top" />
+-                        <input type="text" id=SearchInput class="form-control-sm me-1 btn-sm" placeholder="Filter" onchange=onDeviceSearchChanged(event) onclick=onDeviceSearchChanged(event) onkeyup=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="Filter devices by name or prefix: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:) - Prefix with ! to negate, e.g. !tag:abc - Separate terms with `,`, `or`, or `and`: `device1,device2` or `device1 or device2` = OR; `device1 and device2` = AND; prefix with `!` to exclude, e.g. `u:user1 and !g:group1`.">
+-                        <span id=SearchInputClearButton style="display:none;position:relative">
+-                            <span class="fa-layers fa-fw" role="button" onclick="clearDeviceSearch()" style="position:absolute;left:-25px;top:-15px">
+-                                <i class="fa-solid fa-circle" style="color:var(--bs-secondary-bg)"></i>
+-                                <i class="fa-solid fa-xmark"  style="color:var(--bs-body-color)"></i>
+-                            </span>
+-                        </span>
+-                        <select class="form-select-sm me-1" id=DevFilterSelect onchange=onOnlineCheckBox(event) title="Device Filter">
+-                            <option value=0 selected>All</option>
+-                            <option value=1>Online</option>
+-                            <option value=5>Offline</option>
+-                            <option value=2>Sessions</option>
+-                            <option value=3>Starred</option>
+-                            <option value=4>Intel&reg; AMT</option>
+-                            <option value=6>Help</option>
+-                            <option value=7>Tagged</option>
+-                            <option value=8>Untagged</option>
+-                        </select>
++                        <input type=button class="btn btn-outline-secondary me-1 btn-sm" id=ScrollToTopButton onclick="onDevicesScroll(true);" value="Scroll To Top" />
+                         <div class="form-check" title="Show devices operating system name"><input class="form-check-input me-1" type=checkbox id=RealNameCheckBox onclick=onRealNameCheckBox() /><label class="form-check-label" for="RealNameCheckBox">OS Name</label></div>
+                         <label style="display:none"><input type=checkbox id=OnlineCheckBox class="form-check-input me-2" onclick=onOnlineCheckBox(event) /><span title="Only show devices that are online">Online</span></label>
+                         <span id="devsCustomUIBar"></span>
+@@ -649,7 +639,9 @@
+                             </select>
+                             &nbsp;
+                         </div>
+-                        <i class="fa-solid fa-gear" role="button" id=devListToolbarSettings onclick="onDeviceViewSettings()"></i>
++                        <button type="button" class="btn btn-outline-secondary btn-sm" id=devListToolbarSettings onclick="onDeviceViewSettings()" title="Settings">
++                            <i class="fa-solid fa-gear" aria-hidden="true"></i><span class="visually-hidden">Settings</span>
++                        </button>
+                     </div>
+                 </div>
+                 <div id=NoMeshesPanel style="display:none">
+@@ -970,45 +962,37 @@
+             </div>
+             <div id=p10 style="display:none">
+                 <div id=p10title class="d-flex align-items-center">
+-                    <div id="p10BackButton" class="pe-2">
+-                        <i class="fa-solid fa-square-caret-left fa-2xl" role="button" tabindex=0 onclick=goBack() title="Back" onkeypress="if (event.key == 'Enter') goBack()"></i>
++                    <button type="button" id="p10BackButton" class="btn btn-outline-secondary btn-sm" onclick=goBack()>
++                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back
++                    </button>
++                    <div class="device-heading">
++                        <h1 id=p10deviceName class="console-heading" tabindex="-1"></h1>
++                        <div class="device-heading-meta">
++                            <span id=p10deviceGroup></span>
++                            <span id=p10OfflineStatus class="device-status" style="display:none">Offline</span>
++                            <span id=p10OnlineStatus class="device-status device-status-online" style="display:none">Online</span>
++                        </div>
+                     </div>
+-                    <div class='fs-4 fw-bold'><i class="fa-solid fa-circle-info fa-sm me-2 text-secondary"></i>General<span id=p10deviceName></span></div>
+                 </div>
+-                <div id=p10info style="overflow-y:auto" class="pt-3">
+-                    <table style="width:100%" cellpadding="0" cellspacing="0">
+-                        <tr>
+-                            <td style=width:auto valign=top>
+-                                <div id=p10html></div>
+-                            </td>
+-                            <td style=width:100px;display:none id=notesPanel valign=top>
+-                                <table>
+-                                    <thead>
+-                                        <tr>
+-                                            <th>Notes</th>
+-                                        </tr>
+-                                    </thead>
+-                                    <tbody>
+-                                        <tr>
+-                                            <td><div id=notesPanelArea style=width:300px;height:200px;resize:none;overflow-y:scroll></div></td>
+-                                        </tr>
+-                                    </tbody>
+-                                </table>
+-                            </td>
+-                            <td style=width:20px></td>
+-                            <td style=width:200px;vertical-align:top;position:relative valign=top>
+-                                <div class="deviceNotifyLargeDot">
+-                                    <div id="p10deviceMsg" onclick=showDeviceMessages(null,null,event) class=deviceNotifyDotSub></div>
+-                                    <i title="Starred" role=button class="fa-solid fa-star" id="p10deviceStar" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
+-                                    <i title="List of remote sessions active on this computer." role=button class="fa-solid fa-arrow-right-arrow-left" id="p10deviceNotify" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
+-                                    <i title="Help Requested" role=button class="fa-solid fa-question" id="p10deviceHelp" onclick=showDeviceHelpRequests(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
+-                                </div>
+-                                <div id="p10deviceBattery" class="deviceBatteryLarge deviceBatteryLarge1"></div>
+-                                <a href=# onclick=p10showiconselector()><img id=MainComputerImage></a>
+-                                <div id=MainComputerState></div>
+-                            </td>
+-                        </tr>
+-                    </table><br />
++                <div id=p10info style="overflow-y:auto">
++                    <div class="device-overview">
++                        <div id=p10html></div>
++                        <aside class="device-summary">
++                            <div class="deviceNotifyLargeDot">
++                                <div id="p10deviceMsg" onclick=showDeviceMessages(null,null,event) class=deviceNotifyDotSub></div>
++                                <i title="Starred" role=button class="fa-solid fa-star" id="p10deviceStar" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
++                                <i title="List of remote sessions active on this computer." role=button class="fa-solid fa-arrow-right-arrow-left" id="p10deviceNotify" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
++                                <i title="Help Requested" role=button class="fa-solid fa-question" id="p10deviceHelp" onclick=showDeviceHelpRequests(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
++                            </div>
++                            <div id="p10deviceBattery" class="deviceBatteryLarge deviceBatteryLarge1"></div>
++                            <a href=# onclick="p10showiconselector(); return false" title="Change device icon"><img id=MainComputerImage alt="Change device icon"></a>
++                            <div id=MainComputerState></div>
++                        </aside>
++                        <section id=notesPanel class="device-notes" style="display:none">
++                            <h2>Notes</h2>
++                            <div id=notesPanelArea></div>
++                        </section>
++                    </div>
+                     <div id=p10html2></div>
+                     <div id=p10html3></div>
+                     <div id=p10html4></div>
+@@ -2387,6 +2371,7 @@
+         var sessionRefreshTimer = null;
+         var domain = '{{{domain}}}';
+         var domainUrl = '{{{domainurl}}}';
++        var consolePath = domainUrl + 'v2';
+         var authCookie = '{{{authCookie}}}';
+         var authRelayCookie = '{{{authRelayCookie}}}';
+         var logoutControls = JSON.parse(decodeURIComponent('{{{logoutControls}}}'));
+@@ -2417,6 +2402,9 @@
+         if (pluginHandlerBuilder != null) { pluginHandler = new pluginHandlerBuilder(); }
+         var installedPluginList = null;
+         var goBackStack = [];
++        var devicePreviewRequested = false;
++        var devicePreviewActive = false;
++        var devicePreviewWidth = window.matchMedia('(min-width: 1120px)');
+         var CollapsedGroups = {};
+         var collapseGroups = '{{{collapseGroups}}}';
+         try { CollapsedGroups = JSON.parse(getstore('_collapse', '{}')); } catch (ex) { }
+@@ -2655,7 +2643,10 @@
+             // Deleted non-english style and fix all topbar titles
+             if ((['en', 'ko', 'ja', 'zh-chs', 'zh-cht'].indexOf('{{{lang}}}') == -1) && ('{{{lang}}}'.toLowerCase() != '')) { QC('body').add('nonenglish'); }
+             var elements = document.getElementsByClassName('topbar_td');
+-            for (var i in elements) { if (elements[i].innerHTML) { elements[i].innerHTML = elements[i].innerHTML.split(' ').join('&nbsp;'); } }
++            for (var i in elements) {
++                var cell = elements[i];
++                if (cell.innerHTML && !cell.firstElementChild) { cell.innerHTML = cell.innerHTML.split(' ').join('&nbsp;'); }
++            }
+ 
+             // Custom UI
+             if (customui != null) {
+@@ -3194,12 +3185,10 @@
+ 
+         function toggleBootstrapUIMode() {
+             if (xxdialogMode) return;
+-            var uiViewMode = getstore('uiViewMode', 3);
+-            var x = '<div class=form-check><input type=radio class=form-check-input id=ui0 name=uiradio value=2 ' + ((uiViewMode == 2)?'checked':'') + '><label class=form-check-label for=ui0>' + "Classic" + '</label></div>';
+-            x += '<div class=form-check><input type=radio class=form-check-input id=ui1 name=uiradio value=3 ' + ((uiViewMode == 3)?'checked':'') + '><label class=form-check-label for=ui1>' + "Modern" + '</label></div>';
+-            setModalContent('xxAddAgent', "User Interface", x);
+-            showModal('xxAddAgentModal', 'idx_dlgOkButton', saveUserInterfaceMode);
+-            QV('uiMenu', false);
++            var url = new URL(window.location.href);
++            url.pathname = domainUrl;
++            url.searchParams.delete('sitestyle');
++            window.location.assign(url);
+         }
+ 
+         function getNodeFromId(id) { if (nodes != null) { for (var i in nodes) { if (nodes[i]._id == id) return nodes[i]; } } return null; }
+@@ -5266,6 +5255,7 @@
+ 
+         function onDeviceViewChange(i) {
+             if (i != null) { Q('viewselect').value = i; }
++            if (devicePreviewActive && (Q('viewselect').value > 2)) { go(1); }
+             for (var j = 1; j < 6; j++) { Q('devViewButton' + j).classList.remove('viewSelectorSel'); }
+             Q('devViewButton' + Q('viewselect').value).classList.add('viewSelectorSel');
+             putstore('deviceView', Q('viewselect').value);
+@@ -5372,6 +5362,7 @@
+                 return;
+             }
+             if (e.ctrlKey == true || e.altKey == true || e.metaKey == true) return;
++            if ((e.key === ' ') && e.target.matches('button, select, input[type=button], input[type=checkbox]')) return;
+             if (Q('viewselect').value < 4) {
+                 var processed = 0;
+                 if (e.key) {
+@@ -5509,9 +5500,12 @@
+         var deviceHeaders = {};
+         var oldviewmode = 0;
+         function updateDevices() {
+-            if ((nodes == null) || (xxcurrentView != 1)) { return; }
++            if ((nodes == null) || ((xxcurrentView != 1) && !devicePreviewActive)) { return; }
++            // Keep the preview tied to an accessible result in the current list.
++            if (devicePreviewActive && ((currentNode == null) || !IsNodeViewable(currentNode) || (currentNode.v === false))) { go(1); }
+             var r = '', c = 0, current = null, count = 0, scount = 0, displayedMeshes = {}, view = Q('viewselect').value, groups = {}, groupCount = {};
+             QV('xdevices', view != 4);
++            QC('xdevices').toggle('device-list-scroll', view == 2);
+             QV('xdevicesmap', view == 4);
+             QVH('devListToolbar', view < 3);
+             QVH('kvmListToolbar', (view == 3) || (view == 5));
+@@ -5563,9 +5557,8 @@
+                 }
+ 
+                 // Compute the width of the device view.
+-                var totalDeviceViewWidth = Q('column_l').clientWidth - 60;
+-                var deviceBoxWidth = Math.floor(totalDeviceViewWidth / 301);
+-                deviceBoxWidth = 301 + Math.floor((totalDeviceViewWidth - (deviceBoxWidth * 301)) / deviceBoxWidth);
++                var totalDeviceViewWidth = (devicePreviewActive ? Q('p1') : Q('column_l')).clientWidth - 60;
++                var deviceBoxWidth = Math.floor(totalDeviceViewWidth / Math.max(1, Math.floor(totalDeviceViewWidth / 301)));
+ 
+                 // Compute number of colums
+                 var colcount = 4;
+@@ -5719,7 +5712,7 @@
+                     if (sort == 3) {
+                         r = '<div style="margin:30px">' + "No devices are included in any groups, click on a device's \"Groups\" to add to a group." + '</div>';
+                     } else {
+-                        r = '<div style="margin:30px">' + "No devices matching this search." + ' <a onclick=clearDeviceSearch()>' + "Clear search filter" + '</a></div>';
++                        r = '<div class="device-list-empty">' + "No devices matching this search." + ' <button type=button class="btn btn-outline-secondary btn-sm" onclick="clearDeviceSearch(); Q(\'SearchInput\').focus()">' + "Clear search filter" + '</button></div>';
+                     }
+                 }
+ 
+@@ -5804,7 +5797,7 @@
+                             if (requestedLastConnects == false) { requestedLastConnects = true; meshserver.send({ action: 'lastconnects' }); }
+                         }
+                         // This height of 1 div at the end to fix a problem in Linux firefox browsers
+-                        r = '<table style=width:100%;margin-top:4px;table-layout:fixed cellpadding=0 cellspacing=0><th>' + colums + r + '</tr></table><div style=height:1px></div>';
++                        r = '<table class=device-list-table style=width:100%;margin-top:4px;table-layout:fixed cellpadding=0 cellspacing=0><th>' + colums + r + '</tr></table><div style=height:1px></div>';
+                     }
+                 } else {
+                     r += '</table>';
+@@ -6028,10 +6021,17 @@
+ 
+             // Node
+             var icon = node.icon;
+-            if (((!node.conn) || (node.conn == 0)) && (node.mtype != 3)) { icon += ' gray'; }
++            var offline = !node.conn && (node.mtype != 3);
++            if (offline) { icon += ' gray'; }
++            var openDevice = 'gotoDevice(\'' + node._id + '\',null,null,event); return false';
++            var selected = (devicePreviewActive && (currentNode != null) && (currentNode._id == node._id)) ? ' aria-current="true"' : '';
++            var statusClass = offline ? 'device-status-offline' : (node.conn ? 'device-status-online' : '');
++            if (view == 2) { div.classList.toggle('device-row-selected', selected !== ''); }
+ 
+             if (view == 1) {
+-                div.innerHTML = '<table id=devs cmenu=devsContentMenu onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=width:100%;height:100%><tr><td style=width:22px><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" onchange=p1devcheck(event) value=devid_' + node._id + ' type=checkbox ' + (checkedNodeids[node._id] ? ' checked' : '') + '></td><td><table onmouseup=gotoDevice(\'' + node._id + '\',null,null,event) border=0 cellspacing=0 style=width:100%;height:100%;cursor:pointer><tr><td style=width:50px tabindex=0 onkeypress="if (event.key==\'Enter\') gotoDevice(\'' + node._id + '\',null,null,event)"><div class="i' + icon + '" style=width:50px></div></td><td class=g1t></td><td class=e2t><div class=e1t style=width:' + ((div.clientWidth) - 120) + 'px title="' + title + '">' + name + '</div><div>' + NodeStateStr(node) + '</div></td><td class=g2t></td></tr></table></td></tr></table>' + devNotify;
++                var state = NodeStateStr(node);
++                if (offline) { state = "Offline" + ((state == '&nbsp;') ? '' : ' · ' + state); }
++                div.innerHTML = '<table id=devs cmenu=devsContentMenu class=device-tile onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=width:100%;height:100%><tr><td style=width:22px><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" aria-label="' + title + '" onchange=p1devcheck(event) value=devid_' + node._id + ' type=checkbox ' + (checkedNodeids[node._id] ? ' checked' : '') + '></td><td><table class=device-tile-body onclick="' + openDevice + '" onauxclick="' + openDevice + '" border=0 cellspacing=0 style=width:100%;height:100%;cursor:pointer><tr><td style=width:50px><div class="i' + icon + '" style=width:50px></div></td><td class=g1t></td><td class=e2t><a href=# class="e1t device-name"' + selected + ' style=width:' + ((div.clientWidth) - 120) + 'px title="' + title + '">' + name + '</a><div class="device-status ' + statusClass + '">' + state + '</div></td><td class=g2t></td></tr></table></td></tr></table>' + devNotify;
+             } else if (view == 2) {
+                 var states = [];
+                 if (node.conn) {
+@@ -6066,11 +6066,11 @@
+                 if (sort == 1) { collapseName = ('pwr:' + (node.pwr ? node.pwr : 0)); }
+                 else if ((sort == 3) || (sort == 4)) { collapseName = 'tag:**xx**xx*TaG*xx**xx**'; }
+                 var collapsed = (sort != 3) & (sort != 4) & CollapsedGroups[collapseName];
+-                var r = '<td style=position:relative><div id=devs cmenu=devsContentMenu class=bar18 tabindex=0 onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=height:18px;width:100%;font-size:medium onkeypress="if (event.key==\'Enter\') gotoDevice(\'' + node._id + '\',null,null,event)">';
+-                r += '<div class=deviceBarCheckbox><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" value=devid_' + node._id + ' type=checkbox onchange=p1devcheck(event) ' + (checkedNodeids[node._id] ? ' checked' : '') + '></div>';
++                var r = '<td style=position:relative><div id=devs cmenu=devsContentMenu class=bar18 onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=height:18px;width:100%;font-size:medium>';
++                r += '<div class=deviceBarCheckbox><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" aria-label="' + title + '" value=devid_' + node._id + ' type=checkbox onchange=p1devcheck(event) ' + (checkedNodeids[node._id] ? ' checked' : '') + '></div>';
+                 r += '<div class=deviceBarIcon onmouseup=gotoDevice(\'' + node._id + '\',null,null,event)><div class="j' + icon + '" style=width:16px;margin-top:1px;margin-left:2px;height:16px></div></div>';
+                 r += '<div class=g1 style=height:18px;float:left></div><div class=g2 style=height:18px;float:right></div>';
+-                r += '<div class="style10 d-flex align-items-center" style=cursor:pointer;font-size:14px;max-height:18px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap title="' + title + '" onmouseup=gotoDevice(\'' + node._id + '\',null,null,event)>' + name + '</div></div>' + devNotify + '</td>';
++                r += '<a href=# class="style10 device-name d-flex align-items-center"' + selected + ' title="' + title + '" onclick="' + openDevice + '" onauxclick="' + openDevice + '">' + name + '</a></div>' + devNotify + '</td>';
+ 
+                 // Use defaults if needed
+                 if (deviceViewSettings == null) { deviceViewSettings = {}; }
+@@ -6143,4 +6143,4 @@
+-                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center>' + states.join('&nbsp;+&nbsp;'); } // Connectivity
++                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center><span class="device-status ' + statusClass + '">' + (offline ? "Offline" : states.join('&nbsp;+&nbsp;')) + '</span></td>'; } // Connectivity
+                 if (deviceViewSettings.devsCols.indexOf('amthost') >= 0) { r += '<td style=text-align:center>' + (((node.intelamt == null) || (node.intelamt.host == null)) ? '' : EscapeHtml(node.intelamt.host)); }
+                 if (deviceViewSettings.devsCols.indexOf('amtstate') >= 0) {
+                     var amtstate = '';
+@@ -8044,7 +8044,7 @@
+                 var panel = [0, 10, 12, 11, 13, 16, 17, 15, 19][action]; // (invalid), General, Desktop, Terminal, Files, Events, Console, Plugin
+                 if (event && (event.shiftKey == true)) {
+                     // Open the device in a different tab
+-                    safeNewWindow(window.location.origin + '?node=' + nodeid.split('/')[2] + '&viewmode=' + panel + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + nodeid);
++                    safeNewWindow(window.location.origin + consolePath + '?node=' + nodeid.split('/')[2] + '&viewmode=' + panel + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + nodeid);
+                 } else {
+                     // Go to the right panel
+                     gotoDevice(nodeid, panel);
+@@ -8941,7 +8941,7 @@
+ 
+             if (event && ((event.shiftKey == true) || (event.which == 2) || (event.button == 1))) {
+                 // Open the device in a different tab
+-                safeNewWindow(window.location.origin + '?node=' + nodeid.split('/')[2] + '&viewmode=10&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + nodeid);
++                safeNewWindow(window.location.origin + consolePath + '?node=' + nodeid.split('/')[2] + '&viewmode=10&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + nodeid);
+                 return;
+             }
+ 
+@@ -8998,12 +8998,17 @@
+                 showStoreApps = false;
+ 
+                 // Add node name
+-                var nname = '&nbsp;-&nbsp;' + EscapeHtml(node.name), nnameEx;
+-                if (nname.length == 0) { nname = ' - <i>' + "None" + '</i>'; }
+-                if (((meshrights & 4) != 0) && ((!mesh.flags) || ((mesh.flags & 2) == 0 || (mesh.flags & 16)))) { nname = '<span tabindex=0 title="' + "Click here to edit the server-side device name" + '" onclick=showEditNodeValueDialog(0) onkeyup="if (event.key == \'Enter\') showEditNodeValueDialog(0)" role="button">' + nname + ' <i class="fa-solid fa-pencil fa-2xs"/></i></span>'; }
++                var deviceName = EscapeHtml(node.name) || ('<i>' + "None" + '</i>');
++                var nname = '&nbsp;-&nbsp;' + deviceName, nnameEx, detailName = deviceName;
++                if (((meshrights & 4) != 0) && mesh && ((!mesh.flags) || ((mesh.flags & 2) == 0 || (mesh.flags & 16)))) {
++                    var editNameTitle = "Click here to edit the server-side device name";
++                    nname = '<span tabindex=0 title="' + editNameTitle + '" onclick=showEditNodeValueDialog(0) onkeyup="if (event.key == \'Enter\') showEditNodeValueDialog(0)" role="button">' + nname + ' <i class="fa-solid fa-pencil fa-2xs"></i></span>';
++                    detailName = '<button type="button" class="device-rename" title="' + editNameTitle + '" onclick=showEditNodeValueDialog(0)>' + deviceName + ' <i class="fa-solid fa-pencil" aria-hidden="true"></i></button>';
++                }
+                 nnameEx = nname;
+                 if (mesh) { nname += '<span class="deviceGroupName" style=color:#AAA;font-size:small> - ' + EscapeHtml(mesh.name) + '</span>'; }
+-                QH('p10deviceName', nname);
++                QH('p10deviceName', detailName);
++                QH('p10deviceGroup', mesh ? EscapeHtml(mesh.name) : '');
+                 QH('p11deviceName', nname);
+                 QH('p12deviceName', nname);
+                 QH('p13deviceName', nname);
+@@ -9016,7 +9021,7 @@
+                 QH('p19deviceName', nname);
+ 
+                 // Node attributes
+-                var x = '<table style=width:100%>';
++                var x = '<div class="device-attributes">';
+ 
+                 // If title bar is hidden, display the device name here
+                 if ((args.hide & 8) != 0) { x += '<br />' + addDeviceAttribute("Name", nnameEx); }
+@@ -9279,11 +9284,11 @@
+                 for (var i in meshes) { if (meshes[i].relayid == node._id) { relayFor.push('<a href=# onclick=gotoMesh("' + meshes[i]._id + '") style=cursor:pointer>' + EscapeHtml(meshes[i].name) + '</a>'); } }
+                 if (relayFor.length > 0) { x += addDeviceAttribute('<span title="' + "Device groups this device is a relay for" + '">' + "Relay for" + '</span>', relayFor.join(", ")); }
+ 
+-                x += '</table><br />';
++                x += '</div><div class="device-actions">';
+                 // Show action button, only show if we have permissions 4, 8, 64
+                 if (((meshrights & (4 + 8 + 64 + 262144)) != 0) && (node.mtype < 3) && ((node.agent == null) || (node.agent.id != 34))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Actions" + '" title="' + "Perform power actions on the device" + '" onclick=deviceActionFunction() />'; }
+-                x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Notes" + '" title="' + "View notes about this device" + '" onclick=showNotes(' + ((meshrights & 128) == 0) + ',"' + encodeURIComponentEx(node._id) + '") />';
+-                x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Log Event" + '" title="' + "Write an event for this device" + '" onclick=writeDeviceEvent("' + encodeURIComponentEx(node._id) + '") />';
++                x += '<input type=button class="btn btn-outline-secondary btn-sm me-2 mb-2" value="' + "Notes" + '" title="' + "View notes about this device" + '" onclick=showNotes(' + ((meshrights & 128) == 0) + ',"' + encodeURIComponentEx(node._id) + '") />';
++                x += '<input type=button class="btn btn-outline-secondary btn-sm me-2 mb-2" value="' + "Log Event" + '" title="' + "Write an event for this device" + '" onclick=writeDeviceEvent("' + encodeURIComponentEx(node._id) + '") />';
+                 if ((node.mtype == 2) && (connectivity & 1) && ((meshrights & 131072) != 0)) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" cmenu=deskPreConfigScriptContextMenu value="' + "Run" + '" title="' + "Run commands on this device" + '" onclick=runDeviceCmd("' + encodeURIComponentEx(node._id) + '") />'; }
+                 if (node.mtype != 4) {
+                     if ((meshrights & 8) && (connectivity & 1) && ((meshrights & 16384) != 0) || ((node.pmt == 1) && ((features2 & 2) != 0))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Message" + '" title="' + "Display a text message on the remote device" + '" onclick=deviceMessageFunction() />'; }
+@@ -9325,7 +9330,7 @@
+                     }
+                 }
+ 
+-                QH('p10html', x);
++                QH('p10html', x + '</div>');
+ 
+                 // Show node last 7 days timeline
+                 mainUpdate(256);
+@@ -9449,6 +9454,8 @@
+                     else if ((node.pwr > 1) && (node.pwr != 7)) { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
+                 }
+                 QH('MainComputerState', powerstate);
++                QV('p10OfflineStatus', !node.conn && (node.mtype != 3));
++                QV('p10OnlineStatus', !!node.conn);
+ 
+                 // Set the node icon
+                 Q('MainComputerImage').setAttribute('src', 'images/icons256-' + node.icon + '-1.png');
+@@ -9484,10 +9491,10 @@
+ 
+                 // Set the Intel AMT / Intel SM tab name
+                 if ((node.intelamt != null) && (typeof node.intelamt.sku == 'number') && ((node.intelamt.sku & 16) != 0)) {
+-                    QH('MainDevAmt', "Intel&reg;SM");
++                    QH('MainDevAmtButton', "Intel&reg;SM");
+                     QH('p14deviceNamePrefix', "Intel&reg; SM");
+                 } else {
+-                    QH('MainDevAmt', "Intel&reg;AMT");
++                    QH('MainDevAmtButton', "Intel&reg;AMT");
+                     QH('p14deviceNamePrefix', "Intel&reg; AMT");
+                 }
+ 
+@@ -9645,7 +9652,11 @@
+             }
+             setupDesktop(); // Always refresh the desktop, even if we are on the same device, we need to do some canvas switching.
+             if (!panel) panel = 10;
++            var fromDeviceList = ((xxcurrentView == 1) || devicePreviewActive) && (panel == 10) && (event != null);
++            if (fromDeviceList && Q('xdevices').contains(event.target)) { devicePreviewRequested = true; }
+             go(panel);
++            if (fromDeviceList && (xxcurrentView == 10) && ((args.hide & 8) == 0)) { Q('p10deviceName').focus(); }
++            if (fromDeviceList && devicePreviewActive) { mainUpdate(4); }
+         }
+ 
+         function setIpPduState(op) {
+@@ -23317,11 +23328,49 @@
+             if (((b & 8) || x) && f) f(x, t);
+         }
+ 
++        function isDevicePreviewPanel(panel) {
++            return (panel == 10) || (panel == 16) || (panel == 17);
++        }
++
++        function updateDevicePreview(focusedControl) {
++            var wasActive = devicePreviewActive;
++            devicePreviewActive = devicePreviewRequested && isDevicePreviewPanel(xxcurrentView)
++                && devicePreviewWidth.matches && webPageFullScreen && !QC('body').contains('is-mobile')
++                && !args.hide && ('{{{currentNode}}}' == '') && (Q('viewselect').value <= 2);
++            if (!wasActive && !devicePreviewActive) return;
++
++            var focused = focusedControl || document.activeElement;
++            var menu = Q('MainSubMenuSpan');
++            var anchor = devicePreviewActive ? Q('p' + xxcurrentView + 'title') : Q('MeshSubMenuSpan');
++            QC('column_l').toggle('device-preview', devicePreviewActive);
++            QV('p1', (xxcurrentView == 1) || devicePreviewActive);
++            QV('deviceFullPage', devicePreviewActive);
++            if (devicePreviewActive) {
++                if (anchor.nextElementSibling !== menu) { anchor.after(menu); }
++            } else if (anchor.previousElementSibling !== menu) {
++                anchor.before(menu);
++            }
++            if (menu.contains(focused) && (focused !== Q('deviceFullPage')) && (focused !== document.activeElement) && focused.getClientRects().length) {
++                focused.focus({ preventScroll: true });
++            } else if (!devicePreviewActive && isDevicePreviewPanel(xxcurrentView)
++                && ((focused === Q('deviceFullPage')) || Q('p1').contains(focused))) {
++                var back = Q('p' + xxcurrentView + 'BackButton');
++                (back.querySelector('[tabindex]') || back).focus({ preventScroll: true });
++            }
++        }
++
++        function openDeviceFullPage() {
++            if (!devicePreviewActive) return;
++            devicePreviewRequested = false;
++            updateDevicePreview();
++        }
++
+         function center() {
+             setSessionActivity();
++            updateDevicePreview();
+             if (xxcurrentView == 11) { deskAdjust(); }
+             else if (xxcurrentView == 10) { mainUpdate(256); }
+-            else if (xxcurrentView == 1) { mainUpdate(4); }
++            if ((xxcurrentView == 1) || devicePreviewActive) { mainUpdate(4); }
+         }
+         function messagebox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t, 1); }
+         function statusbox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t); }
+@@ -23331,8 +23380,13 @@
+             setSessionActivity();
+             if (xxdialogMode || (goBackStack.length == 0)) return;
+             if (fullscreen) { deskToggleFull(); }
++            var fromDeviceOverview = isDevicePreviewPanel(xxcurrentView);
+             go(goBackStack.pop());
+             goBackStack.pop();
++            if (fromDeviceOverview && (xxcurrentView == 1)) {
++                var view = Q('viewselect').value;
++                Q(view == 4 ? 'mapSearchLocation' : ((view == 3 || view == 5) ? 'KvmSearchInput' : 'SearchInput')).focus();
++            }
+         }
+ 
+         function goForward(id) { if (xxdialogMode) return; backStack.push(id); goStack(); }
+@@ -23376,15 +23430,15 @@
+                 // Open the device in a different tab
+                 event.preventDefault();
+                 if ((x >= 9) && (x <= 19)) {
+-                    if (currentNode) { safeNewWindow(window.location.origin + '{{{domainurl}}}' + '?gotonode=' + currentNode._id.split('/')[2] + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentNode._id); }
++                    if (currentNode) { safeNewWindow(window.location.origin + consolePath + '?gotonode=' + currentNode._id.split('/')[2] + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentNode._id); }
+                 } else if ((x >= 20) && (x <= 29)) {
+-                    if (currentMesh) { safeNewWindow(window.location.origin + '{{{domainurl}}}' + '?gotomesh=' + currentMesh._id.split('/')[2] + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentMesh._id); }
++                    if (currentMesh) { safeNewWindow(window.location.origin + consolePath + '?gotomesh=' + currentMesh._id.split('/')[2] + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentMesh._id); }
+                 } else if ((x >= 30) && (x <= 39)) {
+-                    if (currentUser) { safeNewWindow(window.location.origin + '{{{domainurl}}}' + '?gotouser=' + ((serverinfo.crossDomain) ? currentUser._id : currentUser._id.split('/')[2]) + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentUser._id); }
++                    if (currentUser) { safeNewWindow(window.location.origin + consolePath + '?gotouser=' + ((serverinfo.crossDomain) ? currentUser._id : currentUser._id.split('/')[2]) + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentUser._id); }
+                 } else if ((x >= 50) && (x <= 59)) {
+-                    if (currentUserGroup) { safeNewWindow(window.location.origin + '{{{domainurl}}}' + '?gotougrp=' + ((serverinfo.crossDomain) ? currentUserGroup._id : currentUserGroup._id.split('/')[2]) + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentUserGroup._id); }
++                    if (currentUserGroup) { safeNewWindow(window.location.origin + consolePath + '?gotougrp=' + ((serverinfo.crossDomain) ? currentUserGroup._id : currentUserGroup._id.split('/')[2]) + '&viewmode=' + x + '&hide=16' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + currentUserGroup._id); }
+                 } else { // if (x < 10))
+-                    safeNewWindow(window.location.origin + '{{{domainurl}}}' + '?viewmode=' + x + '&hide=0' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + x);
++                    safeNewWindow(window.location.origin + consolePath + '?viewmode=' + x + '&hide=0' + ((urlargs.key) ? ('&key=' + urlargs.key) : ''), 'meshcentral:' + x);
+                 }
+                 return;
+             }
+@@ -23408,6 +23462,8 @@
+             if (xxcurrentView == 17) deviceDetailsStatsClear();
+ 
+             // Edit this line when adding a new screen
++            var focusedDeviceControl = Q('MainSubMenuSpan').contains(document.activeElement) ? document.activeElement : null;
++            if ((x < 9) || (x >= 20)) { devicePreviewRequested = false; }
+             for (var i = 0; i < 61; i++) { QV('p' + i, i == x); }
+             xxcurrentView = x;
+ 
+@@ -23435,6 +23491,8 @@
+             for (var i in mainBarItems) {
+                 QC(mainBarItems[i]).remove('fullselect');
+                 QC(mainBarItems[i]).remove('semiselect');
++                var item = Q(mainBarItems[i]).firstElementChild;
++                if (item) { item.removeAttribute('aria-current'); }
+             }
+ 
+             // Remove left bar selection
+@@ -23442,6 +23500,7 @@
+             for (var i in leftBarItems) {
+                 QC(leftBarItems[i]).remove('lbbuttonsel');
+                 QC(leftBarItems[i]).remove('lbbuttonsel2');
++                Q(leftBarItems[i]).removeAttribute('aria-current');
+             }
+ 
+             // Define class for Menu(s) as fully or semi active.
+@@ -23476,6 +23535,10 @@
+                 QC('MainMenuMyServer').add(mainMenuActiveClass);
+                 QC('LeftMenuMyServer').add(leftMenuActiveClass);
+             }
++            var currentBarItem = document.querySelector('#MainMenuSpan .' + mainMenuActiveClass + ' > button');
++            var currentRailItem = document.querySelector('#page_leftbar .' + leftMenuActiveClass);
++            if (currentBarItem) { currentBarItem.setAttribute('aria-current', x < 9 ? 'page' : 'location'); }
++            if (currentRailItem) { currentRailItem.setAttribute('aria-current', x < 9 ? 'page' : 'location'); }
+             QV('ServerPlugins', pluginHandler != null);
+ 
+             // column_l max-height
+@@ -23498,7 +23561,14 @@
+                 QC(panels[i]).remove('style3x');
+                 QC(panels[i]).remove('style3sel');
+                 QC(panels[i]).add((x == i) ? 'style3sel' : 'style3x');
+-            }
++                if ((i >= 9) && (i < 20)) {
++                    var button = Q(panels[i]).firstElementChild;
++                    if (button) {
++                        if (x == i) { button.setAttribute('aria-current', 'page'); } else { button.removeAttribute('aria-current'); }
++                    }
++                }
++            }
++            updateDevicePreview(focusedDeviceControl);
+ 
+             // If going to the remote desktop tab, adjust the tab.
+             if (x == 11) { deskAdjust(); }
+@@ -23509,7 +23579,7 @@
+             QV('p15BackButton', (x != 115) && ((args.hide & 32) == 0) && ('{{currentNode}}'.toLowerCase() == '')); // For device console, only show the back button if not hidden and not in single device view mode.
+             if ((x == 15) || (x == 115)) { setupConsole(); }
+ 
+-            if (x == 1) mainUpdate(4);
++            if ((x == 1) || devicePreviewActive) mainUpdate(4);
+ 
+             // Setup web notifications
+             if ((x == 2) && Notification) { QV('accountEnableNotificationsSpan', Notification.permission != 'granted'); }
