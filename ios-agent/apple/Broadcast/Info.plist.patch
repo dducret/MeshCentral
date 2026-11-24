@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+--- a/apple/Broadcast/Info.plist
++++ b/apple/Broadcast/Info.plist
+@@ -30,13 +30,10 @@
+ 	<key>NSExtension</key>
+ 	<dict>
+-		<key>NSExtensionAttributes</key>
+-		<dict>
+-			<key>RPBroadcastProcessMode</key>
+-			<string>RPBroadcastProcessModeSampleBuffer</string>
+-		</dict>
+ 		<key>NSExtensionPointIdentifier</key>
+ 		<string>com.apple.broadcast-services-upload</string>
+ 		<key>NSExtensionPrincipalClass</key>
+ 		<string>$(PRODUCT_MODULE_NAME).SampleHandler</string>
++		<key>RPBroadcastProcessMode</key>
++		<string>RPBroadcastProcessModeSampleBuffer</string>
+ 	</dict>
+ </dict>

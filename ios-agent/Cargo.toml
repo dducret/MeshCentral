@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+[package]
+name = "meshcentral-ios-core"
+version = "0.4.5"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+description = "Portable protocol and consent foundation for an attended MeshCentral iOS agent"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+
+[workspace]
+members = ["bridge"]
+resolver = "3"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "warn"

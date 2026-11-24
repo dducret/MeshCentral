@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+module CMeshCore {
+    header "meshcentral_ios.h"
+    export *
+}

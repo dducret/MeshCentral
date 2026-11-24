@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Assistance iPhone et iPad · MeshCentral</title><link rel="stylesheet" href="ios-assist.css?v=ipad040">
+<script defer src="ios-console.js?v=ipad040"></script><script defer src="ios-assist.js?v=seance050"></script></head><body>
+<header><h1>Assistance iPhone et iPad</h1><p>Une session autorisée sur l’appareil. Écran en lecture seule.</p></header>
+<main><section><label>Appareil <select id="nodes"><option>Connexion à MeshCentral…</option></select></label>
+<button id="connect" disabled>Demander une session</button><button id="stop" disabled>Terminer</button>
+<p id="status" role="status">Connectez-vous à MeshCentral dans ce navigateur.</p></section>
+<section class="session-dashboard"><h2 id="sessionState" aria-live="polite">Non connecté</h2>
+<p id="deviceIdentity">Sélectionnez un appareil.</p><p id="networkInfo">Réseau : non communiqué</p>
+<p id="agentCompatibility"></p><p id="sessionTime" role="status"></p>
+<p id="healthAdvice" role="status">Les mesures seront disponibles après l’autorisation de la session.</p>
+<button id="refreshDevices">Actualiser les appareils</button><button id="fullscreen">Afficher l’écran en plein écran</button>
+<label>Affichage <select id="screenScale"><option value="fit">Adapter à la fenêtre</option><option value="actual">Taille réelle, avec défilement</option></select></label></section>
+<div class="columns"><section><h2>Écran partagé</h2><canvas id="screen" width="360" height="640" aria-label="Écran en direct"></canvas>
+<p id="streamFreshness" role="status">Aucune image en direct : session inactive.</p>
+<p id="metrics">Aucune image reçue.</p><button id="diagnostic">Exporter le diagnostic</button></section>
+<div><section><h2>Guidage étape par étape</h2>
+<p>La personne effectue les gestes, puis confirme dans l’app. Le chat reste disponible pour l’aider.</p>
+<details><summary>Bibliothèque de parcours</summary>
+<label>Modèle <select id="templates"></select></label><button id="templateUse">Charger le modèle</button>
+<label>Nom du nouveau modèle <input id="templateName" maxlength="100" placeholder="Diagnostic personnalisé"></label>
+<button id="templateSave">Mémoriser le parcours saisi</button><button id="templateExport">Exporter la bibliothèque</button>
+<label>Importer une bibliothèque JSON (256 Kio maximum)<input type="file" id="templateImport" accept="application/json,.json"></label>
+<p id="templateStatus" role="status">Les modèles restent dans cette page. Exportez-les pour les conserver. N’y inscrivez aucun secret.</p></details>
+<label>Parcours : une instruction par ligne, 20 étapes maximum
+<textarea id="guidePlan" rows="5" maxlength="16000" placeholder="Ouvrez Réglages.&#10;Touchez Wi-Fi.&#10;Vérifiez le nom du réseau connecté."></textarea></label>
+<label><input id="guideAttach" type="checkbox" disabled> Joindre la capture affichée ci-dessous et ses annotations à l’étape à envoyer</label>
+<button id="guideStart" disabled>Démarrer le parcours</button>
+<p id="guideStatus" role="status" aria-live="polite">Connectez un agent compatible pour commencer.</p>
+<ol id="guideSteps"></ol>
+<div id="guideControls" hidden>
+<label>Prochaine instruction (modifiable avant l’envoi)<textarea id="guideNextText" rows="3" maxlength="800"></textarea></label>
+<button id="guideNext" disabled>Envoyer l’étape suivante</button>
+<button id="guideStop" disabled>Arrêter le guidage</button></div>
+<p>Une étape ne progresse qu’après « Étape terminée » sur l’appareil. « J’ai besoin d’aide » vous invite à répondre dans le chat.</p>
+</section><section><h2>Conversation</h2><div id="messages" role="log" aria-live="polite"></div>
+<label>Message <textarea id="chat" maxlength="1024" rows="3"></textarea></label><button id="send" disabled>Envoyer</button></section>
+<section><h2>Documents</h2><p>2 Mio maximum. Le destinataire accepte chaque transfert.</p>
+<label>Choisir un document <input id="file" type="file" disabled></label><p id="transfer" role="status"></p>
+<p id="outgoingStatus" role="status"></p><progress id="outgoingProgress" aria-label="Envoi confirmé par le destinataire" max="1" value="0" hidden></progress>
+<p id="incomingStatus" role="status"></p><progress id="incomingProgress" aria-label="Réception du document" max="1" value="0" hidden></progress>
+<p id="offer"></p><button id="accept" hidden>Recevoir</button><button id="reject" hidden>Refuser</button>
+<button id="download" hidden>Enregistrer le document reçu</button><button id="cancelTransfer" disabled>Annuler les transferts</button></section>
+<section><h2>Capture à annoter</h2><button id="capture" disabled>Demander une capture</button>
+<p>La personne confirme l’envoi sur son iPad ou iPhone. Dessinez ensuite en rouge sur la capture figée.</p>
+<canvas id="annotation" width="360" height="640" aria-label="Dessiner sur la capture reçue"></canvas>
+<button id="undo" disabled>Annuler le dernier trait</button><button id="annotate" disabled>Envoyer les annotations</button>
+<p>Les annotations apparaissent dans l’app iPad / iPhone. Elles ne commandent pas l’appareil.</p></section></div></div>
+<section><h2>Compte rendu d’intervention</h2><p id="reportSummary" aria-live="polite">Aucune intervention à exporter.</p>
+<label>Notes du technicien (facultatif)<textarea id="reportNotes" maxlength="4000" rows="3"></textarea></label>
+<label><input id="reportContent" type="checkbox"> Inclure les messages, les instructions et mes notes dans l’export</label>
+<p>Par défaut : dates, événements et progression uniquement. Aucun identifiant d’appareil, adresse, jeton, capture ou document n’est ajouté automatiquement. Si vous incluez les textes, ils peuvent contenir les informations personnelles que vous y avez écrites. Le compte rendu reste en mémoire jusqu’à son effacement, la fermeture de la page ou une nouvelle session.</p>
+<button id="reportExport" disabled>Exporter le compte rendu JSON</button><button id="reportClear">Effacer le compte rendu et les notes</button></section>
+</main></body></html>

@@ -1,0 +1,10 @@
+{
+  "name": "Assistance iOS",
+  "shortName": "iosAssistance",
+  "version": "0.1.0",
+  "description": "Console locale pour l’agent iOS Rust : guidage, écran et diagnostic.",
+  "hasAdminPanel": false,
+  "license": "Apache-2.0",
+  "installation": "Local installation only; see README.md. No public update URL is published.",
+  "meshCentralCompat": ">=1.0.0"
+}

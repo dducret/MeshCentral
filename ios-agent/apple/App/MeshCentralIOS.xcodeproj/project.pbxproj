@@ -1,0 +1,890 @@
+// !$*UTF8*$!
+// SPDX-License-Identifier: Apache-2.0
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		"8B1EC68FE3261F1C32EC2086" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/AgentModel.swift";
+			"sourceTree" = "<group>";
+		};
+		"C4145473BD90CC6B2C46A3DD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8B1EC68FE3261F1C32EC2086";
+		};
+		"8B0FE33DCD6CE5E30B42B3EA" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/AssistanceView.swift";
+			"sourceTree" = "<group>";
+		};
+		"0F8AE33EC19F77E6EB2C87A6" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8B0FE33DCD6CE5E30B42B3EA";
+		};
+		"8C1B91DC73BE7E20691C1E6D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/BroadcastPicker.swift";
+			"sourceTree" = "<group>";
+		};
+		"046B32C9A355A262FE35AB37" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8C1B91DC73BE7E20691C1E6D";
+		};
+		"5774FDDC7A57DC98B1C49E4C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/EnrollmentStore.swift";
+			"sourceTree" = "<group>";
+		};
+		"03844E4034EB18959DBA589C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5774FDDC7A57DC98B1C49E4C";
+		};
+		"B0B7CA9DC9F9E53C656D3C3E" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/MeshCentralIOSApp.swift";
+			"sourceTree" = "<group>";
+		};
+		"8D7066DAE6233A5D9F518AB4" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B0B7CA9DC9F9E53C656D3C3E";
+		};
+		"82117FA37284D4B2E4D5E9B0" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Sources/SimulatorCapture.swift";
+			"sourceTree" = "<group>";
+		};
+		"21281B3F7AD6927FA2319B4B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "82117FA37284D4B2E4D5E9B0";
+		};
+		"D6576B98AFB4AC5743DAE064" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/Assistance.swift";
+			"sourceTree" = "<group>";
+		};
+		"5A29350BC0253FB3D7789B39" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D6576B98AFB4AC5743DAE064";
+		};
+		"CC669DBF860356D2EE0D9BD3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/AssistanceMailbox.swift";
+			"sourceTree" = "<group>";
+		};
+		"85271895DE7D098B39F3DBEF" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CC669DBF860356D2EE0D9BD3";
+		};
+		"E973A90BDF341CD0EDBD0953" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/BroadcastChannel.swift";
+			"sourceTree" = "<group>";
+		};
+		"CDDCB7E73091BC4106EAE794" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E973A90BDF341CD0EDBD0953";
+		};
+		"85B11268545680A6B4D68ECF" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/Connection.swift";
+			"sourceTree" = "<group>";
+		};
+		"071D779A2A683EE1BFCA7556" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "85B11268545680A6B4D68ECF";
+		};
+		"E7B908163FEA201DAE50D5E9" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/ConnectionDiagnostics.swift";
+			"sourceTree" = "<group>";
+		};
+		"A9401B4ECC9034FD1D4D2524" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E7B908163FEA201DAE50D5E9";
+		};
+		"DFC901E22819B728291F44A8" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/DesktopRelay.swift";
+			"sourceTree" = "<group>";
+		};
+		"F547414DAB67B0B2C1CA3729" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DFC901E22819B728291F44A8";
+		};
+		"A777A863A9BC787C9CA51B77" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/DesktopRequest.swift";
+			"sourceTree" = "<group>";
+		};
+		"F0CB2E5480DF07CE7822BDDA" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "A777A863A9BC787C9CA51B77";
+		};
+		"591F166CEE1472E1958A1FEB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/EnrollmentImport.swift";
+			"sourceTree" = "<group>";
+		};
+		"743B7B46D9020429DF7DE098" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "591F166CEE1472E1958A1FEB";
+		};
+		"A50482DBD10DD1FCFBE0C053" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/Identity.swift";
+			"sourceTree" = "<group>";
+		};
+		"ADD613483CB575A7342D0783" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "A50482DBD10DD1FCFBE0C053";
+		};
+		"106912512B414DC0150713CC" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Sources/MeshCentralAgent/ScreenFramePump.swift";
+			"sourceTree" = "<group>";
+		};
+		"C0C377D27E11416837E56652" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "106912512B414DC0150713CC";
+		};
+		"AFF87A50730392B6633ACECE" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"C4145473BD90CC6B2C46A3DD",
+				"0F8AE33EC19F77E6EB2C87A6",
+				"046B32C9A355A262FE35AB37",
+				"03844E4034EB18959DBA589C",
+				"8D7066DAE6233A5D9F518AB4",
+				"21281B3F7AD6927FA2319B4B",
+				"5A29350BC0253FB3D7789B39",
+				"85271895DE7D098B39F3DBEF",
+				"CDDCB7E73091BC4106EAE794",
+				"071D779A2A683EE1BFCA7556",
+				"A9401B4ECC9034FD1D4D2524",
+				"F547414DAB67B0B2C1CA3729",
+				"F0CB2E5480DF07CE7822BDDA",
+				"743B7B46D9020429DF7DE098",
+				"ADD613483CB575A7342D0783",
+				"C0C377D27E11416837E56652",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"5761D1A304040BF7FEAB9EEB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Tests/MeshCentralAgentTests/AssistanceTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"50C9C4CF3B3AA2D735BD84B7" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5761D1A304040BF7FEAB9EEB";
+		};
+		"F7488F2A0A3942FFBE52B638" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Tests/MeshCentralAgentTests/DesktopRequestTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"DF1B46D09276B2854BABB019" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F7488F2A0A3942FFBE52B638";
+		};
+		"AAC226708F9D2CBF4F7CBBDA" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Tests/MeshCentralAgentTests/EnrollmentImportTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"8FBCF5003C09A4FECF4BE3F0" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "AAC226708F9D2CBF4F7CBBDA";
+		};
+		"1C60B6EA5494B99BAA7484B3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Tests/MeshCentralAgentTests/IdentityTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"00998725A658F35610E81CEF" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1C60B6EA5494B99BAA7484B3";
+		};
+		"9569AB05B95108EFEC78F5D3" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"50C9C4CF3B3AA2D735BD84B7",
+				"DF1B46D09276B2854BABB019",
+				"8FBCF5003C09A4FECF4BE3F0",
+				"00998725A658F35610E81CEF",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"4A962152F0EDDBEFF7B06870" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "../Broadcast/SampleHandler.swift";
+			"sourceTree" = "<group>";
+		};
+		"56E92197E921FCC81D799713" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4A962152F0EDDBEFF7B06870";
+		};
+		"EB8CFA499B444BB5D4339C9C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D6576B98AFB4AC5743DAE064";
+		};
+		"1D5E83B48CF01CCF0517B8DD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CC669DBF860356D2EE0D9BD3";
+		};
+		"EF527BE595DD4C201AC6D74F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E973A90BDF341CD0EDBD0953";
+		};
+		"B70E097C731D2240A2D5E4EC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "85B11268545680A6B4D68ECF";
+		};
+		"C667F5718802DEF1B60B9266" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E7B908163FEA201DAE50D5E9";
+		};
+		"A73AFF3B74B2EFE9B41BA23F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DFC901E22819B728291F44A8";
+		};
+		"9F9E85C7A796731D8929EE91" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "A777A863A9BC787C9CA51B77";
+		};
+		"095EDA64656D4EB643267F63" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "591F166CEE1472E1958A1FEB";
+		};
+		"D37F8F03840884CD13C60C63" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "A50482DBD10DD1FCFBE0C053";
+		};
+		"7442FE5724F7CCA11892B5D3" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "106912512B414DC0150713CC";
+		};
+		"79773DAD7157E5A4682EBD0D" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"56E92197E921FCC81D799713",
+				"EB8CFA499B444BB5D4339C9C",
+				"1D5E83B48CF01CCF0517B8DD",
+				"EF527BE595DD4C201AC6D74F",
+				"B70E097C731D2240A2D5E4EC",
+				"C667F5718802DEF1B60B9266",
+				"A73AFF3B74B2EFE9B41BA23F",
+				"9F9E85C7A796731D8929EE91",
+				"095EDA64656D4EB643267F63",
+				"D37F8F03840884CD13C60C63",
+				"7442FE5724F7CCA11892B5D3",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"C5461CC1D8F37AFBDA366A3F" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.app-extension";
+			"includeInIndex" = 0;
+			"path" = "MeshCentralBroadcast.appex";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"681C948D238C526E9E3424E0" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "MeshCentralIOS.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"F739566ED5280322FF98A798" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "MeshCentralIOSTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"DC94DB6105282F871D7D1C6D" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "archive.ar";
+			"path" = "libmeshcentral_ios_bridge.a";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"F7EC276BB07F8168A23A26BD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DC94DB6105282F871D7D1C6D";
+		};
+		"7A4C2DC8FCA657188648E999" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"F7EC276BB07F8168A23A26BD",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"B10CDED79664567B030B2B4F" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"BEBA8F051D9D139E439B8421" = {
+			"isa" = "PBXShellScriptBuildPhase";
+			"name" = "Build Rust core (offline)";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"inputPaths" = (
+			);
+			"outputPaths" = (
+				"$(BUILT_PRODUCTS_DIR)/libmeshcentral_ios_bridge.a",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+			"alwaysOutOfDate" = 1;
+			"shellPath" = "/bin/sh";
+			"shellScript" = "/bin/sh \"${SRCROOT}/Scripts/build-rust.sh\"\n";
+		};
+		"87C56CF165B4DAF887A57513" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.assetcatalog";
+			"path" = "MeshCentralAssets.xcassets";
+			"sourceTree" = "<group>";
+		};
+		"455BD51EF14F38ED93045375" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "87C56CF165B4DAF887A57513";
+		};
+		"F9187E824FE171A6F0EFAE28" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"455BD51EF14F38ED93045375",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"79F63AC67810EC067FC4FBE0" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "archive.ar";
+			"path" = "libmeshcentral_ios_broadcast.a";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"72731FA1E112EC07E8C09EAA" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "79F63AC67810EC067FC4FBE0";
+		};
+		"6E5D4A2A5DF195950E87BE61" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"72731FA1E112EC07E8C09EAA",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"93358C446BDE5F9CD6A172CF" = {
+			"isa" = "PBXShellScriptBuildPhase";
+			"name" = "Build broadcast Rust core (offline)";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"inputPaths" = (
+			);
+			"outputPaths" = (
+				"$(BUILT_PRODUCTS_DIR)/libmeshcentral_ios_broadcast.a",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+			"alwaysOutOfDate" = 1;
+			"shellPath" = "/bin/sh";
+			"shellScript" = "/bin/sh \"${SRCROOT}/Scripts/build-rust.sh\"\n";
+		};
+		"4DC39D0B6D9748318FE72C2B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C5461CC1D8F37AFBDA366A3F";
+			"settings" = {
+				"ATTRIBUTES" = (
+					"RemoveHeadersOnCopy",
+				);
+			};
+		};
+		"A90A32536506476BD5E37DA8" = {
+			"isa" = "PBXCopyFilesBuildPhase";
+			"name" = "Embed Broadcast Extension";
+			"buildActionMask" = 2147483647;
+			"dstPath" = "";
+			"dstSubfolderSpec" = 13;
+			"runOnlyForDeploymentPostprocessing" = 0;
+			"files" = (
+				"4DC39D0B6D9748318FE72C2B",
+			);
+		};
+		"9AC3B5AD93CBC0305C62F78F" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "Info.plist";
+			"sourceTree" = "<group>";
+		};
+		"44D6E0EDD951084D5E4CE147" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.script.sh";
+			"path" = "Scripts/build-rust.sh";
+			"sourceTree" = "<group>";
+		};
+		"29D61C28099748E108170F61" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.script.sh";
+			"path" = "Scripts/prepare-mac.sh";
+			"sourceTree" = "<group>";
+		};
+		"0A3E27B8CA818264D75C8D81" = {
+			"isa" = "PBXGroup";
+			"name" = "Products";
+			"children" = (
+				"681C948D238C526E9E3424E0",
+				"F739566ED5280322FF98A798",
+				"C5461CC1D8F37AFBDA366A3F",
+				"DC94DB6105282F871D7D1C6D",
+				"79F63AC67810EC067FC4FBE0",
+			);
+			"sourceTree" = "<group>";
+		};
+		"CA60D520FFE6B5607AE459EE" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "MeshCentral.entitlements";
+			"sourceTree" = "<group>";
+		};
+		"1D6EAEF5527FE4F19A21319D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "../Broadcast/Info.plist";
+			"sourceTree" = "<group>";
+		};
+		"5CE0BFFE8FB2F4C5C9BA2FBB" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "../Broadcast/MeshCentralBroadcast.entitlements";
+			"sourceTree" = "<group>";
+		};
+		"19F479106CE8C3BA8C106518" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"8B1EC68FE3261F1C32EC2086",
+				"8B0FE33DCD6CE5E30B42B3EA",
+				"8C1B91DC73BE7E20691C1E6D",
+				"5774FDDC7A57DC98B1C49E4C",
+				"B0B7CA9DC9F9E53C656D3C3E",
+				"82117FA37284D4B2E4D5E9B0",
+				"D6576B98AFB4AC5743DAE064",
+				"CC669DBF860356D2EE0D9BD3",
+				"E973A90BDF341CD0EDBD0953",
+				"85B11268545680A6B4D68ECF",
+				"E7B908163FEA201DAE50D5E9",
+				"DFC901E22819B728291F44A8",
+				"A777A863A9BC787C9CA51B77",
+				"591F166CEE1472E1958A1FEB",
+				"A50482DBD10DD1FCFBE0C053",
+				"106912512B414DC0150713CC",
+				"4A962152F0EDDBEFF7B06870",
+				"5761D1A304040BF7FEAB9EEB",
+				"F7488F2A0A3942FFBE52B638",
+				"AAC226708F9D2CBF4F7CBBDA",
+				"1C60B6EA5494B99BAA7484B3",
+				"9AC3B5AD93CBC0305C62F78F",
+				"87C56CF165B4DAF887A57513",
+				"CA60D520FFE6B5607AE459EE",
+				"1D6EAEF5527FE4F19A21319D",
+				"5CE0BFFE8FB2F4C5C9BA2FBB",
+				"44D6E0EDD951084D5E4CE147",
+				"29D61C28099748E108170F61",
+				"0A3E27B8CA818264D75C8D81",
+			);
+			"sourceTree" = "<group>";
+		};
+		"488864B3D19480A82F7F1786" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "16.0";
+				"SWIFT_VERSION" = "5.0";
+				"SWIFT_STRICT_CONCURRENCY" = "minimal";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "NO";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"DEVELOPMENT_TEAM" = "";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+				"SWIFT_INCLUDE_PATHS" = (
+					"$(SRCROOT)/../../bridge/include",
+				);
+				"HEADER_SEARCH_PATHS" = (
+					"$(SRCROOT)/../../bridge/include",
+				);
+				"MESH_HOST_BUNDLE_ID" = "org.meshcentral.iosagent.demo";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ONLY_ACTIVE_ARCH" = "YES";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = (
+					"$(inherited)",
+					"DEBUG",
+				);
+			};
+		};
+		"35B1014F135DE9B45529B733" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "16.0";
+				"SWIFT_VERSION" = "5.0";
+				"SWIFT_STRICT_CONCURRENCY" = "minimal";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "NO";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"DEVELOPMENT_TEAM" = "";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+				"SWIFT_INCLUDE_PATHS" = (
+					"$(SRCROOT)/../../bridge/include",
+				);
+				"HEADER_SEARCH_PATHS" = (
+					"$(SRCROOT)/../../bridge/include",
+				);
+				"MESH_HOST_BUNDLE_ID" = "org.meshcentral.iosagent.demo";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ONLY_ACTIVE_ARCH" = "NO";
+				"ENABLE_TESTABILITY" = "NO";
+			};
+		};
+		"CD7C985718C27B30B80E0BF9" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"488864B3D19480A82F7F1786",
+				"35B1014F135DE9B45529B733",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"2A04C20BF6D5C20A63A1D4CC" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID)";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"INFOPLIST_FILE" = "Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.5.2";
+				"CODE_SIGN_ENTITLEMENTS" = "MeshCentral.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "MeshCentralAppIcon";
+				"LIBRARY_SEARCH_PATHS" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				"OTHER_LDFLAGS" = (
+					"$(inherited)",
+					"-lc++",
+					"-liconv",
+				);
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"ENABLE_PREVIEWS" = "YES";
+			};
+		};
+		"E28089EB494F94D6F9770EC2" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID)";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"INFOPLIST_FILE" = "Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.5.2";
+				"CODE_SIGN_ENTITLEMENTS" = "MeshCentral.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "MeshCentralAppIcon";
+				"LIBRARY_SEARCH_PATHS" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				"OTHER_LDFLAGS" = (
+					"$(inherited)",
+					"-lc++",
+					"-liconv",
+				);
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"ENABLE_PREVIEWS" = "YES";
+			};
+		};
+		"20548860EEA3E0E8DE95BCA4" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"2A04C20BF6D5C20A63A1D4CC",
+				"E28089EB494F94D6F9770EC2",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"D53101CA62725E7A28616F29" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID).Broadcast";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"INFOPLIST_FILE" = "../Broadcast/Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.5.2";
+				"CODE_SIGN_ENTITLEMENTS" = "../Broadcast/MeshCentralBroadcast.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+				"RUST_OUTPUT_NAME" = "libmeshcentral_ios_broadcast.a";
+				"LIBRARY_SEARCH_PATHS" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				"OTHER_LDFLAGS" = (
+					"$(inherited)",
+					"-lc++",
+					"-liconv",
+				);
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+			};
+		};
+		"1819E63445D87F1F5BE1D074" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID).Broadcast";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"INFOPLIST_FILE" = "../Broadcast/Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.5.2";
+				"CODE_SIGN_ENTITLEMENTS" = "../Broadcast/MeshCentralBroadcast.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+				"RUST_OUTPUT_NAME" = "libmeshcentral_ios_broadcast.a";
+				"LIBRARY_SEARCH_PATHS" = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				"OTHER_LDFLAGS" = (
+					"$(inherited)",
+					"-lc++",
+					"-liconv",
+				);
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+			};
+		};
+		"E9ACEFCDA7AE39548EE3940E" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"D53101CA62725E7A28616F29",
+				"1819E63445D87F1F5BE1D074",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"4D97A4E86DFD11924C8BDB2C" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "E9ACEFCDA7AE39548EE3940E";
+			"buildPhases" = (
+				"93358C446BDE5F9CD6A172CF",
+				"79773DAD7157E5A4682EBD0D",
+				"6E5D4A2A5DF195950E87BE61",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+			);
+			"name" = "MeshCentralBroadcast";
+			"productName" = "MeshCentralBroadcast";
+			"productReference" = "C5461CC1D8F37AFBDA366A3F";
+			"productType" = "com.apple.product-type.app-extension";
+		};
+		"87966B2726A9B02DF04A92E5" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "244210E48437B6556980A702";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "4D97A4E86DFD11924C8BDB2C";
+			"remoteInfo" = "MeshCentralBroadcast";
+		};
+		"A7F59A68119E5B647E7EB68F" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "4D97A4E86DFD11924C8BDB2C";
+			"targetProxy" = "87966B2726A9B02DF04A92E5";
+		};
+		"12946E3301F628EAC49744B8" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID).tests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/MeshCentralIOS.app/MeshCentralIOS";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+		};
+		"42EE86C84AAD61C6F57FBD29" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(MESH_HOST_BUNDLE_ID).tests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/MeshCentralIOS.app/MeshCentralIOS";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+		};
+		"BA7797CF42134E97AFE6577E" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"12946E3301F628EAC49744B8",
+				"42EE86C84AAD61C6F57FBD29",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"C1E9827DB735CA9BAA54A540" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "20548860EEA3E0E8DE95BCA4";
+			"buildPhases" = (
+				"BEBA8F051D9D139E439B8421",
+				"AFF87A50730392B6633ACECE",
+				"7A4C2DC8FCA657188648E999",
+				"F9187E824FE171A6F0EFAE28",
+				"A90A32536506476BD5E37DA8",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"A7F59A68119E5B647E7EB68F",
+			);
+			"name" = "MeshCentralIOS";
+			"productName" = "MeshCentralIOS";
+			"productReference" = "681C948D238C526E9E3424E0";
+			"productType" = "com.apple.product-type.application";
+		};
+		"9ECF07CEF5CC21AEBB3F6444" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "244210E48437B6556980A702";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "C1E9827DB735CA9BAA54A540";
+			"remoteInfo" = "MeshCentralIOS";
+		};
+		"349D5D5357687EEC77DB91D7" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "C1E9827DB735CA9BAA54A540";
+			"targetProxy" = "9ECF07CEF5CC21AEBB3F6444";
+		};
+		"9F2097400090526FFEF9A221" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "BA7797CF42134E97AFE6577E";
+			"buildPhases" = (
+				"9569AB05B95108EFEC78F5D3",
+				"B10CDED79664567B030B2B4F",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"349D5D5357687EEC77DB91D7",
+			);
+			"name" = "MeshCentralIOSTests";
+			"productName" = "MeshCentralIOSTests";
+			"productReference" = "F739566ED5280322FF98A798";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"244210E48437B6556980A702" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastUpgradeCheck" = "1600";
+				"TargetAttributes" = {
+					"C1E9827DB735CA9BAA54A540" = {
+						"CreatedOnToolsVersion" = "16.0";
+					};
+					"9F2097400090526FFEF9A221" = {
+						"CreatedOnToolsVersion" = "16.0";
+						"TestTargetID" = "C1E9827DB735CA9BAA54A540";
+					};
+				};
+			};
+			"buildConfigurationList" = "CD7C985718C27B30B80E0BF9";
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "fr";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = (
+				"fr",
+				"en",
+				"Base",
+			);
+			"mainGroup" = "19F479106CE8C3BA8C106518";
+			"productRefGroup" = "0A3E27B8CA818264D75C8D81";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = (
+				"C1E9827DB735CA9BAA54A540",
+				"9F2097400090526FFEF9A221",
+				"4D97A4E86DFD11924C8BDB2C",
+			);
+		};
+	};
+	"rootObject" = "244210E48437B6556980A702";
+}
