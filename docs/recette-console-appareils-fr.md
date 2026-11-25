@@ -435,3 +435,34 @@ Résultats de la recette
   atteignent au moins 7,25:1. Le passage à `/` a préservé la session.
 - Les reprises ont ciblé la stabilité du défilement et le libellé mobile.
   Aucune exception JavaScript n’a été relevée sur le parcours validé.
+
+### Migration de sécurité vers upstream 109d029d
+
+La base officielle `109d029ded08606495a9c712102525a026269633` a été
+fusionnée avec le lot `5059e99d`. La préparation conserve le legacy à
+`/` et sert la fiche modernisée à `/v2` sur la même session.
+
+- L’ascendance Git a confirmé les correctifs de permissions `cdc9582a`
+  et `5ee4afeb`, de partage `396e423b` et `d0215d8b`,
+  d’authentification `75ebec8a` et `26305f81`, d’échappement de
+  gabarits `d6e19aa7` et `846c03ad`, et de compression `0775600f`.
+- Sous Windows avec Node 24.14.1, une copie installée au chemin
+  `node_modules/meshcentral` a démarré avec ses données NeDB **de test**.
+  Une correction ciblée de la résolution de manifeste npm a permis de
+  charger `otplib` 13.4.1 dans le paquet préparé, en gardant la
+  vérification de la version.
+- La recette Edge a confirmé les mires distinctes, la connexion par
+  mot de passe et TOTP avec `force2factor`, le passage de `/v2` à `/`
+  et le retour à `/v2` avec la même session. Dans un groupe en lecture
+  seule, les commandes et onglets de contrôle sont restés masqués.
+  Le filtre et le focus ont été retrouvés après la fiche au clavier.
+  Le test est passé avec `minify=1` en utilisant le repli upstream.
+  Aucune exception JavaScript n’a été relevée.
+- Le script a préparé la copie française de `/` et `/v2` depuis la
+  source corrigée. Les empreintes des fichiers de l’installation active
+  de test sont restées identiques. La bascule des dossiers et les
+  retours arrière ont été testés avec un service simulé, y compris sur
+  échec du démarrage et de la sauvegarde.
+- La bascule systemd sur Linux, le profil de production et la reconnexion
+  d’agents réels restent à vérifier. Le verrou upstream réduit l’audit aux
+  alertes résiduelles détaillées dans le manifeste de livraison.

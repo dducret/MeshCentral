@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: Apache-2.0
+diff --git a/meshcentral.js b/meshcentral.js
+--- a/meshcentral.js
++++ b/meshcentral.js
+@@ -4392,10 +4392,19 @@
+                     // This is the first way to test if a module is already installed.
+                     try { versionMatch = (require(`${moduleName}/package.json`).version == moduleVersion) } catch (ex) {
+                         if (ex.code == "ERR_PACKAGE_PATH_NOT_EXPORTED") { 
+-                            var rootPath = __dirname;
+-                            if ((__dirname.endsWith('/node_modules/meshcentral')) || (__dirname.endsWith('\\node_modules\\meshcentral')) || (__dirname.endsWith('/node_modules/meshcentral/')) || (__dirname.endsWith('\\node_modules\\meshcentral\\'))) { rootPath = require('path').join(__dirname, '../..'); }
+-                            var pkgPath = require('path').join(rootPath, 'node_modules', moduleName, 'package.json');
+-                            if (require('fs').existsSync(pkgPath)) { modulePath = pkgPath; }
++                            const path = require('path'), fs = require('fs');
++                            let dir = path.dirname(require.resolve(moduleName));
++                            // Locate the manifest of the package Node actually resolved.
++                            while (true) {
++                                const candidate = path.join(dir, 'package.json');
++                                if (fs.existsSync(candidate) && JSON.parse(fs.readFileSync(candidate, 'utf8')).name === moduleName) {
++                                    modulePath = candidate;
++                                    break;
++                                }
++                                const parent = path.dirname(dir);
++                                if (parent === dir) break;
++                                dir = parent;
++                            }
+                         } else { throw new Error(); }
+                     }
+                     // If the module is not installed, but we get the ERR_PACKAGE_PATH_NOT_EXPORTED error, try a second way.
