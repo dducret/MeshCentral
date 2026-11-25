@@ -397,22 +397,19 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  </div>
                  <div id="xdevices" class="noselect" style="display:none" onscroll="onDevicesScroll(false)"></div>
                  <div id="xdevicesmap" style="display:none">
-@@ -970,45 +971,37 @@
+@@ -970,33 +971,19 @@
              </div>
              <div id=p10 style="display:none">
                  <div id=p10title class="d-flex align-items-center">
 -                    <div id="p10BackButton" class="pe-2">
 -                        <i class="fa-solid fa-square-caret-left fa-2xl" role="button" tabindex=0 onclick=goBack() title="Back" onkeypress="if (event.key == 'Enter') goBack()"></i>
 +                    <button type="button" id="p10BackButton" class="btn btn-outline-secondary btn-sm" onclick=goBack()>
-+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back
++                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
++                        <span id="p10BackLabel">Back</span>
 +                    </button>
 +                    <div class="device-heading">
 +                        <h1 id=p10deviceName class="console-heading" tabindex="-1"></h1>
-+                        <div class="device-heading-meta">
-+                            <span id=p10deviceGroup></span>
-+                            <span id=p10OfflineStatus class="device-status" style="display:none">Offline</span>
-+                            <span id=p10OnlineStatus class="device-status device-status-online" style="display:none">Online</span>
-+                        </div>
++                        <div id="p10deviceGroup" class="device-heading-meta"></div>
                      </div>
 -                    <div class='fs-4 fw-bold'><i class="fa-solid fa-circle-info fa-sm me-2 text-secondary"></i>General<span id=p10deviceName></span></div>
                  </div>
@@ -438,32 +435,32 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 -                            </td>
 -                            <td style=width:20px></td>
 -                            <td style=width:200px;vertical-align:top;position:relative valign=top>
--                                <div class="deviceNotifyLargeDot">
--                                    <div id="p10deviceMsg" onclick=showDeviceMessages(null,null,event) class=deviceNotifyDotSub></div>
--                                    <i title="Starred" role=button class="fa-solid fa-star" id="p10deviceStar" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
--                                    <i title="List of remote sessions active on this computer." role=button class="fa-solid fa-arrow-right-arrow-left" id="p10deviceNotify" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
--                                    <i title="Help Requested" role=button class="fa-solid fa-question" id="p10deviceHelp" onclick=showDeviceHelpRequests(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
--                                </div>
--                                <div id="p10deviceBattery" class="deviceBatteryLarge deviceBatteryLarge1"></div>
++                <div id=p10info style="overflow-y:auto">
++                    <div class="device-overview">
++                        <div class="device-summary">
++                            <div class="device-summary-media">
+                                 <div class="deviceNotifyLargeDot">
+                                     <div id="p10deviceMsg" onclick=showDeviceMessages(null,null,event) class=deviceNotifyDotSub></div>
+                                     <i title="Starred" role=button class="fa-solid fa-star" id="p10deviceStar" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
+@@ -1004,11 +991,21 @@
+                                     <i title="Help Requested" role=button class="fa-solid fa-question" id="p10deviceHelp" onclick=showDeviceHelpRequests(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
+                                 </div>
+                                 <div id="p10deviceBattery" class="deviceBatteryLarge deviceBatteryLarge1"></div>
 -                                <a href=# onclick=p10showiconselector()><img id=MainComputerImage></a>
 -                                <div id=MainComputerState></div>
 -                            </td>
 -                        </tr>
 -                    </table><br />
-+                <div id=p10info style="overflow-y:auto">
-+                    <div class="device-overview">
-+                        <div id=p10html></div>
-+                        <aside class="device-summary">
-+                            <div class="deviceNotifyLargeDot">
-+                                <div id="p10deviceMsg" onclick=showDeviceMessages(null,null,event) class=deviceNotifyDotSub></div>
-+                                <i title="Starred" role=button class="fa-solid fa-star" id="p10deviceStar" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
-+                                <i title="List of remote sessions active on this computer." role=button class="fa-solid fa-arrow-right-arrow-left" id="p10deviceNotify" onclick=showDeviceSessions(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
-+                                <i title="Help Requested" role=button class="fa-solid fa-question" id="p10deviceHelp" onclick=showDeviceHelpRequests(null,null,event) data-fa-transform="shrink-5" data-fa-mask="fa-solid fa-circle"></i>
++                                <a href=# onclick="p10showiconselector(); return false" title="Change device icon"><img id=MainComputerImage alt="Change device icon"></a>
 +                            </div>
-+                            <div id="p10deviceBattery" class="deviceBatteryLarge deviceBatteryLarge1"></div>
-+                            <a href=# onclick="p10showiconselector(); return false" title="Change device icon"><img id=MainComputerImage alt="Change device icon"></a>
-+                            <div id=MainComputerState></div>
-+                        </aside>
++                            <dl id="MainComputerState">
++                                <div><dt>Connectivity</dt><dd id="p10Connectivity"></dd></div>
++                                <div><dt>Power State</dt><dd id="p10PowerState" class="device-power-state"></dd></div>
++                                <div><dt id="p10LastContactLabel">Last Seen</dt><dd id="p10LastContact"></dd></div>
++                            </dl>
++                        </div>
++                        <div id="p10actions" class="device-actions"></div>
++                        <div id=p10html></div>
 +                        <section id=notesPanel class="device-notes" style="display:none">
 +                            <h2>Notes</h2>
 +                            <div id=notesPanelArea></div>
@@ -472,7 +469,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      <div id=p10html2></div>
                      <div id=p10html3></div>
                      <div id=p10html4></div>
-@@ -2066,24 +2059,17 @@
+@@ -2066,24 +2063,17 @@
              </div>
              <br id="column_l_bottomgap" />
          </div>
@@ -504,7 +501,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
                      <div class="modal-body" id="xxAddAgentBody">
-@@ -2387,6 +2373,8 @@
+@@ -2387,6 +2377,8 @@
          var sessionRefreshTimer = null;
          var domain = '{{{domain}}}';
          var domainUrl = '{{{domainurl}}}';
@@ -513,17 +510,18 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          var authCookie = '{{{authCookie}}}';
          var authRelayCookie = '{{{authRelayCookie}}}';
          var logoutControls = JSON.parse(decodeURIComponent('{{{logoutControls}}}'));
-@@ -2417,6 +2405,9 @@
+@@ -2417,6 +2409,10 @@
          if (pluginHandlerBuilder != null) { pluginHandler = new pluginHandlerBuilder(); }
          var installedPluginList = null;
          var goBackStack = [];
 +        var devicePreviewRequested = false;
 +        var devicePreviewActive = false;
++        var deviceListReturn = null;
 +        var devicePreviewWidth = window.matchMedia('(min-width: 1120px)');
          var CollapsedGroups = {};
          var collapseGroups = '{{{collapseGroups}}}';
          try { CollapsedGroups = JSON.parse(getstore('_collapse', '{}')); } catch (ex) { }
-@@ -2655,7 +2646,10 @@
+@@ -2655,7 +2651,10 @@
              // Deleted non-english style and fix all topbar titles
              if ((['en', 'ko', 'ja', 'zh-chs', 'zh-cht'].indexOf('{{{lang}}}') == -1) && ('{{{lang}}}'.toLowerCase() != '')) { QC('body').add('nonenglish'); }
              var elements = document.getElementsByClassName('topbar_td');
@@ -535,7 +533,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // Custom UI
              if (customui != null) {
-@@ -2963,28 +2957,6 @@
+@@ -2963,28 +2962,6 @@
              if (footerBar) { Q('uiViewButton5').classList.add('uiSelectorSel'); }
          }
  
@@ -564,7 +562,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          function updateUserDropdown() {
              if (logoutControls && logoutControls.name) {
                  var userImageSrc = 'images/user-256.png';
-@@ -2996,21 +2968,6 @@
+@@ -2996,21 +2973,6 @@
                  var userImage = Q('userDropdownImage');
                  if (userImage) {
                      userImage.src = userImageSrc;
@@ -586,7 +584,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
              }
          }
-@@ -3194,12 +3151,10 @@
+@@ -3194,12 +3156,10 @@
  
          function toggleBootstrapUIMode() {
              if (xxdialogMode) return;
@@ -603,7 +601,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function getNodeFromId(id) { if (nodes != null) { for (var i in nodes) { if (nodes[i]._id == id) return nodes[i]; } } return null; }
-@@ -3211,7 +3166,10 @@
+@@ -3211,7 +3171,10 @@
          }
  
          function onStateChanged(server, state, prevState, errorCode) {
@@ -614,7 +612,26 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  // Control web socket disconnected
                  setDialogMode(0); // Close any dialog boxes if present
                  go(0); // Go to disconnection panel
-@@ -4983,7 +4941,7 @@
+@@ -3741,9 +3704,7 @@
+                     if (node != null) {
+                         node.lastconnect = message.time;
+                         node.lastaddr = message.addr;
+-                        if ((currentNode._id == node._id) && (Q('MainComputerState').innerHTML == '') && (node.lastconnect != null)) {
+-                            QH('MainComputerState', '<span>' + "Last seen:" + '<br />' + printDateTime(new Date(node.lastconnect)) + '</span>');
+-                        }
++                        if (currentNode && currentNode._id == node._id) { updateDeviceOverviewState(node); }
+                     }
+                     break;
+                 }
+@@ -3754,6 +3715,7 @@
+                         var node = getNodeFromId(lcnodeid);
+                         if (node != null) { node.lastconnect = message.lastconnects[lcnodeid] }
+                     }
++                    if (currentNode && xxcurrentView == 10) { updateDeviceOverviewState(currentNode); }
+                     mainUpdate(4);
+ 					break;
+                 }
+@@ -4983,7 +4945,7 @@
                      break;
                  }
                  case 'createInviteLink': { // Agent installation invitation link
@@ -623,7 +640,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      var servername = serverinfo.name;
                      if ((servername.indexOf('.') == -1) || ((features & 2) != 0)) { servername = window.location.hostname; } // If the server name is not set or it's in LAN-only mode, use the URL hostname as server name.
                      var domainUrlNoSlash = domainUrl.substring(0, domainUrl.length - 1);
-@@ -5002,6 +4960,7 @@
+@@ -5002,6 +4964,7 @@
                      if (message.expire == 5040) { t = "1 month"; }
                      if (message.expire == 0) { t = "Unlimited"; }
                      QH('agentInvitationLink', format("Invitation Link ({0})", t));
@@ -631,7 +648,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      QV('agentInvitationLinkDiv', true);
                      break;
                  }
-@@ -5266,6 +5225,7 @@
+@@ -5266,6 +5229,7 @@
  
          function onDeviceViewChange(i) {
              if (i != null) { Q('viewselect').value = i; }
@@ -639,7 +656,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var j = 1; j < 6; j++) { Q('devViewButton' + j).classList.remove('viewSelectorSel'); }
              Q('devViewButton' + Q('viewselect').value).classList.add('viewSelectorSel');
              putstore('deviceView', Q('viewselect').value);
-@@ -5372,6 +5332,7 @@
+@@ -5372,6 +5336,7 @@
                  return;
              }
              if (e.ctrlKey == true || e.altKey == true || e.metaKey == true) return;
@@ -647,12 +664,13 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              if (Q('viewselect').value < 4) {
                  var processed = 0;
                  if (e.key) {
-@@ -5509,9 +5470,12 @@
+@@ -5509,9 +5474,13 @@
          var deviceHeaders = {};
          var oldviewmode = 0;
          function updateDevices() {
 -            if ((nodes == null) || (xxcurrentView != 1)) { return; }
 +            if ((nodes == null) || ((xxcurrentView != 1) && !devicePreviewActive)) { return; }
++            var focusedRow = (xxcurrentView == 1 && document.activeElement.matches('.device-name')) ? captureDeviceList(document.activeElement) : null;
 +            // Keep the preview tied to an accessible result in the current list.
 +            if (devicePreviewActive && ((currentNode == null) || !IsNodeViewable(currentNode) || (currentNode.v === false))) { go(1); }
              var r = '', c = 0, current = null, count = 0, scount = 0, displayedMeshes = {}, view = Q('viewselect').value, groups = {}, groupCount = {};
@@ -661,7 +679,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('xdevicesmap', view == 4);
              QVH('devListToolbar', view < 3);
              QVH('kvmListToolbar', (view == 3) || (view == 5));
-@@ -5563,9 +5527,8 @@
+@@ -5563,9 +5532,8 @@
                  }
  
                  // Compute the width of the device view.
@@ -673,7 +691,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Compute number of colums
                  var colcount = 4;
-@@ -5592,20 +5555,21 @@
+@@ -5592,20 +5560,21 @@
                              if (meshes[node.meshid] && (meshes[node.meshid].mtype == 3)) { if (meshes[node.meshid].relayid) { extra = '<span class=devHeaderx>' + ", Relayed Devices" + '</span>'; } else { extra = '<span class=devHeaderx>' + ", Local Devices" + '</span>'; } }
                              if ((view == 1) && (current != null)) { if (c == 2) { r += '<td><div style=width:301px></div></td>'; } if (r != '') { r += '</tr></table>'; } }
                              if (view == 2) { r += '<div>'; }
@@ -703,7 +721,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                              if (view == 2) { r += '</div>'; }
                              displayedMeshes[current] = 1;
                              c = 0;
-@@ -5719,7 +5683,7 @@
+@@ -5719,7 +5688,7 @@
                      if (sort == 3) {
                          r = '<div style="margin:30px">' + "No devices are included in any groups, click on a device's \"Groups\" to add to a group." + '</div>';
                      } else {
@@ -712,7 +730,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  }
  
-@@ -5734,16 +5698,13 @@
+@@ -5734,16 +5703,13 @@
                          var mesh = sortedMeshes[i], meshrights = GetMeshRights(mesh);
                          if (displayedMeshes[mesh._id] == null) {
                              if ((current != '') && (r != '')) { r += '</tr></table>'; }
@@ -735,7 +753,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                              if (mesh.mtype == 1) {
                                  r += '<td><div style=padding:10px><i>' + "No Intel&reg; AMT devices in this device group";
                                  if (((meshrights & 4) != 0) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) { r += ', <a href=# style=cursor:pointer onclick=\'return addDeviceToMesh("' + mesh._id + '")\'>' + "add one" + '</a>'; }
-@@ -5804,7 +5765,7 @@
+@@ -5804,7 +5770,7 @@
                              if (requestedLastConnects == false) { requestedLastConnects = true; meshserver.send({ action: 'lastconnects' }); }
                          }
                          // This height of 1 div at the end to fix a problem in Linux firefox browsers
@@ -744,7 +762,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  } else {
                      r += '</table>';
-@@ -5827,7 +5788,6 @@
+@@ -5827,7 +5793,6 @@
  
                  for (var i in deviceHeaders) { QH(i, deviceHeaders[i]); }
                  for (var i in deviceHeadersTitles) { Q(i).title = deviceHeadersTitles[i]; }
@@ -752,15 +770,51 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Take care of KVM surfaces in desktop view mode
                  if (((view == 3) || (view == 5)) && (xxcurrentView == 1)) {
-@@ -5904,6 +5864,7 @@
+@@ -5903,7 +5868,14 @@
+                 }
              }
              oldviewmode = view;
-             onDevicesScrollEx();
+-            onDevicesScrollEx();
++            var returnToRow = xxcurrentView == 1 && (deviceListReturn || focusedRow);
++            if (returnToRow) {
++                deviceListReturn = null;
++                restoreDeviceList(returnToRow);
++            } else {
++                onDevicesScrollEx();
++            }
 +            p1updateInfo();
          }
  
  
-@@ -6028,49 +5989,30 @@
+@@ -5924,14 +5896,21 @@
+ 
+         function onDevicesScrollEx() {
+             if (onDevicesScrollnagleTimer != null) { clearTimeout(onDevicesScrollnagleTimer); onDevicesScrollnagleTimer = null; }
+-            var visibleTop = Q('xdevices').scrollTop - 200, visibleBottom = Q('xdevices').scrollTop + Q('xdevices').clientHeight + 200;
++            var viewport = Q('xdevices').getBoundingClientRect();
+             var view = Q('viewselect').value, devdivs = document.getElementsByName('xxdevice' + view);
++            var focus = document.activeElement;
++            var focusRow = focus.matches('#xdevices .device-name') ? focus.closest('[name="xxdevice' + view + '"]') : null;
++            // Read geometry before rendering, since an empty table row can grow when populated.
++            var rects = Array.from(devdivs, function (row) { return row.getBoundingClientRect(); });
+             for (var i = 0; i < devdivs.length; i++) {
+-                if ((devdivs[i].offsetTop >= visibleTop) && (devdivs[i].offsetTop < visibleBottom)) {
+-                    var node = getNodeFromId(devdivs[i].id.substring(3));
+-                    if (node != null) { updateDeviceViewHtml(view, devdivs[i], node); } else { devdivs[i].innerHTML = ''; }
+-                } else {
+-                    devdivs[i].innerHTML = '';
++                var row = devdivs[i], rect = rects[i];
++                if (row === focusRow) continue;
++                if ((rect.height > 0) && (rect.bottom >= viewport.top - 200) && (rect.top < viewport.bottom + 200)) {
++                    var node = getNodeFromId(row.id.substring(3));
++                    if (node != null) { updateDeviceViewHtml(view, row, node); } else { row.innerHTML = ''; }
++                } else if (row.firstElementChild) {
++                    if (view == 2 && rect.height > 0) { row.style.height = rect.height + 'px'; }
++                    row.innerHTML = '';
+                 }
+             }
+         }
+@@ -6028,49 +6007,30 @@
  
              // Node
              var icon = node.icon;
@@ -823,13 +877,13 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Use defaults if needed
                  if (deviceViewSettings == null) { deviceViewSettings = {}; }
-@@ -6143,4 +6085,4 @@
+@@ -6143,4 +6103,4 @@
 -                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center>' + states.join('&nbsp;+&nbsp;'); } // Connectivity
 +                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center><span class="device-status ' + statusClass + '">' + NodeConnectivityStr(node) + '</span></td>'; } // Connectivity
                  if (deviceViewSettings.devsCols.indexOf('amthost') >= 0) { r += '<td style=text-align:center>' + (((node.intelamt == null) || (node.intelamt.host == null)) ? '' : EscapeHtml(node.intelamt.host)); }
                  if (deviceViewSettings.devsCols.indexOf('amtstate') >= 0) {
                      var amtstate = '';
-@@ -6374,6 +6316,8 @@
+@@ -6374,6 +6334,8 @@
                  QC('DevxColImg' + id).remove('fa-chevron-down');
                  QC('DevxColImg' + id).add('fa-chevron-right');
              }
@@ -838,7 +892,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              putstore('_collapse', JSON.stringify(CollapsedGroups));
              updateCollapseAllButton();
              onDevicesScrollEx();
-@@ -6551,29 +6495,49 @@
+@@ -6551,29 +6513,49 @@
              }
          }
  
@@ -907,7 +961,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function addLocalDeviceToMesh(meshid) {
-@@ -6793,40 +6757,52 @@
+@@ -6793,40 +6775,52 @@
          function inviteAgentToMesh(meshid) {
              if (xxdialogMode) return false;
              var x = '', mesh = meshes[meshid];
@@ -976,7 +1030,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function d2ChangedInviteType() {
-@@ -6841,15 +6817,30 @@
+@@ -6841,15 +6835,30 @@
              d2RequestInvitationLink();
          }
  
@@ -1008,7 +1062,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QE('idx_dlgOkButton', true);
                  QV('idx_dlgCancelButton', false);
              }
-@@ -6992,6 +6983,23 @@
+@@ -6992,6 +7001,23 @@
          // module's own key handlers, the page-level ondockey* handlers gate on xxdialogMode instead.
          function deskDialogReleaseKeys() { if (!xxdialogMode && (xxcurrentView == 11) && desktop && desktop.m && desktop.m.handleReleaseKeys && Q('DeskControl') && Q('DeskControl').checked) { desktop.m.handleReleaseKeys(); } }
  
@@ -1032,7 +1086,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          function setModalContent(modalId, title, bodyContent, size = null) {
              deskDialogReleaseKeys();
              // Check if the modal elements exist
-@@ -6999,6 +7007,7 @@
+@@ -6999,6 +7025,7 @@
              var modalTitleElement = document.getElementById(modalId + 'Title');
  
              if (modalConfigurableElement && modalTitleElement) {
@@ -1040,7 +1094,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  // Set the modal title
                  modalTitleElement.innerHTML = title;
  
-@@ -7173,9 +7182,14 @@
+@@ -7173,9 +7200,14 @@
              meshserver.send({ action: 'addamtdevice', meshid: meshid, devicename: Q('dp1devicename').value, hostname: host, amtusername: amtuser, amtpassword: Q('dp1password').value, amttls: Q('dp1tls').value });
          }
  
@@ -1056,7 +1110,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              //var title = '';
              //for (x in deviceHeaderCount) { if (title.length > 0) title += ', '; title += deviceHeaderCount[x] + ' ' + PowerStateStr2(x); }
              //deviceHeadersTitles["DevxHeader" + deviceHeaderId] = title;
-@@ -7187,19 +7201,18 @@
+@@ -7187,19 +7219,18 @@
          var powerStateStrings = ['', '<span title="' + "Device is powered on." + '">' + "Powered" + '</span>', '<span title="' + "Device is in sleep state (S1)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in sleep state (S2)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in deep sleep state (S3)." + '">' + "Deep Sleep" + '</span>', '<span title="' + "Device is in hibernating state (S4)." + '">' + "Hibernating" + '</span>', '<span title="' + "Device is in powered off state (S5)." + '">' + "Soft-Off" + '</span>', '<span title="' + "Device is detected but power state could not be obtained." + '">' + "Present" + '</span>', '<span title="' + "Device is powered off." + '">' + "Off" + '</span>'];
          var powerStateStrings2 = ['', "Device is powered", "Device is in sleep state (S1)", "Device is in sleep state (S2)", "Device is in deep sleep state (S3)", "Device is hibernating (S4)", "Device is in soft-off state (S5)", "Device is present, but power state cannot be determined", "The device is powered off"];
          var powerColorTable = ['pwsTransparent', 'pwsBlack', 'pwsBlue', 'pwsBlue2', 'pwsLightblue', 'pwsBlueviolet', 'pwsDarkgreen', 'pwsLightseagreen', 'pwsLightseagreen2'];
@@ -1080,7 +1134,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  }
                  if ((node.conn & 2) != 0) { states.push('<span title="' + "Intel&reg; AMT CIRA is connected and ready for use." + '">' + "CIRA" + '</span>'); }
-@@ -7207,9 +7220,22 @@
+@@ -7207,9 +7238,22 @@
                  if ((node.conn & 8) != 0) { states.push('<span title="' + "Mesh agent is reachable using another agent as relay." + '">' + "Relay" + '</span>'); }
                  if ((node.conn & 16) != 0) { states.push('<span title="' + "MQTT connection to the device is active." + '">' + "MQTT" + '</span>'); }
              }
@@ -1106,7 +1160,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function PowerStateStr(x) {
-@@ -7248,8 +7274,27 @@
+@@ -7248,8 +7292,27 @@
              p1updateInfo();
          }
  
@@ -1134,7 +1188,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              if (checkcount > 0) {
                  QE('GroupActionButton', true);
                  Q('SelectAllButton').value = "Select None";
-@@ -7283,17 +7328,19 @@
+@@ -7283,17 +7346,19 @@
  
              // Check if any of the selected devices have a MQTT connection active
              if (features & 0x00400000) {
@@ -1157,7 +1211,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  if ((rights & 131072) && ((added & 16) == 0)) { added |= 16; addedOptions.push({ v: 106, name: "Run commands" }); }
                  if ((rights & 16384) && ((added & 32) == 0)) { added |= 32; addedOptions.push({ v: 108, name: "Device notification" }); }
                  if ((rights & 4) && ((added & 64) == 0)) { added |= 64; addedOptions.push({ v: 107, name: "Edit tags" }); }
-@@ -7310,11 +7357,28 @@
+@@ -7310,11 +7375,28 @@
              var addedOptionsStr = '';
              addedOptions.sort(nameSort);
              for (var i in addedOptions) { addedOptionsStr += '<option value=' + addedOptions[i].v + (addedOptions[i].s ? ' selected' : '') + '>' + addedOptions[i].name + '</option>'; }
@@ -1187,7 +1241,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          // Get the list of checked devices
-@@ -7324,6 +7388,7 @@
+@@ -7324,6 +7406,7 @@
              var elements = document.getElementsByClassName('DeviceCheckbox');
              for (var i = 0; i < elements.length; i++) { elements[i].checked = false; }
              checkedNodeids = {};
@@ -1195,7 +1249,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function groupActionFunctionEx() {
-@@ -7337,11 +7402,11 @@
+@@ -7337,11 +7420,11 @@
                  // Group delete, ask for confirmation
                  var chkNodeIds = getCheckedDevices(), x = '';
                  if (chkNodeIds.length == 0) return;
@@ -1209,7 +1263,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      var y = '';
                      if (nconn == 1) { y += format("1 selected device is online." + '<br />', nconn); }
                      else if (nconn > 1) { y += format("{0} selected devices are online." + '<br />', nconn); }
-@@ -7349,9 +7414,11 @@
+@@ -7349,9 +7432,11 @@
                      else if (ndisc > 1) { y += format("{0} selected devices are offline." + '<br />', ndisc); }
                      if (y != '') { x += '<div style=padding:8px>' + y + '</div>'; } else { x += '<br />'; }
                  }
@@ -1222,7 +1276,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QE('idx_dlgOkButton', false);
              } else if (op == 102) {
                  // Move computers to a different group
-@@ -7442,11 +7509,15 @@
+@@ -7442,11 +7527,15 @@
                  var x = "Upload default server core on selected devices?" + '<br /><br />';
                  setModalContent('xxAddAgent', "Upload default server core", x);
                  showModal('xxAddAgentModal', 'idx_dlgOkButton', () => d2groupActionFunctionAgentDefaultCodeExec());
@@ -1243,7 +1297,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
              return false;
          }
-@@ -7582,7 +7653,7 @@
+@@ -7582,7 +7671,7 @@
          }
  
          function d2groupActionFunctionDelCheck() { QE('idx_dlgOkButton', Q('d2check').checked); }
@@ -1252,7 +1306,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
          function d2runCommandDialog(options) {
              var wintype = false, linuxtype = false, agenttype = false;
-@@ -8044,7 +8115,7 @@
+@@ -8044,7 +8133,7 @@
                  var panel = [0, 10, 12, 11, 13, 16, 17, 15, 19][action]; // (invalid), General, Desktop, Terminal, Files, Events, Console, Plugin
                  if (event && (event.shiftKey == true)) {
                      // Open the device in a different tab
@@ -1261,7 +1315,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  } else {
                      // Go to the right panel
                      gotoDevice(nodeid, panel);
-@@ -8283,7 +8354,7 @@
+@@ -8283,7 +8372,7 @@
              QV('filesContextMenu', false);
              QV('deskPlayerContextMenu', false);
              QV('deskKeyShortcutContextMenu', false);
@@ -1270,7 +1324,32 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('deskPreConfigShortcutContextMenu', false);
              QV('deskPreConfigScriptContextMenu', false);
              QV('expandAllContextMenu', false);
-@@ -8941,7 +9012,7 @@
+@@ -8922,6 +9011,24 @@
+         var deviceSharesReq = null;
+         var deviceShares = null;
+ 
++        function updateDeviceOverviewState(node) {
++            var connectivity = NodeConnectivityStr(node);
++            if ((node.conn & 1) && node.agent && node.agent.root === false) {
++                connectivity += ' · <span title="' + "Agent is running on remote device with reduced privilages." + '">' + "Restricted" + '</span>';
++            }
++            QH('p10Connectivity', connectivity);
++            var connected = node.mtype == 2 ? ((node.conn & 1) != 0) : !!node.conn;
++            QC('p10Connectivity').toggle('device-status-online', connected);
++            QC('p10Connectivity').toggle('device-status-offline', !connected && node.mtype != 3);
++            var unavailable = consoleUsesFrench ? 'Non disponible' : "Unknown";
++            QH('p10PowerState', NodePowerStateStr(node) || unavailable);
++            var lastContact = node.lastconnect != null ? new Date(node.lastconnect) : null;
++            var lastContactHtml = (lastContact && !isNaN(lastContact.getTime()))
++                ? '<time datetime="' + lastContact.toISOString() + '">' + printDateTime(lastContact) + '</time>' : unavailable;
++            if (consoleUsesFrench) { Q('p10LastContactLabel').textContent = 'Dernier contact'; }
++            QH('p10LastContact', lastContactHtml);
++        }
++
+         function getCurrentNode() { return currentNode; };
+         function gotoDevice(nodeid, panel, refresh, event) {
+             if (event && ((event.which == 3) || (event.button == 2))) return; // ignore right click events here as handled elsewhere
+@@ -8941,7 +9048,7 @@
  
              if (event && ((event.shiftKey == true) || (event.which == 2) || (event.button == 1))) {
                  // Open the device in a different tab
@@ -1279,7 +1358,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  return;
              }
  
-@@ -8998,12 +9069,17 @@
+@@ -8998,12 +9105,17 @@
                  showStoreApps = false;
  
                  // Add node name
@@ -1301,7 +1380,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QH('p11deviceName', nname);
                  QH('p12deviceName', nname);
                  QH('p13deviceName', nname);
-@@ -9016,7 +9092,7 @@
+@@ -9016,7 +9128,7 @@
                  QH('p19deviceName', nname);
  
                  // Node attributes
@@ -1310,12 +1389,13 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // If title bar is hidden, display the device name here
                  if ((args.hide & 8) != 0) { x += '<br />' + addDeviceAttribute("Name", nnameEx); }
-@@ -9279,11 +9355,11 @@
+@@ -9279,11 +9391,12 @@
                  for (var i in meshes) { if (meshes[i].relayid == node._id) { relayFor.push('<a href=# onclick=gotoMesh("' + meshes[i]._id + '") style=cursor:pointer>' + EscapeHtml(meshes[i].name) + '</a>'); } }
                  if (relayFor.length > 0) { x += addDeviceAttribute('<span title="' + "Device groups this device is a relay for" + '">' + "Relay for" + '</span>', relayFor.join(", ")); }
  
 -                x += '</table><br />';
-+                x += '</div><div class="device-actions">';
++                QH('p10html', x + '</div>');
++                x = '';
                  // Show action button, only show if we have permissions 4, 8, 64
                  if (((meshrights & (4 + 8 + 64 + 262144)) != 0) && (node.mtype < 3) && ((node.agent == null) || (node.agent.id != 34))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Actions" + '" title="' + "Perform power actions on the device" + '" onclick=deviceActionFunction() />'; }
 -                x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Notes" + '" title="' + "View notes about this device" + '" onclick=showNotes(' + ((meshrights & 128) == 0) + ',"' + encodeURIComponentEx(node._id) + '") />';
@@ -1325,49 +1405,50 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  if ((node.mtype == 2) && (connectivity & 1) && ((meshrights & 131072) != 0)) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" cmenu=deskPreConfigScriptContextMenu value="' + "Run" + '" title="' + "Run commands on this device" + '" onclick=runDeviceCmd("' + encodeURIComponentEx(node._id) + '") />'; }
                  if (node.mtype != 4) {
                      if ((meshrights & 8) && (connectivity & 1) && ((meshrights & 16384) != 0) || ((node.pmt == 1) && ((features2 & 2) != 0))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Message" + '" title="' + "Display a text message on the remote device" + '" onclick=deviceMessageFunction() />'; }
-@@ -9325,7 +9401,7 @@
+@@ -9325,7 +9438,7 @@
                      }
                  }
  
 -                QH('p10html', x);
-+                QH('p10html', x + '</div>');
++                QH('p10actions', x);
  
                  // Show node last 7 days timeline
                  mainUpdate(256);
-@@ -9424,8 +9500,8 @@
+@@ -9423,32 +9536,7 @@
+                     QH('p10html5', '');
                  }
  
-                 // Set the node power state
+-                // Set the node power state
 -                var powerstate = PowerStateStr(node.state);
 -                //if (node.state == 0) { powerstate = 'Unknown State'; }
-+                var powerstate = '';
-+                if ((node.mtype == 2) && ((connectivity & 1) == 0)) { powerstate = "Agent disconnected"; }
-                 var agentPrivilages = '';
-                 if ((node.agent != null) && (node.agent.root === false)) { agentPrivilages = ', <span title="' + "Agent is running on remote device with reduced privilages." + '">' + "Restricted" + '</span>'; }
-                 if ((connectivity & 1) != 0) {
-@@ -9443,12 +9519,17 @@
-                 if ((connectivity & 2) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT connected" + '">' + "Intel&reg; AMT connected" + '</span>'; }
-                 else if ((connectivity & 4) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT detected" + '">' + "Intel&reg; AMT detected" + '</span>'; }
-                 if ((connectivity & 16) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "MQTT connected" + '">' + "MQTT channel connected" + '</span>'; }
+-                var agentPrivilages = '';
+-                if ((node.agent != null) && (node.agent.root === false)) { agentPrivilages = ', <span title="' + "Agent is running on remote device with reduced privilages." + '">' + "Restricted" + '</span>'; }
+-                if ((connectivity & 1) != 0) {
+-                    if (powerstate.length > 0) { powerstate += '<br/>'; }
+-                    if (node.mtype == 4) {
+-                        if (node.porttype == 'PDU') {
+-                            powerstate += '<span style=font-size:12px title="' + "Switch port connected" + '">' + "Switch port connected" + '</span>' + agentPrivilages;
+-                        } else {
+-                            powerstate += '<span style=font-size:12px title="' + "IP-KVM port connected" + '">' + "IP-KVM port connected" + '</span>' + agentPrivilages;
+-                        }
+-                    } else {
+-                        powerstate += '<span style=font-size:12px title="' + "Agent connected" + '">' + "Agent connected" + '</span>' + agentPrivilages;
+-                    }
+-                }
+-                if ((connectivity & 2) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT connected" + '">' + "Intel&reg; AMT connected" + '</span>'; }
+-                else if ((connectivity & 4) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT detected" + '">' + "Intel&reg; AMT detected" + '</span>'; }
+-                if ((connectivity & 16) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "MQTT connected" + '">' + "MQTT channel connected" + '</span>'; }
 -                if ((powerstate == '') && node.lastconnect) { powerstate = '<span style=font-size:12px>' + "Last seen:" + '<br />' + printDateTime(new Date(node.lastconnect)) + '</span>'; }
 -                else {
 -                    if (node.porttype == 'PDU') { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
 -                    else if ((node.pwr > 1) && (node.pwr != 7)) { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
-+                if (!connectivity && node.lastconnect) {
-+                    if (powerstate.length > 0) { powerstate += '<br/>'; }
-+                    powerstate += '<span style=font-size:12px>' + "Last seen:" + '<br />' + printDateTime(new Date(node.lastconnect)) + '</span>';
-+                }
-+                var devicePower = NodePowerStateStr(node);
-+                if (devicePower) {
-+                    powerstate += '<div class="device-power-state">' + "Power State" + ': ' + devicePower + '</div>';
-                 }
-                 QH('MainComputerState', powerstate);
-+                QV('p10OfflineStatus', !node.conn && (node.mtype != 3));
-+                QV('p10OnlineStatus', !!node.conn);
+-                }
+-                QH('MainComputerState', powerstate);
++                updateDeviceOverviewState(node);
  
                  // Set the node icon
                  Q('MainComputerImage').setAttribute('src', 'images/icons256-' + node.icon + '-1.png');
-@@ -9484,10 +9565,10 @@
+@@ -9484,10 +9572,10 @@
  
                  // Set the Intel AMT / Intel SM tab name
                  if ((node.intelamt != null) && (typeof node.intelamt.sku == 'number') && ((node.intelamt.sku & 16) != 0)) {
@@ -1380,19 +1461,25 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      QH('p14deviceNamePrefix', "Intel&reg; AMT");
                  }
  
-@@ -9645,7 +9726,11 @@
+@@ -9645,7 +9733,17 @@
              }
              setupDesktop(); // Always refresh the desktop, even if we are on the same device, we need to do some canvas switching.
              if (!panel) panel = 10;
-+            var fromDeviceList = ((xxcurrentView == 1) || devicePreviewActive) && (panel == 10) && (event != null);
-+            if (fromDeviceList && Q('xdevices').contains(event.target)) { devicePreviewRequested = true; }
++            var listOrigin = ((xxcurrentView == 1) || devicePreviewActive) && (panel == 10) && event
++                ? captureDeviceList(event.target) : null;
++            var fromDeviceList = !!listOrigin;
++            if (fromDeviceList) {
++                deviceListReturn = listOrigin;
++                devicePreviewRequested = true;
++            }
++            Q('p10BackLabel').textContent = deviceListReturn ? (consoleUsesFrench ? 'Retour à la liste' : "Back to devices") : "Back";
              go(panel);
 +            if (fromDeviceList && (xxcurrentView == 10) && ((args.hide & 8) == 0)) { Q('p10deviceName').focus(); }
 +            if (fromDeviceList && devicePreviewActive) { mainUpdate(4); }
          }
  
          function setIpPduState(op) {
-@@ -10523,10 +10608,11 @@
+@@ -10523,10 +10621,11 @@
              if (nodeids.length > 1) { x = format("Are you sure you want to uninstall the selected {0} agents?", nodeids.length); } else { x = "Are you sure you want to uninstall selected agent?"; }
              x += '<br /><br />';
              if (nodeids.length > 1) { x += "This will not remove the devices from the server, but the devices will not longer be able to connect to the server. All remote access to the devices will be lost. The devices must be connected for this command to work."; } else { x += "This will not remove this device from the server, but the device will not longer be able to connect to the server. All remote access to the device will be lost. The device must be connect for this command to work."; }
@@ -1406,7 +1493,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              p10validateSendUninstallAgentDialog();
              return false;
          }
-@@ -10569,6 +10655,7 @@
+@@ -10569,6 +10668,7 @@
              xxdialogButtons = 3; xxdialogTag = nodeid;
              setModalContent('xxAddAgent', "Delete Node", x);
              showModal('xxAddAgentModal', 'idx_dlgOkButton', () => p10showDeleteNodeDialogEx(0, nodeid));
@@ -1414,7 +1501,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              p10validateDeleteNodeDialog();
              return false;
          }
-@@ -21731,49 +21818,45 @@
+@@ -21731,49 +21831,45 @@
          var userDropdownOpen = false;
          var uiSubmenuOpen = false;
  
@@ -1494,7 +1581,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              var uiSubmenu = Q('uiSubmenu');
              var isDesktop = window.innerWidth > 769;
-@@ -21812,13 +21895,7 @@
+@@ -21812,13 +21908,7 @@
          }
  
          function handleUserMenuItem(action) {
@@ -1509,7 +1596,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              switch(action) {
                  case 'devices': goForward('devices'); break;
-@@ -21843,6 +21920,7 @@
+@@ -21843,6 +21933,7 @@
          }
  
          function resetChevronArrow() {
@@ -1517,10 +1604,58 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              var arrow = document.querySelector('.userDropdownUISettings .fa-chevron-right');
              if (arrow) arrow.style.transform = '';
          }
-@@ -23317,11 +23395,49 @@
+@@ -23317,11 +23408,97 @@
              if (((b & 8) || x) && f) f(x, t);
          }
  
++        function deviceListViewKey() {
++            return JSON.stringify([Q('viewselect').value, Q('SearchInput').value, Q('DevFilterSelect').value,
++                sort, devicePagingState ? devicePagingState.skip : 0, CollapsedGroups]);
++        }
++
++        function captureDeviceList(target) {
++            var list = Q('xdevices'), view = Q('viewselect').value;
++            if (!target || (view != 1 && view != 2) || !list.contains(target)) return null;
++            var row = target.closest('[name="xxdevice' + view + '"]');
++            if (!row) return null;
++            return {
++                nodeid: row.id.substring(3), key: deviceListViewKey(),
++                top: list.scrollTop, left: list.scrollLeft,
++                rowOffset: row.getBoundingClientRect().top - list.getBoundingClientRect().top
++            };
++        }
++
++        function restoreDeviceList(state) {
++            var list = Q('xdevices'), view = Q('viewselect').value, sameView = (state.key === deviceListViewKey());
++            var row = Q('xv' + view + state.nodeid);
++            if (row && (!row.getClientRects().length || !list.contains(row))) { row = null; }
++            if (sameView) {
++                list.scrollTop = state.top;
++                list.scrollLeft = state.left;
++            }
++            if (row && sameView && state.top > 0) {
++                list.scrollTop += row.getBoundingClientRect().top - list.getBoundingClientRect().top - state.rowOffset;
++            }
++            onDevicesScrollEx();
++            if (row) {
++                var listRect = list.getBoundingClientRect(), rowRect = row.getBoundingClientRect();
++                if (sameView && state.top > 0) {
++                    var delta = rowRect.top - listRect.top - state.rowOffset;
++                    if (Math.abs(delta) > 1) { list.scrollTop += delta; onDevicesScrollEx(); }
++                } else if (rowRect.bottom <= listRect.top || rowRect.top >= listRect.bottom) {
++                    row.scrollIntoView({ block: 'nearest', inline: 'nearest' });
++                    onDevicesScrollEx();
++                }
++                var link = row.querySelector('.device-name');
++                if (!link) {
++                    var node = getNodeFromId(state.nodeid);
++                    if (node) { updateDeviceViewHtml(view, row, node); link = row.querySelector('.device-name'); }
++                }
++                if (link) { link.focus({ preventScroll: true }); return; }
++            }
++            Q(view == 4 ? 'mapSearchLocation' : ((view == 3 || view == 5) ? 'KvmSearchInput' : 'SearchInput')).focus({ preventScroll: true });
++        }
++
 +        function isDevicePreviewPanel(panel) {
 +            return (panel == 10) || (panel == 16) || (panel == 17);
 +        }
@@ -1568,21 +1703,21 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
          function messagebox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t, 1); }
          function statusbox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t); }
-@@ -23331,8 +23447,13 @@
+@@ -23331,8 +23508,13 @@
              setSessionActivity();
              if (xxdialogMode || (goBackStack.length == 0)) return;
              if (fullscreen) { deskToggleFull(); }
 +            var fromDeviceOverview = isDevicePreviewPanel(xxcurrentView);
              go(goBackStack.pop());
              goBackStack.pop();
-+            if (fromDeviceOverview && (xxcurrentView == 1)) {
++            if (fromDeviceOverview && (xxcurrentView == 1) && !deviceListReturn) {
 +                var view = Q('viewselect').value;
 +                Q(view == 4 ? 'mapSearchLocation' : ((view == 3 || view == 5) ? 'KvmSearchInput' : 'SearchInput')).focus();
 +            }
          }
  
          function goForward(id) { if (xxdialogMode) return; backStack.push(id); goStack(); }
-@@ -23376,15 +23497,15 @@
+@@ -23376,15 +23558,15 @@
                  // Open the device in a different tab
                  event.preventDefault();
                  if ((x >= 9) && (x <= 19)) {
@@ -1603,16 +1738,19 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
                  return;
              }
-@@ -23408,6 +23529,8 @@
+@@ -23408,6 +23590,11 @@
              if (xxcurrentView == 17) deviceDetailsStatsClear();
  
              // Edit this line when adding a new screen
 +            var focusedDeviceControl = Q('MainSubMenuSpan').contains(document.activeElement) ? document.activeElement : null;
-+            if ((x < 9) || (x >= 20)) { devicePreviewRequested = false; }
++            if ((x < 9) || (x >= 20)) {
++                devicePreviewRequested = false;
++                if (x != 1) { deviceListReturn = null; }
++            }
              for (var i = 0; i < 61; i++) { QV('p' + i, i == x); }
              xxcurrentView = x;
  
-@@ -23435,6 +23558,8 @@
+@@ -23435,6 +23622,8 @@
              for (var i in mainBarItems) {
                  QC(mainBarItems[i]).remove('fullselect');
                  QC(mainBarItems[i]).remove('semiselect');
@@ -1621,7 +1759,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Remove left bar selection
-@@ -23442,6 +23567,7 @@
+@@ -23442,6 +23631,7 @@
              for (var i in leftBarItems) {
                  QC(leftBarItems[i]).remove('lbbuttonsel');
                  QC(leftBarItems[i]).remove('lbbuttonsel2');
@@ -1629,7 +1767,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Define class for Menu(s) as fully or semi active.
-@@ -23476,6 +23602,10 @@
+@@ -23476,6 +23666,10 @@
                  QC('MainMenuMyServer').add(mainMenuActiveClass);
                  QC('LeftMenuMyServer').add(leftMenuActiveClass);
              }
@@ -1640,7 +1778,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('ServerPlugins', pluginHandler != null);
  
              // column_l max-height
-@@ -23498,7 +23628,14 @@
+@@ -23498,7 +23692,14 @@
                  QC(panels[i]).remove('style3x');
                  QC(panels[i]).remove('style3sel');
                  QC(panels[i]).add((x == i) ? 'style3sel' : 'style3x');
@@ -1656,7 +1794,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // If going to the remote desktop tab, adjust the tab.
              if (x == 11) { deskAdjust(); }
-@@ -23509,7 +23646,7 @@
+@@ -23509,7 +23710,7 @@
              QV('p15BackButton', (x != 115) && ((args.hide & 32) == 0) && ('{{currentNode}}'.toLowerCase() == '')); // For device console, only show the back button if not hidden and not in single device view mode.
              if ((x == 15) || (x == 115)) { setupConsole(); }
  
@@ -1665,7 +1803,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // Setup web notifications
              if ((x == 2) && Notification) { QV('accountEnableNotificationsSpan', Notification.permission != 'granted'); }
-@@ -24692,7 +24829,7 @@
+@@ -24692,7 +24893,7 @@
          function isPrivateIP(a) { if (a.indexOf(':') != a.lastIndexOf(':')) { return /^(::1?$|f[cd]|fe[89ab])/i.test(a); } return /^(10\.|127\.|169\.254\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.|100\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\.)/.test(a); }
          function u2fSupported() { return (window.u2f && ((navigator.userAgent.indexOf('Chrome/') > 0) || (navigator.userAgent.indexOf('Firefox/') > 0) || (navigator.userAgent.indexOf('Opera/') > 0) || (navigator.userAgent.indexOf('Safari/') > 0))); }
          function findOne(arr1, arr2) { if ((arr1 == null) || (arr2 == null)) return false; return arr2.some(function (v) { return arr1.indexOf(v) >= 0; }); };

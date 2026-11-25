@@ -393,3 +393,45 @@ Résultats de la recette
   a conservé la session et aucune exception JavaScript n’a été relevée.
 - Les opérations d’alimentation, de suppression et de désinstallation
   ont été contrôlées côté navigateur, avec interception avant le serveur.
+
+### Fiche appareil et retour à la liste sur `/v2`
+
+Base du lot `2df0197a`. La fiche affichait l’état dans un bloc séparé
+des attributs et les actions après les attributs. Le bouton de retour
+plaçait le focus sur le filtre, même si l’appareil était encore visible.
+
+Critères réutilisables pour la phase Rust
+
+- Le nom et le groupe identifient l’appareil. La connectivité de l’agent,
+  l’alimentation et le dernier contact sont affichés séparément. Une date
+  manquante est signalée comme indisponible. Un retour `lastconnect`
+  enrichit la fiche du seul appareil correspondant.
+- Les actions de la fiche précèdent les attributs. MeshCentral continue
+  à déterminer les actions et onglets disponibles pour le compte.
+- La fiche reste latérale à grande largeur et occupe la zone de contenu
+  à largeur mobile. Elle s’ouvre depuis une ligne, puis « Retour à la
+  liste » restaure cette ligne, la position et le focus. Le texte du
+  filtre, le filtre d’état et le tri sont conservés.
+- Si la ligne n’est plus visible, le retour place le focus sur le filtre
+  en vigueur pour permettre de poursuivre la recherche.
+
+Résultats de la recette
+
+- `prepare.cjs --check` a accepté `7d52d950`, upstream `d0215d8b` et le
+  paquet npm officiel 1.3.1. La variante française minifiée a été
+  régénérée et servie par l’instance npm existante de recette.
+- À 1 280 px en clair, le compte restreint a ouvert le volet au clavier.
+  La fiche a affiché un dernier contact lu par npm 1.3.1 depuis les
+  données de test, un agent déconnecté et un appareil allumé. Les actions
+  de la fiche ont précédé les attributs. Tabulation inverse et Entrée ont
+  ramené le focus et la position sur la ligne, avec le même filtre, le
+  même état et le même tri. En masquant la ligne avec le filtre du volet,
+  le retour a placé le focus sur la recherche en vigueur.
+- À 390 px en mode mobile émulé, en français et en sombre, l’ouverture
+  et le retour tactiles ont fonctionné sur un groupe en lecture seule.
+  Le retour a retrouvé la ligne à 1 px de sa position visuelle initiale.
+  L’action de gestion et les onglets Bureau, Terminal, Fichiers et Console
+  n’étaient pas proposés. Les contrastes mesurés du résumé et du retour
+  atteignent au moins 7,25:1. Le passage à `/` a préservé la session.
+- Les reprises ont ciblé la stabilité du défilement et le libellé mobile.
+  Aucune exception JavaScript n’a été relevée sur le parcours validé.

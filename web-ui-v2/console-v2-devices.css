@@ -260,7 +260,8 @@
     font-weight: 600;
 }
 
-.console-dialog .modal-footer .btn-primary {
+.console-dialog .modal-footer .btn-primary,
+.device-actions .btn-primary {
     --bs-btn-bg: #16598f;
     --bs-btn-border-color: #16598f;
     --bs-btn-hover-bg: #124674;
@@ -283,7 +284,8 @@
     --bs-btn-active-border-color: var(--console-control-border);
 }
 
-[data-bs-theme="dark"] .console-dialog .modal-footer .btn-primary {
+[data-bs-theme="dark"] .console-dialog .modal-footer .btn-primary,
+[data-bs-theme="dark"] .device-actions .btn-primary {
     --bs-btn-color: #142638;
     --bs-btn-bg: #a9d3ff;
     --bs-btn-border-color: #a9d3ff;
@@ -797,8 +799,7 @@
 }
 
 .device-status-online::before,
-.device-status-offline::before,
-#p10OfflineStatus::before {
+.device-status-offline::before {
     display: inline-block;
     width: .45rem;
     height: .45rem;
@@ -814,6 +815,8 @@
     border-bottom: 1px solid var(--console-border);
 }
 
+#xdevices.device-list-scroll { overflow-anchor: none; }
+
 .device-list-empty {
     padding: 20px 12px;
     color: var(--console-text);
@@ -828,15 +831,10 @@
 }
 
 .device-heading-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 12px;
+    margin-block-start: .1875rem;
+    color: var(--console-muted);
+    font-size: .875rem;
     overflow-wrap: anywhere;
-}
-
-#p10OfflineStatus {
-    font-weight: 600;
 }
 
 .device-rename {
@@ -853,7 +851,13 @@
 
 #p10BackButton {
     flex-shrink: 0;
-    min-height: 32px;
+    min-height: 2.25rem;
+    font-weight: 600;
+}
+
+#p10 :is(#p10BackButton, .device-actions .btn):focus-visible {
+    outline: 2px solid var(--console-focus);
+    outline-offset: 2px;
 }
 
 #p1 .btn-outline-secondary,
@@ -867,9 +871,8 @@
 
 .device-overview {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(9rem, 13rem);
-    align-items: start;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .875rem;
     margin-bottom: 16px;
 }
 
@@ -903,11 +906,16 @@
 }
 
 .device-actions {
-    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
 }
 
-.device-actions :is(button, input) {
-    min-height: 32px;
+.device-actions .btn {
+    min-height: 2.25rem;
+    margin: 0 !important;
+    border-radius: .5rem;
+    font-weight: 600;
 }
 
 [data-bs-theme="dark"] #p10html2 thead {
@@ -916,17 +924,72 @@
 }
 
 .device-summary {
-    position: relative;
-    padding: 8px 12px 12px;
-    border-radius: 6px;
-    background: var(--console-tint);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: .75rem;
+    padding: .875rem;
+    border: 1px solid var(--console-border);
+    border-radius: .625rem;
+    background: var(--console-surface);
     color: var(--console-text);
-    text-align: center;
 }
 
-#MainComputerImage {
-    width: min(100%, 112px);
+.device-summary-media {
+    display: grid;
+    justify-items: center;
+    gap: .25rem;
+    padding: .375rem;
+    border-radius: .5rem;
+    background: var(--console-tint);
+}
+
+#p10info #MainComputerImage {
+    display: block;
+    width: 3rem;
     height: auto;
+}
+
+.device-summary-media :is(.deviceNotifyLargeDot, .deviceBatteryLarge, .deviceNotifyDotSub) {
+    position: static;
+}
+
+.device-summary-media .deviceNotifyLargeDot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .25rem;
+    max-width: 3rem;
+    height: auto;
+}
+
+#MainComputerState {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+    gap: .625rem;
+    width: auto;
+    margin: 0;
+    font-size: .875rem;
+    text-align: start;
+}
+
+#MainComputerState > div {
+    min-width: 0;
+    padding: .5rem .625rem;
+    border-radius: .375rem;
+    background: var(--console-tint);
+    overflow-wrap: anywhere;
+}
+
+#MainComputerState dt {
+    color: var(--console-muted);
+    font-size: .8125rem;
+    font-weight: 500;
+}
+
+#MainComputerState dd {
+    margin: .125rem 0 0;
+    font-weight: 600;
 }
 
 .device-notes {
@@ -948,9 +1011,20 @@
     overflow-wrap: anywhere;
 }
 
-body.is-mobile #p10BackButton {
-    color: white;
-    gap: 6px;
+body.is-mobile #p10 #p10title {
+    align-items: center !important;
+    gap: .625rem;
+    padding: .375rem .5rem !important;
+}
+
+body.is-mobile #p10 #p10BackButton {
+    align-self: center;
+    gap: .375rem;
+    margin: 0;
+    padding: .375rem .5rem !important;
+    border-radius: .5rem;
+    background: var(--console-tint);
+    color: var(--console-text);
 }
 
 body.is-mobile {
@@ -1089,14 +1163,6 @@ body.is-mobile :is(#p16title, #p17title) .fs-4 {
     flex: 0 0 auto;
 }
 
-.device-preview .device-overview {
-    grid-template-columns: minmax(0, 1fr);
-}
-
-.device-preview .device-summary {
-    justify-self: start;
-}
-
 @media (max-width: 768px) {
     #xdevices.device-list-scroll {
         overflow-x: auto;
@@ -1123,13 +1189,4 @@ body.is-mobile :is(#p16title, #p17title) .fs-4 {
         flex-basis: auto;
     }
 
-    .device-overview {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
-    }
-
-    .device-summary {
-        justify-self: start;
-        min-width: 10rem;
-    }
 }
