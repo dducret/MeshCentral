@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+diff --git a/webserver.js b/webserver.js
+--- a/webserver.js
++++ b/webserver.js
+@@ -10641,6 +10641,7 @@
+     function render(req, res, filename, args, user) {
+         if ((req.webUiV2 === true) && /^login(?:2)?(?:-mobile)?(?:-min)?$/.test(obj.path.basename(filename))) {
+             args.customCSSTags = (args.customCSSTags || '') + '<link rel="stylesheet" href="styles/console-v2-login.css">';
++            args.customJSTags = (args.customJSTags || '') + '<script defer src="scripts/console-v2-login-labels.js"></script>';
+         }
+         if (obj.renderPages != null) {
+             // Get the list of acceptable languages in order

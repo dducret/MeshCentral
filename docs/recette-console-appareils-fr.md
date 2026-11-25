@@ -281,3 +281,29 @@ dédiée sur les gabarits de connexion MeshCentral existants.
   habituelle et la session ouverte sur `/v2` y restait active.
 - La recette concerne l’authentification MeshCentral intégrée avec TOTP.
   Aucune exception JavaScript n’a été relevée sur le parcours testé.
+
+### Libellés français, connexion de l’agent et alimentation
+
+Le lot part de `73ccbd0f`. Sur `/v2`, le filtre et les actions utilisent
+les traductions MeshCentral. En français, le compteur affiche `0 appareil`,
+`1 appareil` et `2 appareils`. Les cartes et la fiche présentent la
+connexion de l’agent séparément de l’alimentation. La colonne Connectivité
+de la liste affiche les moyens d’accès à l’appareil.
+
+- `prepare.cjs --check` a accepté la base `7d52d950`, le commit upstream
+  `d0215d8b` et le paquet officiel npm 1.3.1. Sur la copie npm déjà équipée
+  de la première mire, le patch de mise à niveau a été appliqué et le
+  contrôle est passé après installation. Le gabarit français minifié a
+  été généré avec le traducteur MeshCentral.
+- La recette Edge sur npm 1.3.1 a validé le formulaire français à 390 px
+  en sombre. « Nom d’utilisateur » et « Mot de passe » restent visibles
+  après saisie et sont associés à leurs champs. La navigation au clavier,
+  le code TOTP de test et la bascule vers `/` avec la même session ont
+  abouti. Le contraste du libellé mesuré a été de 13,55:1.
+- À 1 280 px, le filtre, les compteurs et les actions de groupe étaient
+  en français. Le compte restreint ne voyait aucune action d’ajout dans
+  le groupe en lecture seule. Des états synthétiques appliqués au jeu
+  de données dans le navigateur ont confirmé les cas agent connecté et
+  appareil allumé, agent déconnecté et appareil allumé, puis alimentation
+  inconnue. Les vérifications de la carte, de la liste et de la fiche ont
+  abouti sur le parcours final sans exception JavaScript.

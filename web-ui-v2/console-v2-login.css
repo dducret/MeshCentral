@@ -99,6 +99,17 @@ body, body#body {
 
 form[method=post] table { width: 100%; }
 
+.console-login-label {
+    display: block;
+    margin-top: 8px;
+    color: var(--login-text);
+    font-size: .875rem;
+    font-weight: 600;
+    text-align: start;
+}
+
+#loginuserpassdiv tr:first-child .console-login-label { margin-top: 0; }
+
 form[method=post] :is(input:not([type]), input[type=text], input[type=password], input[type=email], select) {
     box-sizing: border-box;
     width: 100% !important;

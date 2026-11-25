@@ -53,6 +53,8 @@ Pour la mire de connexion, reprends le répertoire `web-ui-v2/` complet de
 la branche. `prepare.cjs` applique aussi `webserver-login.patch`, y compris
 sur un paquet où la console `/v2` est déjà installée. Ce patch charge la
 feuille de style de la mire dans les gabarits MeshCentral servis à `/v2`.
+Sur une instance qui a déjà la première mire, `prepare.cjs` sélectionne
+`webserver-login-upgrade.patch` pour lui ajouter les libellés permanents.
 
 Si le ZIP d’extension est déjà décompressé, extrais le correctif npm par-dessus
 ce lot dans `MC_LOT`, puis relance `--check`. Le correctif met à jour les
@@ -67,6 +69,8 @@ intacte tant que le retour arrière est nécessaire.
 
 Si tu sers des variantes minifiées ou traduites, génère celles du seul
 gabarit 2026 dans la copie de préparation avec les outils upstream.
+La variante française sert notamment les libellés de filtre et les
+compteurs de groupe au singulier et au pluriel.
 Remplace `fr` par `'*'` pour générer toutes les langues du dictionnaire.
 
 ```bash

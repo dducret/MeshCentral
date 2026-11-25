@@ -54,14 +54,15 @@ function prepare(app, checkOnly) {
     const view = generateView(path.join(views, 'default3.handlebars'));
     const serverPatches = [
         selectServerPatch(app, ['webserver', 'webserver-npm-1.3.1']),
-        selectServerPatch(app, ['webserver-login'])
+        selectServerPatch(app, ['webserver-login', 'webserver-login-upgrade'])
     ];
 
     const assets = [
         ['server.cjs', 'web-ui-v2/server.cjs'],
         ['legacy-switch.js', 'public/scripts/console-v2-legacy-switch.js'],
         ['console-v2-devices.css', 'public/styles/console-v2-devices.css'],
-        ['console-v2-login.css', 'public/styles/console-v2-login.css']
+        ['console-v2-login.css', 'public/styles/console-v2-login.css'],
+        ['console-v2-login-labels.js', 'public/scripts/console-v2-login-labels.js']
     ].map(([source, target]) => [path.join(app, target), fs.readFileSync(path.join(__dirname, source))]);
     const target = path.join(views, 'default3-v2.handlebars');
     const translations = path.join(views, 'translations');

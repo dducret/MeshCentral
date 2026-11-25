@@ -318,9 +318,9 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 +                <div id="devListToolbarSpan" class="noselect d-flex align-items-center">
 +                    <div id=devListToolbar class="d-flex visually-hidden">
 +                        <div class="device-query-field">
-+                            <label for="SearchInput">Filter devices</label>
++                            <label for="SearchInput">Filter</label>
 +                            <div class="device-search">
-+                                <input type="text" id=SearchInput class="form-control form-control-sm" placeholder="Filter" oninput=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="Filter devices by name or prefix: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:) - Prefix with ! to negate, e.g. !tag:abc - Separate terms with `,`, `or`, or `and`: `device1,device2` or `device1 or device2` = OR; `device1 and device2` = AND; prefix with `!` to exclude, e.g. `u:user1 and !g:group1`.">
++                                <input type="text" id=SearchInput class="form-control form-control-sm" oninput=onDeviceSearchChanged(event) onfocus=onSearchFocus(1) onblur=onSearchFocus(0) title="Filter devices by name or prefix: user: (u:) ip: group: (g:) tag: (t:) atag: (a:) os: amt: desc: wsc:ok/noav/noupdate/nofirewall/any connectivity: (c:) - Prefix with ! to negate, e.g. !tag:abc - Separate terms with `,`, `or`, or `and`: `device1,device2` or `device1 or device2` = OR; `device1 and device2` = AND; prefix with `!` to exclude, e.g. `u:user1 and !g:group1`.">
 +                                <button type="button" id=SearchInputClearButton class="device-search-clear" style="display:none" title="Clear search filter" onclick="clearDeviceSearch(); Q('SearchInput').focus()">
 +                                    <i class="fa-solid fa-xmark" aria-hidden="true"></i><span class="visually-hidden">Clear search filter</span>
 +                                </button>
@@ -486,15 +486,16 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          <div class="modal fade" id="xxAddAgentModal" tabindex="-1" aria-hidden="true">
              <div class="modal-dialog modal-dialog-centered" id="xxAddAgentModalConf">
                  <div class="modal-content">
-@@ -2387,6 +2370,7 @@
+@@ -2387,6 +2370,8 @@
          var sessionRefreshTimer = null;
          var domain = '{{{domain}}}';
          var domainUrl = '{{{domainurl}}}';
 +        var consolePath = domainUrl + 'v2';
++        var consoleUsesFrench = /^fr(?:-|$)/i.test(document.documentElement.lang);
          var authCookie = '{{{authCookie}}}';
          var authRelayCookie = '{{{authRelayCookie}}}';
          var logoutControls = JSON.parse(decodeURIComponent('{{{logoutControls}}}'));
-@@ -2417,6 +2401,9 @@
+@@ -2417,6 +2402,9 @@
          if (pluginHandlerBuilder != null) { pluginHandler = new pluginHandlerBuilder(); }
          var installedPluginList = null;
          var goBackStack = [];
@@ -504,7 +505,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          var CollapsedGroups = {};
          var collapseGroups = '{{{collapseGroups}}}';
          try { CollapsedGroups = JSON.parse(getstore('_collapse', '{}')); } catch (ex) { }
-@@ -2655,7 +2642,10 @@
+@@ -2655,7 +2643,10 @@
              // Deleted non-english style and fix all topbar titles
              if ((['en', 'ko', 'ja', 'zh-chs', 'zh-cht'].indexOf('{{{lang}}}') == -1) && ('{{{lang}}}'.toLowerCase() != '')) { QC('body').add('nonenglish'); }
              var elements = document.getElementsByClassName('topbar_td');
@@ -516,7 +517,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // Custom UI
              if (customui != null) {
-@@ -2963,28 +2953,6 @@
+@@ -2963,28 +2954,6 @@
              if (footerBar) { Q('uiViewButton5').classList.add('uiSelectorSel'); }
          }
  
@@ -545,7 +546,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          function updateUserDropdown() {
              if (logoutControls && logoutControls.name) {
                  var userImageSrc = 'images/user-256.png';
-@@ -2996,21 +2964,6 @@
+@@ -2996,21 +2965,6 @@
                  var userImage = Q('userDropdownImage');
                  if (userImage) {
                      userImage.src = userImageSrc;
@@ -567,7 +568,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
              }
          }
-@@ -3194,12 +3147,10 @@
+@@ -3194,12 +3148,10 @@
  
          function toggleBootstrapUIMode() {
              if (xxdialogMode) return;
@@ -584,7 +585,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function getNodeFromId(id) { if (nodes != null) { for (var i in nodes) { if (nodes[i]._id == id) return nodes[i]; } } return null; }
-@@ -3211,7 +3162,10 @@
+@@ -3211,7 +3163,10 @@
          }
  
          function onStateChanged(server, state, prevState, errorCode) {
@@ -595,7 +596,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  // Control web socket disconnected
                  setDialogMode(0); // Close any dialog boxes if present
                  go(0); // Go to disconnection panel
-@@ -5266,6 +5220,7 @@
+@@ -5266,6 +5221,7 @@
  
          function onDeviceViewChange(i) {
              if (i != null) { Q('viewselect').value = i; }
@@ -603,7 +604,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var j = 1; j < 6; j++) { Q('devViewButton' + j).classList.remove('viewSelectorSel'); }
              Q('devViewButton' + Q('viewselect').value).classList.add('viewSelectorSel');
              putstore('deviceView', Q('viewselect').value);
-@@ -5372,6 +5327,7 @@
+@@ -5372,6 +5328,7 @@
                  return;
              }
              if (e.ctrlKey == true || e.altKey == true || e.metaKey == true) return;
@@ -611,7 +612,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              if (Q('viewselect').value < 4) {
                  var processed = 0;
                  if (e.key) {
-@@ -5509,9 +5465,12 @@
+@@ -5509,9 +5466,12 @@
          var deviceHeaders = {};
          var oldviewmode = 0;
          function updateDevices() {
@@ -625,7 +626,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('xdevicesmap', view == 4);
              QVH('devListToolbar', view < 3);
              QVH('kvmListToolbar', (view == 3) || (view == 5));
-@@ -5563,9 +5522,8 @@
+@@ -5563,9 +5523,8 @@
                  }
  
                  // Compute the width of the device view.
@@ -637,7 +638,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Compute number of colums
                  var colcount = 4;
-@@ -5592,20 +5550,21 @@
+@@ -5592,20 +5551,21 @@
                              if (meshes[node.meshid] && (meshes[node.meshid].mtype == 3)) { if (meshes[node.meshid].relayid) { extra = '<span class=devHeaderx>' + ", Relayed Devices" + '</span>'; } else { extra = '<span class=devHeaderx>' + ", Local Devices" + '</span>'; } }
                              if ((view == 1) && (current != null)) { if (c == 2) { r += '<td><div style=width:301px></div></td>'; } if (r != '') { r += '</tr></table>'; } }
                              if (view == 2) { r += '<div>'; }
@@ -667,7 +668,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                              if (view == 2) { r += '</div>'; }
                              displayedMeshes[current] = 1;
                              c = 0;
-@@ -5719,7 +5678,7 @@
+@@ -5719,7 +5679,7 @@
                      if (sort == 3) {
                          r = '<div style="margin:30px">' + "No devices are included in any groups, click on a device's \"Groups\" to add to a group." + '</div>';
                      } else {
@@ -676,7 +677,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  }
  
-@@ -5734,16 +5693,13 @@
+@@ -5734,16 +5694,13 @@
                          var mesh = sortedMeshes[i], meshrights = GetMeshRights(mesh);
                          if (displayedMeshes[mesh._id] == null) {
                              if ((current != '') && (r != '')) { r += '</tr></table>'; }
@@ -694,12 +695,12 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 +                            var collapsed = CollapsedGroups[mesh._id] === true;
 +                            r += '<div class="DevSt console-group-header"><div class="console-group-main">';
 +                            if ((mesh.mtype == 2) || (mesh.mtype == 3)) { r += renderGroupCollapse(deviceHeaderId2, mesh._id, 0, collapsed); }
-+                            r += renderGroupName(mesh) + '<span class=devHeaderx>' + format("{0} nodes", 0) + '</span>';
++                            r += renderGroupName(mesh) + '<span class=devHeaderx>' + consoleGroupCount(0) + '</span>';
 +                            r += getMeshActions(mesh, meshrights) + '</div></div></td></tr><tr>';
                              if (mesh.mtype == 1) {
                                  r += '<td><div style=padding:10px><i>' + "No Intel&reg; AMT devices in this device group";
                                  if (((meshrights & 4) != 0) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) { r += ', <a href=# style=cursor:pointer onclick=\'return addDeviceToMesh("' + mesh._id + '")\'>' + "add one" + '</a>'; }
-@@ -5804,7 +5760,7 @@
+@@ -5804,7 +5761,7 @@
                              if (requestedLastConnects == false) { requestedLastConnects = true; meshserver.send({ action: 'lastconnects' }); }
                          }
                          // This height of 1 div at the end to fix a problem in Linux firefox browsers
@@ -708,7 +709,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  } else {
                      r += '</table>';
-@@ -6028,10 +5984,17 @@
+@@ -6028,49 +5985,30 @@
  
              // Node
              var icon = node.icon;
@@ -722,13 +723,41 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              if (view == 1) {
 -                div.innerHTML = '<table id=devs cmenu=devsContentMenu onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=width:100%;height:100%><tr><td style=width:22px><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" onchange=p1devcheck(event) value=devid_' + node._id + ' type=checkbox ' + (checkedNodeids[node._id] ? ' checked' : '') + '></td><td><table onmouseup=gotoDevice(\'' + node._id + '\',null,null,event) border=0 cellspacing=0 style=width:100%;height:100%;cursor:pointer><tr><td style=width:50px tabindex=0 onkeypress="if (event.key==\'Enter\') gotoDevice(\'' + node._id + '\',null,null,event)"><div class="i' + icon + '" style=width:50px></div></td><td class=g1t></td><td class=e2t><div class=e1t style=width:' + ((div.clientWidth) - 120) + 'px title="' + title + '">' + name + '</div><div>' + NodeStateStr(node) + '</div></td><td class=g2t></td></tr></table></td></tr></table>' + devNotify;
-+                var state = NodeStateStr(node);
-+                if (offline) { state = "Offline" + ((state == '&nbsp;') ? '' : ' · ' + state); }
-+                div.innerHTML = '<table id=devs cmenu=devsContentMenu class=device-tile onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=width:100%;height:100%><tr><td style=width:22px><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" aria-label="' + title + '" onchange=p1devcheck(event) value=devid_' + node._id + ' type=checkbox ' + (checkedNodeids[node._id] ? ' checked' : '') + '></td><td><table class=device-tile-body onclick="' + openDevice + '" onauxclick="' + openDevice + '" border=0 cellspacing=0 style=width:100%;height:100%;cursor:pointer><tr><td style=width:50px><div class="i' + icon + '" style=width:50px></div></td><td class=g1t></td><td class=e2t><a href=# class="e1t device-name"' + selected + ' style=width:' + ((div.clientWidth) - 120) + 'px title="' + title + '">' + name + '</a><div class="device-status ' + statusClass + '">' + state + '</div></td><td class=g2t></td></tr></table></td></tr></table>' + devNotify;
++                var power = NodePowerStateStr(node);
++                var state = '<span class="device-status ' + statusClass + '">' + NodeConnectivityStr(node) + '</span>';
++                if (power) { state += '<span class="device-power-state">' + power + '</span>'; }
++                div.innerHTML = '<table id=devs cmenu=devsContentMenu class=device-tile onmouseover=devMouseHover(this,1) onmouseout=devMouseHover(this,0) style=width:100%;height:100%><tr><td style=width:22px><input class="' + node.meshid + ' DeviceCheckbox form-check-input me-2" aria-label="' + title + '" onchange=p1devcheck(event) value=devid_' + node._id + ' type=checkbox ' + (checkedNodeids[node._id] ? ' checked' : '') + '></td><td><table class=device-tile-body onclick="' + openDevice + '" onauxclick="' + openDevice + '" border=0 cellspacing=0 style=width:100%;height:100%;cursor:pointer><tr><td style=width:50px><div class="i' + icon + '" style=width:50px></div></td><td class=g1t></td><td class=e2t><a href=# class="e1t device-name"' + selected + ' style=width:' + ((div.clientWidth) - 120) + 'px title="' + title + '">' + name + '</a><div class="device-card-states">' + state + '</div></td><td class=g2t></td></tr></table></td></tr></table>' + devNotify;
              } else if (view == 2) {
-                 var states = [];
-                 if (node.conn) {
-@@ -6066,11 +6029,11 @@
+-                var states = [];
+-                if (node.conn) {
+-                    if ((node.conn & 1) != 0) {
+-                        if (node.mtype == 4) {
+-                            if (node.porttype == 'PDU') {
+-                                states.push('<span title="' + "Switch port is ready for use." + '">' + "Switch" + '</span>');
+-                            } else {
+-                                states.push('<span title="' + "IP-KVM port is connected and ready for use." + '">' + "IP-KVM" + '</span>');
+-                            }
+-                        } else {
+-                            states.push('<span title="' + "Mesh agent is connected and ready for use." + '">' + "Agent" + '</span>');
+-                        }
+-                    }
+-                    if ((node.conn & 2) != 0) { states.push('<span title="' + "Intel&reg; AMT CIRA is connected and ready for use." + '">' + "CIRA" + '</span>'); }
+-                    else if ((node.conn & 4) != 0) { states.push('<span title="' + "Intel&reg; AMT is routable." + '">' + "AMT" + '</span>'); }
+-                    if ((node.conn & 8) != 0) { states.push('<span title="' + "Mesh agent is reachable using another agent as relay." + '">' + "Relay" + '</span>'); }
+-                    if ((node.conn & 16) != 0) { states.push('<span title="' + "MQTT connection to the device is active." + '">' + "MQTT" + '</span>'); }
+-                }
+-                if (node.mtype == 3) {
+-                    var mesh = meshes[node.meshid];
+-                    if (mesh && mesh.relayid) {
+-                        states.push('<span title="' + "Local network connection thru a relay agent." + '">' + "Relay" + '</span>');
+-                    } else {
+-                        states.push('<span title="' + "Local network connection." + '">' + "Local" + '</span>');
+-                    }
+-                }
+-
+                 if (node.desc && (deviceViewSettings.devsCols.indexOf('desc') >= 0)) { name = '<div class="flex-grow-1">' + name + '</div><div style=float:right' + (stars[node._id] == 1 ? ';padding-right:15px' : '') + '>' + EscapeHtml(node.desc) + '</div>'; }
+ 
+                 var collapseName = node.meshid;
                  if (sort == 1) { collapseName = ('pwr:' + (node.pwr ? node.pwr : 0)); }
                  else if ((sort == 3) || (sort == 4)) { collapseName = 'tag:**xx**xx*TaG*xx**xx**'; }
                  var collapsed = (sort != 3) & (sort != 4) & CollapsedGroups[collapseName];
@@ -743,13 +772,13 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Use defaults if needed
                  if (deviceViewSettings == null) { deviceViewSettings = {}; }
-@@ -6143,4 +6106,4 @@
+@@ -6143,4 +6081,4 @@
 -                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center>' + states.join('&nbsp;+&nbsp;'); } // Connectivity
-+                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center><span class="device-status ' + statusClass + '">' + (offline ? "Offline" : states.join('&nbsp;+&nbsp;')) + '</span></td>'; } // Connectivity
++                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center><span class="device-status ' + statusClass + '">' + NodeConnectivityStr(node) + '</span></td>'; } // Connectivity
                  if (deviceViewSettings.devsCols.indexOf('amthost') >= 0) { r += '<td style=text-align:center>' + (((node.intelamt == null) || (node.intelamt.host == null)) ? '' : EscapeHtml(node.intelamt.host)); }
                  if (deviceViewSettings.devsCols.indexOf('amtstate') >= 0) {
                      var amtstate = '';
-@@ -6374,6 +6337,8 @@
+@@ -6374,6 +6312,8 @@
                  QC('DevxColImg' + id).remove('fa-chevron-down');
                  QC('DevxColImg' + id).add('fa-chevron-right');
              }
@@ -758,7 +787,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              putstore('_collapse', JSON.stringify(CollapsedGroups));
              updateCollapseAllButton();
              onDevicesScrollEx();
-@@ -6551,29 +6516,49 @@
+@@ -6551,29 +6491,49 @@
              }
          }
  
@@ -827,7 +856,73 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function addLocalDeviceToMesh(meshid) {
-@@ -8044,7 +8029,7 @@
+@@ -7173,9 +7133,14 @@
+             meshserver.send({ action: 'addamtdevice', meshid: meshid, devicename: Q('dp1devicename').value, hostname: host, amtusername: amtuser, amtpassword: Q('dp1password').value, amttls: Q('dp1tls').value });
+         }
+ 
++        function consoleGroupCount(count) {
++            if (consoleUsesFrench) { return count + ((count > 1) ? ' appareils' : ' appareil'); }
++            return (count == 1) ? "1 node" : format("{0} nodes", count);
++        }
++
+         function deviceHeaderSet() {
+             if (deviceHeaderId == 0) { deviceHeaderId = 1; return; }
+-            deviceHeaders['DevxHeader' + deviceHeaderId] = ((deviceHeaderTotal == 1) ? "1 node" : format("{0} nodes", deviceHeaderTotal));
++            deviceHeaders['DevxHeader' + deviceHeaderId] = consoleGroupCount(deviceHeaderTotal);
+             //var title = '';
+             //for (x in deviceHeaderCount) { if (title.length > 0) title += ', '; title += deviceHeaderCount[x] + ' ' + PowerStateStr2(x); }
+             //deviceHeadersTitles["DevxHeader" + deviceHeaderId] = title;
+@@ -7187,19 +7152,18 @@
+         var powerStateStrings = ['', '<span title="' + "Device is powered on." + '">' + "Powered" + '</span>', '<span title="' + "Device is in sleep state (S1)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in sleep state (S2)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in deep sleep state (S3)." + '">' + "Deep Sleep" + '</span>', '<span title="' + "Device is in hibernating state (S4)." + '">' + "Hibernating" + '</span>', '<span title="' + "Device is in powered off state (S5)." + '">' + "Soft-Off" + '</span>', '<span title="' + "Device is detected but power state could not be obtained." + '">' + "Present" + '</span>', '<span title="' + "Device is powered off." + '">' + "Off" + '</span>'];
+         var powerStateStrings2 = ['', "Device is powered", "Device is in sleep state (S1)", "Device is in sleep state (S2)", "Device is in deep sleep state (S3)", "Device is hibernating (S4)", "Device is in soft-off state (S5)", "Device is present, but power state cannot be determined", "The device is powered off"];
+         var powerColorTable = ['pwsTransparent', 'pwsBlack', 'pwsBlue', 'pwsBlue2', 'pwsLightblue', 'pwsBlueviolet', 'pwsDarkgreen', 'pwsLightseagreen', 'pwsLightseagreen2'];
+-        function NodeStateStr(node) {
++        function NodeConnectivityStr(node) {
+             var states = [];
+-            if (node.state > 0 && node.state < powerStatetable.length) state.push(powerStatetable[node.state]);
+             if (node.conn) {
+                 if ((node.conn & 1) != 0) {
+                     if (node.mtype == 4) {
+                         if (node.porttype == 'PDU') {
+-                            states.push('<span title="' + "Power switch is ready for use." + '">' + "Switch" + '</span>');
++                            states.push('<span title="' + "Switch port is ready for use." + '">' + "Switch" + '</span>');
+                         } else {
+-                            states.push('<span title="' + "IP-KVM port is up and ready for use." + '">' + "IP-KVM" + '</span>');
++                            states.push('<span title="' + "IP-KVM port is connected and ready for use." + '">' + "IP-KVM" + '</span>');
+                         }
+                     } else {
+-                        states.push('<span title="' + "Mesh agent is connected and ready for use." + '">' + "Agent" + '</span>');
++                        states.push('<span title="' + "Mesh agent is connected and ready for use." + '">' + "Agent connected" + '</span>');
+                     }
+                 }
+                 if ((node.conn & 2) != 0) { states.push('<span title="' + "Intel&reg; AMT CIRA is connected and ready for use." + '">' + "CIRA" + '</span>'); }
+@@ -7207,9 +7171,22 @@
+                 if ((node.conn & 8) != 0) { states.push('<span title="' + "Mesh agent is reachable using another agent as relay." + '">' + "Relay" + '</span>'); }
+                 if ((node.conn & 16) != 0) { states.push('<span title="' + "MQTT connection to the device is active." + '">' + "MQTT" + '</span>'); }
+             }
+-            if ((node.pwr != null) && (node.pwr != 0)) { states.push(powerStateStrings[node.pwr]); }
+-            if (states.length == 0) return '&nbsp;';
+-            return states.join(', ');
++            if (node.mtype == 3) {
++                var mesh = meshes[node.meshid];
++                if (mesh && mesh.relayid) {
++                    states.push('<span title="' + "Local network connection thru a relay agent." + '">' + "Relay" + '</span>');
++                } else {
++                    states.push('<span title="' + "Local network connection." + '">' + "Local" + '</span>');
++                }
++            }
++            if ((node.mtype == 2) && ((node.conn & 1) == 0)) { states.unshift("Agent disconnected"); }
++            return states.length ? states.join(' · ') : (node.conn ? "Online" : "Offline");
++        }
++
++        function NodePowerStateStr(node) {
++            var power = (node.pwr > 0) ? node.pwr : node.state;
++            if (power == 1) { return consoleUsesFrench ? 'Allumé' : "Powered"; }
++            return (power > 0 && power < powerStateStrings.length) ? powerStateStrings[power] : '';
+         }
+ 
+         function PowerStateStr(x) {
+@@ -8044,7 +8021,7 @@
                  var panel = [0, 10, 12, 11, 13, 16, 17, 15, 19][action]; // (invalid), General, Desktop, Terminal, Files, Events, Console, Plugin
                  if (event && (event.shiftKey == true)) {
                      // Open the device in a different tab
@@ -836,7 +931,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  } else {
                      // Go to the right panel
                      gotoDevice(nodeid, panel);
-@@ -8283,7 +8268,7 @@
+@@ -8283,7 +8260,7 @@
              QV('filesContextMenu', false);
              QV('deskPlayerContextMenu', false);
              QV('deskKeyShortcutContextMenu', false);
@@ -845,7 +940,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('deskPreConfigShortcutContextMenu', false);
              QV('deskPreConfigScriptContextMenu', false);
              QV('expandAllContextMenu', false);
-@@ -8941,7 +8926,7 @@
+@@ -8941,7 +8918,7 @@
  
              if (event && ((event.shiftKey == true) || (event.which == 2) || (event.button == 1))) {
                  // Open the device in a different tab
@@ -854,7 +949,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  return;
              }
  
-@@ -8998,12 +8983,17 @@
+@@ -8998,12 +8975,17 @@
                  showStoreApps = false;
  
                  // Add node name
@@ -876,7 +971,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QH('p11deviceName', nname);
                  QH('p12deviceName', nname);
                  QH('p13deviceName', nname);
-@@ -9016,7 +9006,7 @@
+@@ -9016,7 +8998,7 @@
                  QH('p19deviceName', nname);
  
                  // Node attributes
@@ -885,7 +980,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // If title bar is hidden, display the device name here
                  if ((args.hide & 8) != 0) { x += '<br />' + addDeviceAttribute("Name", nnameEx); }
-@@ -9279,11 +9269,11 @@
+@@ -9279,11 +9261,11 @@
                  for (var i in meshes) { if (meshes[i].relayid == node._id) { relayFor.push('<a href=# onclick=gotoMesh("' + meshes[i]._id + '") style=cursor:pointer>' + EscapeHtml(meshes[i].name) + '</a>'); } }
                  if (relayFor.length > 0) { x += addDeviceAttribute('<span title="' + "Device groups this device is a relay for" + '">' + "Relay for" + '</span>', relayFor.join(", ")); }
  
@@ -900,7 +995,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  if ((node.mtype == 2) && (connectivity & 1) && ((meshrights & 131072) != 0)) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" cmenu=deskPreConfigScriptContextMenu value="' + "Run" + '" title="' + "Run commands on this device" + '" onclick=runDeviceCmd("' + encodeURIComponentEx(node._id) + '") />'; }
                  if (node.mtype != 4) {
                      if ((meshrights & 8) && (connectivity & 1) && ((meshrights & 16384) != 0) || ((node.pmt == 1) && ((features2 & 2) != 0))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Message" + '" title="' + "Display a text message on the remote device" + '" onclick=deviceMessageFunction() />'; }
-@@ -9325,7 +9315,7 @@
+@@ -9325,7 +9307,7 @@
                      }
                  }
  
@@ -909,8 +1004,32 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Show node last 7 days timeline
                  mainUpdate(256);
-@@ -9449,6 +9439,8 @@
-                     else if ((node.pwr > 1) && (node.pwr != 7)) { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
+@@ -9424,8 +9406,8 @@
+                 }
+ 
+                 // Set the node power state
+-                var powerstate = PowerStateStr(node.state);
+-                //if (node.state == 0) { powerstate = 'Unknown State'; }
++                var powerstate = '';
++                if ((node.mtype == 2) && ((connectivity & 1) == 0)) { powerstate = "Agent disconnected"; }
+                 var agentPrivilages = '';
+                 if ((node.agent != null) && (node.agent.root === false)) { agentPrivilages = ', <span title="' + "Agent is running on remote device with reduced privilages." + '">' + "Restricted" + '</span>'; }
+                 if ((connectivity & 1) != 0) {
+@@ -9443,12 +9425,17 @@
+                 if ((connectivity & 2) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT connected" + '">' + "Intel&reg; AMT connected" + '</span>'; }
+                 else if ((connectivity & 4) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT detected" + '">' + "Intel&reg; AMT detected" + '</span>'; }
+                 if ((connectivity & 16) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "MQTT connected" + '">' + "MQTT channel connected" + '</span>'; }
+-                if ((powerstate == '') && node.lastconnect) { powerstate = '<span style=font-size:12px>' + "Last seen:" + '<br />' + printDateTime(new Date(node.lastconnect)) + '</span>'; }
+-                else {
+-                    if (node.porttype == 'PDU') { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
+-                    else if ((node.pwr > 1) && (node.pwr != 7)) { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
++                if (!connectivity && node.lastconnect) {
++                    if (powerstate.length > 0) { powerstate += '<br/>'; }
++                    powerstate += '<span style=font-size:12px>' + "Last seen:" + '<br />' + printDateTime(new Date(node.lastconnect)) + '</span>';
++                }
++                var devicePower = NodePowerStateStr(node);
++                if (devicePower) {
++                    powerstate += '<div class="device-power-state">' + "Power State" + ': ' + devicePower + '</div>';
                  }
                  QH('MainComputerState', powerstate);
 +                QV('p10OfflineStatus', !node.conn && (node.mtype != 3));
@@ -918,7 +1037,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Set the node icon
                  Q('MainComputerImage').setAttribute('src', 'images/icons256-' + node.icon + '-1.png');
-@@ -9484,10 +9476,10 @@
+@@ -9484,10 +9471,10 @@
  
                  // Set the Intel AMT / Intel SM tab name
                  if ((node.intelamt != null) && (typeof node.intelamt.sku == 'number') && ((node.intelamt.sku & 16) != 0)) {
@@ -931,7 +1050,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      QH('p14deviceNamePrefix', "Intel&reg; AMT");
                  }
  
-@@ -9645,7 +9637,11 @@
+@@ -9645,7 +9632,11 @@
              }
              setupDesktop(); // Always refresh the desktop, even if we are on the same device, we need to do some canvas switching.
              if (!panel) panel = 10;
@@ -943,7 +1062,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function setIpPduState(op) {
-@@ -21731,49 +21727,45 @@
+@@ -21731,49 +21722,45 @@
          var userDropdownOpen = false;
          var uiSubmenuOpen = false;
  
@@ -1023,7 +1142,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              var uiSubmenu = Q('uiSubmenu');
              var isDesktop = window.innerWidth > 769;
-@@ -21812,13 +21804,7 @@
+@@ -21812,13 +21799,7 @@
          }
  
          function handleUserMenuItem(action) {
@@ -1038,7 +1157,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              switch(action) {
                  case 'devices': goForward('devices'); break;
-@@ -21843,6 +21829,7 @@
+@@ -21843,6 +21824,7 @@
          }
  
          function resetChevronArrow() {
@@ -1046,7 +1165,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              var arrow = document.querySelector('.userDropdownUISettings .fa-chevron-right');
              if (arrow) arrow.style.transform = '';
          }
-@@ -23317,11 +23304,49 @@
+@@ -23317,11 +23299,49 @@
              if (((b & 8) || x) && f) f(x, t);
          }
  
@@ -1097,7 +1216,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
          function messagebox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t, 1); }
          function statusbox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t); }
-@@ -23331,8 +23356,13 @@
+@@ -23331,8 +23351,13 @@
              setSessionActivity();
              if (xxdialogMode || (goBackStack.length == 0)) return;
              if (fullscreen) { deskToggleFull(); }
@@ -1111,7 +1230,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function goForward(id) { if (xxdialogMode) return; backStack.push(id); goStack(); }
-@@ -23376,15 +23406,15 @@
+@@ -23376,15 +23401,15 @@
                  // Open the device in a different tab
                  event.preventDefault();
                  if ((x >= 9) && (x <= 19)) {
@@ -1132,7 +1251,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
                  return;
              }
-@@ -23408,6 +23438,8 @@
+@@ -23408,6 +23433,8 @@
              if (xxcurrentView == 17) deviceDetailsStatsClear();
  
              // Edit this line when adding a new screen
@@ -1141,7 +1260,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var i = 0; i < 61; i++) { QV('p' + i, i == x); }
              xxcurrentView = x;
  
-@@ -23435,6 +23467,8 @@
+@@ -23435,6 +23462,8 @@
              for (var i in mainBarItems) {
                  QC(mainBarItems[i]).remove('fullselect');
                  QC(mainBarItems[i]).remove('semiselect');
@@ -1150,7 +1269,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Remove left bar selection
-@@ -23442,6 +23476,7 @@
+@@ -23442,6 +23471,7 @@
              for (var i in leftBarItems) {
                  QC(leftBarItems[i]).remove('lbbuttonsel');
                  QC(leftBarItems[i]).remove('lbbuttonsel2');
@@ -1158,7 +1277,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Define class for Menu(s) as fully or semi active.
-@@ -23476,6 +23511,10 @@
+@@ -23476,6 +23506,10 @@
                  QC('MainMenuMyServer').add(mainMenuActiveClass);
                  QC('LeftMenuMyServer').add(leftMenuActiveClass);
              }
@@ -1169,7 +1288,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('ServerPlugins', pluginHandler != null);
  
              // column_l max-height
-@@ -23498,7 +23537,14 @@
+@@ -23498,7 +23532,14 @@
                  QC(panels[i]).remove('style3x');
                  QC(panels[i]).remove('style3sel');
                  QC(panels[i]).add((x == i) ? 'style3sel' : 'style3x');
@@ -1185,7 +1304,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // If going to the remote desktop tab, adjust the tab.
              if (x == 11) { deskAdjust(); }
-@@ -23509,7 +23555,7 @@
+@@ -23509,7 +23550,7 @@
              QV('p15BackButton', (x != 115) && ((args.hide & 32) == 0) && ('{{currentNode}}'.toLowerCase() == '')); // For device console, only show the back button if not hidden and not in single device view mode.
              if ((x == 15) || (x == 115)) { setupConsole(); }
  

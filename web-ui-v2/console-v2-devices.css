@@ -464,6 +464,27 @@
     padding: 2px 7px;
 }
 
+.device-card-states {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 8px;
+}
+
+.device-power-state {
+    color: var(--console-muted);
+    font-size: .875rem;
+}
+
+.device-card-states .device-power-state:not(:first-child) {
+    padding-inline-start: 8px;
+    border-inline-start: 1px solid var(--console-border);
+}
+
+#MainComputerState .device-power-state {
+    margin-top: 4px;
+}
+
 .device-tile-body {
     border-collapse: separate;
     border: 1px solid var(--console-border);
