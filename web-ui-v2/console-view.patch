@@ -461,7 +461,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      <div id=p10html2></div>
                      <div id=p10html3></div>
                      <div id=p10html4></div>
-@@ -2066,19 +2056,12 @@
+@@ -2066,24 +2056,17 @@
              </div>
              <br id="column_l_bottomgap" />
          </div>
@@ -482,10 +482,17 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 +                <div class="footer2"><a id="termsLinkFooter" href="terms">Terms &amp; Privacy</a></div>
              </div>
 -        </div>
+-        <div class="modal fade" id="xxAddAgentModal" tabindex="-1" aria-hidden="true">
 +        </footer>
-         <div class="modal fade" id="xxAddAgentModal" tabindex="-1" aria-hidden="true">
++        <div class="modal fade console-dialog" id="xxAddAgentModal" tabindex="-1" aria-labelledby="xxAddAgentTitle" aria-hidden="true">
              <div class="modal-dialog modal-dialog-centered" id="xxAddAgentModalConf">
                  <div class="modal-content">
+                     <div class="modal-header" id="dialogHeader">
+-                        <h5 class="modal-title text-white" id="xxAddAgentTitle"></h5>
++                        <h5 class="modal-title" id="xxAddAgentTitle"></h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body" id="xxAddAgentBody">
 @@ -2387,6 +2370,8 @@
          var sessionRefreshTimer = null;
          var domain = '{{{domain}}}';
@@ -856,7 +863,73 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function addLocalDeviceToMesh(meshid) {
-@@ -7173,9 +7133,14 @@
+@@ -6793,33 +6753,40 @@
+         function inviteAgentToMesh(meshid) {
+             if (xxdialogMode) return false;
+             var x = '', mesh = meshes[meshid];
++            function invitationField(id, label, input) {
++                return '<div class="console-invite-field"><label for="' + id + '">' + label + '</label>' + input + '</div>';
++            }
+             if (features & 64) {
+-                x += addHtmlFormFloating("Invitation Type", '<select id=d2InviteType onchange=d2ChangedInviteType() class=form-select><option value=0>' + "Link invitation" + '</option><option value=1>' + "Email invitation" + '</option></select>') + '<hr />';
+-                x += '<div id=emailInviteDiv style=display:none>' + format("Invite someone to install the mesh agent. An email with be sent with the link to the mesh agent installation for the \"{0}\" device group.", EscapeHtml(mesh.name)) + '<br /><br />';
+-                x += addHtmlFormFloating("Name (optional)", '<input id=agentInviteName value="" placeholder="Name (optional)" class="form-control" maxlength=64 />');
+-                x += addHtmlFormFloating("Email", '<input id=agentInviteEmail placeholder="' + "example@email.com" + '" class="form-control" onkeyup=validateAgentInvite() />');
+-                x += addHtmlFormFloating("Operating System", '<select id=agentInviteNameOs onchange=d2ChangedInviteType() class=form-select><option value=4>' + "Send installation link" + '</option><option value=0 selected>' + "Any supported" + '</option><option value=1>' + "Windows only" + '</option><option value=3>' + "Apple macOS only" + '</option><option value=2>' + "Linux only" + '</option><option value=5>' + "MeshCentral Assistant" + '</option></select>');
++                x += invitationField('d2InviteType', "Invitation Type", '<select id=d2InviteType onchange=d2ChangedInviteType() class=form-select><option value=0>' + "Link invitation" + '</option><option value=1>' + "Email invitation" + '</option></select>');
++                x += '<div id=emailInviteDiv style=display:none><p class="console-invite-description">' + format("Invite someone to install the mesh agent. An email with be sent with the link to the mesh agent installation for the \"{0}\" device group.", EscapeHtml(mesh.name)) + '</p>';
++                x += invitationField('agentInviteName', "Name (optional)", '<input id=agentInviteName value="" placeholder="Name (optional)" class="form-control" maxlength=64 />');
++                x += invitationField('agentInviteEmail', "Email", '<input id=agentInviteEmail placeholder="' + "example@email.com" + '" class="form-control" onkeyup=validateAgentInvite() />');
++                x += invitationField('agentInviteNameOs', "Operating System", '<select id=agentInviteNameOs onchange=d2ChangedInviteType() class=form-select><option value=4>' + "Send installation link" + '</option><option value=0 selected>' + "Any supported" + '</option><option value=1>' + "Windows only" + '</option><option value=3>' + "Apple macOS only" + '</option><option value=2>' + "Linux only" + '</option><option value=5>' + "MeshCentral Assistant" + '</option></select>');
+                 x += '<div id=d2agentexpirediv>';
+-                x += addHtmlFormFloating("Link Expiration", '<select id=agentInviteExpire class=form-select><option value=1>' + "1 hour" + '</option><option value=8>' + "8 hours" + '</option><option value=24>' + "1 day" + '</option><option value=168>' + "1 week" + '</option><option value=5040>' + "1 month" + '</option><option value=0>' + "Unlimited" + '</option></select>');
++                x += invitationField('agentInviteExpire', "Link Expiration", '<select id=agentInviteExpire class=form-select><option value=1>' + "1 hour" + '</option><option value=8>' + "8 hours" + '</option><option value=24>' + "1 day" + '</option><option value=168>' + "1 week" + '</option><option value=5040>' + "1 month" + '</option><option value=0>' + "Unlimited" + '</option></select>');
+                 x += '</div>';
+                 x += '<div id=d2agentInstallTypeDiv2>';
+-                x += addHtmlFormFloating("Installation Type", '<select id=agentInviteType class=form-select><option value=0>' + "Background and interactive" + '</option><option value=2>' + "Background only" + '</option><option value=1>' + "Interactive only" + '</option></select>');
++                x += invitationField('agentInviteType', "Installation Type", '<select id=agentInviteType class=form-select><option value=0>' + "Background and interactive" + '</option><option value=2>' + "Background only" + '</option><option value=1>' + "Interactive only" + '</option></select>');
+                 x += '</div>';
+-                x += addHtmlFormFloating("Message" + ' ' + "(optional)", '<textarea id="agentInviteMessage" class="form-control" style="height:100px;resize:none;" maxlength="1024"></textarea>');
++                x += invitationField('agentInviteMessage', "Message" + ' ' + "(optional)", '<textarea id="agentInviteMessage" class="form-control" style="height:100px;resize:none;" maxlength="1024"></textarea>');
+                 x += '</div>';
+             }
+-            x += '<div id=urlInviteDiv>' + format("Invite someone to install the mesh agent by sharing an invitation link. This link points the user to installation instructions for the \"{0}\" device group. The link is public and no account for this server is needed.", EscapeHtml(mesh.name)) + '<br /><br />';
+-            x += addHtmlFormFloating("Link Expiration", '<select id=d2inviteExpire class=form-select onchange=d2RequestInvitationLink()><option value=1>' + "1 hour" + '</option><option value=8>' + "8 hours" + '</option><option value=24>' + "1 day" + '</option><option value=168>' + "1 week" + '</option><option value=5040>' + "1 month" + '</option><option value=0>' + "Unlimited" + '</option></select>');
+-            x += addHtmlFormFloating("Agents", '<select id=d2agentType class=form-select onchange=d2ChangedInviteType()><option value=0>' + "All Available Agents" + '</option><option value=1>' + "Windows MeshAgent" + '</option><option value=2>' + "Linux MeshAgent" + '</option><option value=4>' + "MacOS MeshAgent" + '</option><option value=8>' + "MeshCentral Assistant" + '</option><option value=16>' + "Android MeshAgent" + '</option></select>');
++            x += '<div id=urlInviteDiv><p class="console-invite-description">' + format("Invite someone to install the mesh agent by sharing an invitation link. This link points the user to installation instructions for the \"{0}\" device group. The link is public and no account for this server is needed.", EscapeHtml(mesh.name)) + '</p>';
++            x += invitationField('d2inviteExpire', "Link Expiration", '<select id=d2inviteExpire class=form-select onchange=d2RequestInvitationLink()><option value=1>' + "1 hour" + '</option><option value=8>' + "8 hours" + '</option><option value=24>' + "1 day" + '</option><option value=168>' + "1 week" + '</option><option value=5040>' + "1 month" + '</option><option value=0>' + "Unlimited" + '</option></select>');
++            x += invitationField('d2agentType', "Agents", '<select id=d2agentType class=form-select onchange=d2ChangedInviteType()><option value=0>' + "All Available Agents" + '</option><option value=1>' + "Windows MeshAgent" + '</option><option value=2>' + "Linux MeshAgent" + '</option><option value=4>' + "MacOS MeshAgent" + '</option><option value=8>' + "MeshCentral Assistant" + '</option><option value=16>' + "Android MeshAgent" + '</option></select>');
+             x += '<div id=d2agentInstallTypeDiv>';
+-            x += addHtmlFormFloating("Installation Type", '<select id=d2agentInviteType class=form-select onchange=d2RequestInvitationLink()><option value=0>' + "Background and interactive" + '</option><option value=2>' + "Background only" + '</option><option value=1>' + "Interactive only" + '</option></select>');
++            x += invitationField('d2agentInviteType', "Installation Type", '<select id=d2agentInviteType class=form-select onchange=d2RequestInvitationLink()><option value=0>' + "Background and interactive" + '</option><option value=2>' + "Background only" + '</option><option value=1>' + "Interactive only" + '</option></select>');
+             x += '</div>';
+-            x += '<div id=agentInvitationLinkDiv style="text-align:center;font-size:large;margin:16px;display:none"><a href=# id=agentInvitationLink rel="noreferrer noopener" target="_blank" style=cursor:pointer></a> <img src=images/link4.png height=10 width=10 title="' + "Copy link to clipboard" + '" style=cursor:pointer onclick=d2CopyInviteToClip()></div></div>';
++            x += '<div id="agentInvitationLinkDiv" class="console-invite-result" style="display:none"><div class="console-invite-result-inner">';
++            x += '<a href="#" id="agentInvitationLink" rel="noreferrer noopener" target="_blank"></a>';
++            x += '<button type="button" class="btn btn-outline-secondary console-invite-copy" title="' + "Copy link to clipboard" + '" onclick="d2CopyInviteToClip()">' + "Copy" + '</button></div></div></div>';
+             xxdialogTag = meshid;
+             setModalContent('xxAddAgent', "Invite", x);
+             showModal('xxAddAgentModal', 'idx_dlgOkButton', function () {
+                 performAgentInvite(3, meshid);
+             });
++            var okButton = Q('idx_dlgOkButton'), defaultLabel = okButton.textContent;
++            Q('xxAddAgentModal').addEventListener('hidden.bs.modal', function () { okButton.textContent = defaultLabel; }, { once: true });
+             if (features & 64) { Q('d2InviteType').focus(); d2ChangedInviteType(); } else { Q('d2inviteExpire').focus(); validateAgentInvite(); }
+             d2RequestInvitationLink();
+             return false;
+@@ -6847,9 +6814,11 @@
+ 
+         function validateAgentInvite() {
+             if ((features & 64) && (Q('d2InviteType').value == 1)) {
++                Q('idx_dlgOkButton').textContent = "Send";
+                 QE('idx_dlgOkButton', checkEmail(Q('agentInviteEmail').value));
+                 QV('idx_dlgCancelButton', true);
+             } else {
++                Q('idx_dlgOkButton').textContent = "Close";
+                 QE('idx_dlgOkButton', true);
+                 QV('idx_dlgCancelButton', false);
+             }
+@@ -7173,9 +7142,14 @@
              meshserver.send({ action: 'addamtdevice', meshid: meshid, devicename: Q('dp1devicename').value, hostname: host, amtusername: amtuser, amtpassword: Q('dp1password').value, amttls: Q('dp1tls').value });
          }
  
@@ -872,7 +945,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              //var title = '';
              //for (x in deviceHeaderCount) { if (title.length > 0) title += ', '; title += deviceHeaderCount[x] + ' ' + PowerStateStr2(x); }
              //deviceHeadersTitles["DevxHeader" + deviceHeaderId] = title;
-@@ -7187,19 +7152,18 @@
+@@ -7187,19 +7161,18 @@
          var powerStateStrings = ['', '<span title="' + "Device is powered on." + '">' + "Powered" + '</span>', '<span title="' + "Device is in sleep state (S1)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in sleep state (S2)." + '">' + "Sleeping" + '</span>', '<span title="' + "Device is in deep sleep state (S3)." + '">' + "Deep Sleep" + '</span>', '<span title="' + "Device is in hibernating state (S4)." + '">' + "Hibernating" + '</span>', '<span title="' + "Device is in powered off state (S5)." + '">' + "Soft-Off" + '</span>', '<span title="' + "Device is detected but power state could not be obtained." + '">' + "Present" + '</span>', '<span title="' + "Device is powered off." + '">' + "Off" + '</span>'];
          var powerStateStrings2 = ['', "Device is powered", "Device is in sleep state (S1)", "Device is in sleep state (S2)", "Device is in deep sleep state (S3)", "Device is hibernating (S4)", "Device is in soft-off state (S5)", "Device is present, but power state cannot be determined", "The device is powered off"];
          var powerColorTable = ['pwsTransparent', 'pwsBlack', 'pwsBlue', 'pwsBlue2', 'pwsLightblue', 'pwsBlueviolet', 'pwsDarkgreen', 'pwsLightseagreen', 'pwsLightseagreen2'];
@@ -896,7 +969,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  }
                  if ((node.conn & 2) != 0) { states.push('<span title="' + "Intel&reg; AMT CIRA is connected and ready for use." + '">' + "CIRA" + '</span>'); }
-@@ -7207,9 +7171,22 @@
+@@ -7207,9 +7180,22 @@
                  if ((node.conn & 8) != 0) { states.push('<span title="' + "Mesh agent is reachable using another agent as relay." + '">' + "Relay" + '</span>'); }
                  if ((node.conn & 16) != 0) { states.push('<span title="' + "MQTT connection to the device is active." + '">' + "MQTT" + '</span>'); }
              }
@@ -922,7 +995,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function PowerStateStr(x) {
-@@ -8044,7 +8021,7 @@
+@@ -8044,7 +8030,7 @@
                  var panel = [0, 10, 12, 11, 13, 16, 17, 15, 19][action]; // (invalid), General, Desktop, Terminal, Files, Events, Console, Plugin
                  if (event && (event.shiftKey == true)) {
                      // Open the device in a different tab
@@ -931,7 +1004,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  } else {
                      // Go to the right panel
                      gotoDevice(nodeid, panel);
-@@ -8283,7 +8260,7 @@
+@@ -8283,7 +8269,7 @@
              QV('filesContextMenu', false);
              QV('deskPlayerContextMenu', false);
              QV('deskKeyShortcutContextMenu', false);
@@ -940,7 +1013,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('deskPreConfigShortcutContextMenu', false);
              QV('deskPreConfigScriptContextMenu', false);
              QV('expandAllContextMenu', false);
-@@ -8941,7 +8918,7 @@
+@@ -8941,7 +8927,7 @@
  
              if (event && ((event.shiftKey == true) || (event.which == 2) || (event.button == 1))) {
                  // Open the device in a different tab
@@ -949,7 +1022,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  return;
              }
  
-@@ -8998,12 +8975,17 @@
+@@ -8998,12 +8984,17 @@
                  showStoreApps = false;
  
                  // Add node name
@@ -971,7 +1044,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QH('p11deviceName', nname);
                  QH('p12deviceName', nname);
                  QH('p13deviceName', nname);
-@@ -9016,7 +8998,7 @@
+@@ -9016,7 +9007,7 @@
                  QH('p19deviceName', nname);
  
                  // Node attributes
@@ -980,7 +1053,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // If title bar is hidden, display the device name here
                  if ((args.hide & 8) != 0) { x += '<br />' + addDeviceAttribute("Name", nnameEx); }
-@@ -9279,11 +9261,11 @@
+@@ -9279,11 +9270,11 @@
                  for (var i in meshes) { if (meshes[i].relayid == node._id) { relayFor.push('<a href=# onclick=gotoMesh("' + meshes[i]._id + '") style=cursor:pointer>' + EscapeHtml(meshes[i].name) + '</a>'); } }
                  if (relayFor.length > 0) { x += addDeviceAttribute('<span title="' + "Device groups this device is a relay for" + '">' + "Relay for" + '</span>', relayFor.join(", ")); }
  
@@ -995,7 +1068,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  if ((node.mtype == 2) && (connectivity & 1) && ((meshrights & 131072) != 0)) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" cmenu=deskPreConfigScriptContextMenu value="' + "Run" + '" title="' + "Run commands on this device" + '" onclick=runDeviceCmd("' + encodeURIComponentEx(node._id) + '") />'; }
                  if (node.mtype != 4) {
                      if ((meshrights & 8) && (connectivity & 1) && ((meshrights & 16384) != 0) || ((node.pmt == 1) && ((features2 & 2) != 0))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Message" + '" title="' + "Display a text message on the remote device" + '" onclick=deviceMessageFunction() />'; }
-@@ -9325,7 +9307,7 @@
+@@ -9325,7 +9316,7 @@
                      }
                  }
  
@@ -1004,7 +1077,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Show node last 7 days timeline
                  mainUpdate(256);
-@@ -9424,8 +9406,8 @@
+@@ -9424,8 +9415,8 @@
                  }
  
                  // Set the node power state
@@ -1015,7 +1088,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  var agentPrivilages = '';
                  if ((node.agent != null) && (node.agent.root === false)) { agentPrivilages = ', <span title="' + "Agent is running on remote device with reduced privilages." + '">' + "Restricted" + '</span>'; }
                  if ((connectivity & 1) != 0) {
-@@ -9443,12 +9425,17 @@
+@@ -9443,12 +9434,17 @@
                  if ((connectivity & 2) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT connected" + '">' + "Intel&reg; AMT connected" + '</span>'; }
                  else if ((connectivity & 4) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "Intel&reg; AMT detected" + '">' + "Intel&reg; AMT detected" + '</span>'; }
                  if ((connectivity & 16) != 0) { if (powerstate.length > 0) { powerstate += '<br/>'; } powerstate += '<span style=font-size:12px title="' + "MQTT connected" + '">' + "MQTT channel connected" + '</span>'; }
@@ -1037,7 +1110,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Set the node icon
                  Q('MainComputerImage').setAttribute('src', 'images/icons256-' + node.icon + '-1.png');
-@@ -9484,10 +9471,10 @@
+@@ -9484,10 +9480,10 @@
  
                  // Set the Intel AMT / Intel SM tab name
                  if ((node.intelamt != null) && (typeof node.intelamt.sku == 'number') && ((node.intelamt.sku & 16) != 0)) {
@@ -1050,7 +1123,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      QH('p14deviceNamePrefix', "Intel&reg; AMT");
                  }
  
-@@ -9645,7 +9632,11 @@
+@@ -9645,7 +9641,11 @@
              }
              setupDesktop(); // Always refresh the desktop, even if we are on the same device, we need to do some canvas switching.
              if (!panel) panel = 10;
@@ -1062,7 +1135,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function setIpPduState(op) {
-@@ -21731,49 +21722,45 @@
+@@ -21731,49 +21731,45 @@
          var userDropdownOpen = false;
          var uiSubmenuOpen = false;
  
@@ -1142,7 +1215,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              var uiSubmenu = Q('uiSubmenu');
              var isDesktop = window.innerWidth > 769;
-@@ -21812,13 +21799,7 @@
+@@ -21812,13 +21808,7 @@
          }
  
          function handleUserMenuItem(action) {
@@ -1157,7 +1230,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              switch(action) {
                  case 'devices': goForward('devices'); break;
-@@ -21843,6 +21824,7 @@
+@@ -21843,6 +21833,7 @@
          }
  
          function resetChevronArrow() {
@@ -1165,7 +1238,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              var arrow = document.querySelector('.userDropdownUISettings .fa-chevron-right');
              if (arrow) arrow.style.transform = '';
          }
-@@ -23317,11 +23299,49 @@
+@@ -23317,11 +23308,49 @@
              if (((b & 8) || x) && f) f(x, t);
          }
  
@@ -1216,7 +1289,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
          function messagebox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t, 1); }
          function statusbox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t); }
-@@ -23331,8 +23351,13 @@
+@@ -23331,8 +23360,13 @@
              setSessionActivity();
              if (xxdialogMode || (goBackStack.length == 0)) return;
              if (fullscreen) { deskToggleFull(); }
@@ -1230,7 +1303,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function goForward(id) { if (xxdialogMode) return; backStack.push(id); goStack(); }
-@@ -23376,15 +23401,15 @@
+@@ -23376,15 +23410,15 @@
                  // Open the device in a different tab
                  event.preventDefault();
                  if ((x >= 9) && (x <= 19)) {
@@ -1251,7 +1324,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
                  return;
              }
-@@ -23408,6 +23433,8 @@
+@@ -23408,6 +23442,8 @@
              if (xxcurrentView == 17) deviceDetailsStatsClear();
  
              // Edit this line when adding a new screen
@@ -1260,7 +1333,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var i = 0; i < 61; i++) { QV('p' + i, i == x); }
              xxcurrentView = x;
  
-@@ -23435,6 +23462,8 @@
+@@ -23435,6 +23471,8 @@
              for (var i in mainBarItems) {
                  QC(mainBarItems[i]).remove('fullselect');
                  QC(mainBarItems[i]).remove('semiselect');
@@ -1269,7 +1342,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Remove left bar selection
-@@ -23442,6 +23471,7 @@
+@@ -23442,6 +23480,7 @@
              for (var i in leftBarItems) {
                  QC(leftBarItems[i]).remove('lbbuttonsel');
                  QC(leftBarItems[i]).remove('lbbuttonsel2');
@@ -1277,7 +1350,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Define class for Menu(s) as fully or semi active.
-@@ -23476,6 +23506,10 @@
+@@ -23476,6 +23515,10 @@
                  QC('MainMenuMyServer').add(mainMenuActiveClass);
                  QC('LeftMenuMyServer').add(leftMenuActiveClass);
              }
@@ -1288,7 +1361,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('ServerPlugins', pluginHandler != null);
  
              // column_l max-height
-@@ -23498,7 +23532,14 @@
+@@ -23498,7 +23541,14 @@
                  QC(panels[i]).remove('style3x');
                  QC(panels[i]).remove('style3sel');
                  QC(panels[i]).add((x == i) ? 'style3sel' : 'style3x');
@@ -1304,7 +1377,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // If going to the remote desktop tab, adjust the tab.
              if (x == 11) { deskAdjust(); }
-@@ -23509,7 +23550,7 @@
+@@ -23509,7 +23559,7 @@
              QV('p15BackButton', (x != 115) && ((args.hide & 32) == 0) && ('{{currentNode}}'.toLowerCase() == '')); // For device console, only show the back button if not hidden and not in single device view mode.
              if ((x == 15) || (x == 115)) { setupConsole(); }
  

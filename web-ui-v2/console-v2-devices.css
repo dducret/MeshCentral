@@ -194,6 +194,161 @@
 .console-footer-inner .footer2 { margin-inline-start: auto; }
 #footer.console-footer a { color: var(--console-link); text-underline-offset: .2em; }
 
+.console-dialog .modal-content {
+    border: 1px solid var(--console-border);
+    border-radius: 1rem;
+    background: var(--console-surface);
+    color: var(--console-text);
+    box-shadow: 0 1rem 3rem rgba(15, 28, 45, .24);
+}
+
+.console-dialog #dialogHeader {
+    gap: .75rem;
+    margin: 0;
+    padding: .75rem clamp(1rem, 4vw, 1.5rem);
+    border-color: var(--console-border);
+    border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
+    background: var(--console-surface);
+    color: var(--console-text);
+}
+
+.console-dialog .modal-title {
+    min-width: 0;
+    font-size: 1.2rem;
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+.console-dialog #dialogHeader .btn-close {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0;
+    margin-inline-start: auto;
+    border-radius: .5rem;
+    background-color: transparent !important;
+    background-size: .875rem !important;
+}
+
+.console-dialog #dialogHeader .btn-close:hover {
+    background-color: var(--console-tint) !important;
+}
+
+[data-bs-theme="dark"] .console-dialog #dialogHeader .btn-close { filter: none; }
+
+.console-dialog .modal-body {
+    padding: 1.25rem clamp(1rem, 4vw, 1.5rem);
+    background: var(--console-surface);
+    color: var(--console-text);
+}
+
+.console-dialog .modal-footer {
+    gap: .5rem;
+    padding: .75rem clamp(1rem, 4vw, 1.5rem);
+    border-color: var(--console-border);
+    border-radius: 0 0 calc(1rem - 1px) calc(1rem - 1px);
+    background: var(--console-surface);
+}
+
+.console-dialog .modal-footer > * { margin: 0; }
+
+.console-dialog :is(.modal-footer .btn, .console-invite-copy) {
+    min-height: 2.5rem;
+    padding-inline: .875rem;
+    border-radius: .5rem;
+    font-weight: 600;
+}
+
+.console-dialog .modal-footer .btn-primary {
+    --bs-btn-bg: #16598f;
+    --bs-btn-border-color: #16598f;
+    --bs-btn-hover-bg: #124674;
+    --bs-btn-hover-border-color: #124674;
+    --bs-btn-active-bg: #124674;
+    --bs-btn-active-border-color: #124674;
+    --bs-btn-disabled-bg: #16598f;
+    --bs-btn-disabled-border-color: #16598f;
+}
+
+.console-dialog :is(.modal-footer .btn-secondary, .console-invite-copy) {
+    --bs-btn-color: var(--console-text);
+    --bs-btn-bg: var(--console-surface);
+    --bs-btn-border-color: var(--console-control-border);
+    --bs-btn-hover-color: var(--console-text);
+    --bs-btn-hover-bg: var(--console-tint);
+    --bs-btn-hover-border-color: var(--console-control-border);
+    --bs-btn-active-color: var(--console-text);
+    --bs-btn-active-bg: var(--console-tint);
+    --bs-btn-active-border-color: var(--console-control-border);
+}
+
+[data-bs-theme="dark"] .console-dialog .modal-footer .btn-primary {
+    --bs-btn-color: #142638;
+    --bs-btn-bg: #a9d3ff;
+    --bs-btn-border-color: #a9d3ff;
+    --bs-btn-hover-color: #142638;
+    --bs-btn-hover-bg: #c3e0ff;
+    --bs-btn-hover-border-color: #c3e0ff;
+    --bs-btn-active-color: #142638;
+    --bs-btn-active-bg: #c3e0ff;
+    --bs-btn-active-border-color: #c3e0ff;
+    --bs-btn-disabled-bg: #a9d3ff;
+    --bs-btn-disabled-border-color: #a9d3ff;
+    color: var(--bs-btn-color) !important;
+}
+
+.console-dialog :is(.btn, .btn-close, .form-select, .form-control, .console-invite-result a):focus-visible {
+    outline: 2px solid var(--console-focus);
+    outline-offset: 2px;
+}
+
+.console-invite-description {
+    margin-block-end: 1rem;
+    color: var(--console-muted);
+    line-height: 1.5;
+}
+
+.console-invite-field { margin-block-end: .875rem; }
+
+.console-invite-field label {
+    display: block;
+    margin-block-end: .25rem;
+    color: var(--console-text);
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+.console-dialog .console-invite-field :is(.form-control, .form-select) {
+    min-height: 2.75rem;
+    border-color: var(--console-control-border) !important;
+    border-radius: .5rem;
+    background-color: var(--console-surface);
+    color: var(--console-text);
+}
+
+.console-invite-result {
+    padding: .625rem .75rem;
+    border: 1px solid var(--console-border);
+    border-radius: .625rem;
+    background: var(--console-tint);
+}
+
+.console-invite-result-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem 1rem;
+}
+
+.console-dialog .console-invite-result a:not(.btn) {
+    color: var(--console-link) !important;
+    font-weight: 600;
+    text-underline-offset: .2em;
+    overflow-wrap: anywhere;
+}
+
 #page_leftbar {
     border-inline-end: 1px solid var(--console-border);
     background: var(--console-tint);

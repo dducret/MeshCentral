@@ -307,3 +307,45 @@ de la liste affiche les moyens d’accès à l’appareil.
   appareil allumé, agent déconnecté et appareil allumé, puis alimentation
   inconnue. Les vérifications de la carte, de la liste et de la fiche ont
   abouti sur le parcours final sans exception JavaScript.
+
+### Dialogues et invitation par lien sur `/v2`
+
+Base du lot `61e00d10`. Le dialogue partagé de la console avait un
+bandeau bleu et des boutons génériques. Dans « Inviter », la copie
+du lien se faisait via une petite icône sans accès clavier. Le lot
+réutilise la modale Bootstrap, les traductions et les actions de MeshCentral.
+
+Critères réutilisables pour la phase Rust
+
+- Depuis un groupe autorisé, le menu ouvre « Inviter ». Un groupe
+  en lecture seule ne présente aucune action d’invitation.
+- Le dialogue est nommé par son titre. Les libellés restent visibles et
+  sont associés à leurs champs. La description signale que le lien est public.
+- Un changement d’expiration affiche le nouveau lien et sa durée. Le bouton
+  « Copier » place l’URL active dans le presse-papiers et répond au clavier.
+- Le focus est visible pendant la navigation. Échap et les boutons de
+  fermeture ferment le dialogue. Le dialogue suivant garde son propre libellé.
+- Lorsque l’invitation par courriel est disponible, « Envoyer » suit la
+  validation de l’adresse. Le passage à ce mode masque le résultat par lien.
+- Les champs et actions restent lisibles en clair au bureau et en sombre
+  à largeur étroite. L’interface historique à `/` garde sa présentation
+  et la session est conservée lors du passage d’une interface à l’autre.
+
+Résultats sur le compte de recette restreint
+
+- `prepare.cjs --check` est passé sur la base `7d52d950`, sur upstream
+  `d0215d8b` et sur npm officiel 1.3.1. La préparation sur une copie npm
+  déjà équipée a abouti et le gabarit français minifié a été régénéré.
+- La recette Edge a confirmé la mise à jour de l’expiration de 1 heure à
+  1 jour, la copie au clavier de l’URL active, la fermeture par Échap et
+  l’absence d’action dans le groupe en lecture seule. Le dialogue « Ajouter
+  un agent » a retrouvé son bouton d’origine après la fermeture d’« Inviter ».
+- La reprise ciblée après correction de la croix et de la bordure des champs
+  a validé le rendu à 1 280 px en clair et à 390 px en sombre, en français
+  minifié. Les contrastes des textes mesurés atteignent au moins 6,41:1 en
+  clair et 7,10:1 en sombre. La bordure du champ mesuré atteint 4,25:1 en
+  clair et 5,90:1 en sombre. Le retour à `/` conserve la session et ne
+  charge pas l’habillage `/v2`. Aucune exception JavaScript n’a été relevée.
+- Le formulaire de courriel et la validation de l’adresse ont été vérifiés
+  avec la fonction activée côté navigateur dans le jeu de recette. L’envoi
+  SMTP réel reste à valider sur une instance de test équipée.
