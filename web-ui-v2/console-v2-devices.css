@@ -298,7 +298,33 @@
     color: var(--bs-btn-color) !important;
 }
 
-.console-dialog :is(.btn, .btn-close, .form-select, .form-control, .console-invite-result a):focus-visible {
+.console-dialog .modal-footer .btn-danger {
+    --bs-btn-bg: #a6263c;
+    --bs-btn-border-color: #a6263c;
+    --bs-btn-hover-bg: #851e30;
+    --bs-btn-hover-border-color: #851e30;
+    --bs-btn-active-bg: #851e30;
+    --bs-btn-active-border-color: #851e30;
+    --bs-btn-disabled-bg: #a6263c;
+    --bs-btn-disabled-border-color: #a6263c;
+}
+
+[data-bs-theme="dark"] .console-dialog .modal-footer .btn-danger {
+    --bs-btn-color: #451322;
+    --bs-btn-bg: #ffb2bf;
+    --bs-btn-border-color: #ffb2bf;
+    --bs-btn-hover-color: #451322;
+    --bs-btn-hover-bg: #ffd0d8;
+    --bs-btn-hover-border-color: #ffd0d8;
+    --bs-btn-active-color: #451322;
+    --bs-btn-active-bg: #ffd0d8;
+    --bs-btn-active-border-color: #ffd0d8;
+    --bs-btn-disabled-color: #451322;
+    --bs-btn-disabled-bg: #ffb2bf;
+    --bs-btn-disabled-border-color: #ffb2bf;
+}
+
+.console-dialog :is(.btn, .btn-close, .form-select, .form-control, .console-invite-result a, .console-confirmation-devices):focus-visible {
     outline: 2px solid var(--console-focus);
     outline-offset: 2px;
 }
@@ -348,6 +374,31 @@
     text-underline-offset: .2em;
     overflow-wrap: anywhere;
 }
+
+.console-dialog .console-invite-result a:not([href]) { color: var(--console-muted) !important; }
+
+.console-invite-copy-status {
+    margin: .5rem 0 0;
+    color: var(--console-text);
+    font-size: .875rem;
+}
+
+.console-invite-copy-status:empty { margin: 0; }
+
+.console-selection-dialog-count { font-weight: 600; }
+
+.console-confirmation-devices {
+    max-block-size: 9rem;
+    margin-block: .75rem 1rem;
+    overflow: auto;
+    padding: .625rem .875rem .625rem 2rem;
+    border: 1px solid var(--console-border);
+    border-radius: .5rem;
+    background: var(--console-tint);
+    overflow-wrap: anywhere;
+}
+
+.console-confirmation-devices li + li { margin-block-start: .25rem; }
 
 #page_leftbar {
     border-inline-end: 1px solid var(--console-border);
@@ -455,6 +506,46 @@
     align-items: flex-end;
     gap: 6px;
     min-width: 0;
+}
+
+.console-selection-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem 1rem;
+    margin-block: .5rem;
+    padding: .5rem .75rem;
+    border: 1px solid var(--console-control-border);
+    border-radius: .5rem;
+    background: var(--console-tint);
+    color: var(--console-text);
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+.console-selection-bar .btn {
+    --bs-btn-color: var(--console-link);
+    --bs-btn-bg: var(--console-surface);
+    --bs-btn-border-color: var(--console-control-border);
+    --bs-btn-hover-color: var(--console-text);
+    --bs-btn-hover-bg: var(--console-tint);
+    --bs-btn-hover-border-color: var(--console-control-border);
+    --bs-btn-active-color: var(--console-text);
+    --bs-btn-active-bg: var(--console-tint);
+    --bs-btn-active-border-color: var(--console-control-border);
+    min-height: 2rem;
+    padding-inline: .75rem;
+    font-weight: 600;
+}
+
+.console-selection-bar .btn:focus-visible {
+    outline: 2px solid var(--console-focus);
+    outline-offset: 2px;
+}
+
+.device-list-table tr:has(.DeviceCheckbox:checked) > td {
+    background-color: var(--console-tint);
 }
 
 .device-query-field,

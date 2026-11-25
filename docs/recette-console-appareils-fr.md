@@ -349,3 +349,47 @@ Résultats sur le compte de recette restreint
 - Le formulaire de courriel et la validation de l’adresse ont été vérifiés
   avec la fonction activée côté navigateur dans le jeu de recette. L’envoi
   SMTP réel reste à valider sur une instance de test équipée.
+
+### Sélection, confirmations et copie sur `/v2`
+
+Base du lot `68451128`. L’action groupée était un bouton grisé dans la
+barre des filtres. La sélection survivait au filtrage sans indication
+des appareils masqués. Le choix d’une opération d’alimentation pouvait la
+déclencher immédiatement. La copie d’un lien se faisait sans retour visuel.
+
+Critères réutilisables pour la phase Rust
+
+- En mode Liste ou Cartes, la barre d’actions apparaît dès la première
+  sélection et disparaît dès que la sélection est vidée. En mode Liste,
+  les lignes cochées sont surlignées. Le compteur indique combien
+  d’appareils sélectionnés sont hors de la vue actuelle.
+- Le menu conserve les opérations permises par les droits MeshCentral.
+  Les confirmations de suppression groupée, de désinstallation et
+  d’alimentation identifient l’opération et les appareils sélectionnés.
+  La suppression et la désinstallation exigent toujours leur case de
+  confirmation. Une annulation conserve la sélection et rend le focus à
+  « Actions ». Après exécution, le focus revient à « Tout sélectionner ».
+- La copie annonce son succès après écriture dans le presse-papiers.
+  En cas d’échec, le lien reste disponible pour une copie manuelle.
+  Pendant la régénération du lien, le bouton est désactivé et l’ancienne
+  adresse n’est plus utilisable. Une réponse tardive ne remplace pas
+  le lien demandé le plus récemment.
+
+Résultats de la recette
+
+- Préparation compatible avec `7d52d950`, upstream `d0215d8b` et le
+  paquet npm officiel 1.3.1. Mise à jour appliquée sur l’installation
+  npm de test et variante française minifiée régénérée.
+- Dans Edge à 1 280 px en clair, le compte restreint a sélectionné des
+  lignes au clavier. Le compteur a indiqué l’appareil masqué par le filtre.
+  Le groupe en lecture seule ne proposait que l’export. La suppression
+  groupée exigeait sa case de confirmation et Échap rendait le focus à
+  « Actions ». Le test a intercepté le redémarrage, vérifié son destinataire
+  et constaté que la sélection se vidait après confirmation.
+- À 390 px en sombre, le dialogue de désinstallation a affiché l’appareil
+  et attendu la case de confirmation. Le contraste du bouton actif a
+  mesuré 9,04:1. La copie réelle et son échec simulé ont affiché le bon
+  retour. Une réponse de génération retardée a été ignorée. Le retour à `/`
+  a conservé la session et aucune exception JavaScript n’a été relevée.
+- Les opérations d’alimentation, de suppression et de désinstallation
+  ont été contrôlées côté navigateur, avec interception avant le serveur.
