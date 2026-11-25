@@ -1,0 +1,192 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:root {
+    color-scheme: light;
+    --login-background: #edf3f9;
+    --login-surface: #fff;
+    --login-text: #192d43;
+    --login-muted: #4b6177;
+    --login-border: #cbd8e5;
+    --login-control-border: #687d92;
+    --login-accent: #164f8b;
+    --login-primary: #164f8b;
+    --login-primary-hover: #123e6d;
+    --login-focus: #1462a5;
+    --login-error: #9a2537;
+    --login-error-bg: #fff0f1;
+    --login-success: #176647;
+    --login-success-bg: #e7f5ec;
+    --login-shadow: 0 10px 28px rgb(25 45 67 / 10%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --login-background: #141e2a;
+        --login-surface: #1d2937;
+        --login-text: #eff6ff;
+        --login-muted: #bacbe0;
+        --login-border: #43576b;
+        --login-control-border: #92a6bc;
+        --login-accent: #a9d3ff;
+        --login-primary: #164f8b;
+        --login-primary-hover: #2565a5;
+        --login-focus: #9fceff;
+        --login-error: #ffc1c7;
+        --login-error-bg: #412830;
+        --login-success: #a1e2b9;
+        --login-success-bg: #20382f;
+        --login-shadow: 0 10px 28px rgb(0 0 0 / 22%);
+    }
+}
+
+body, body#body {
+    background: var(--login-background) !important;
+    color: var(--login-text) !important;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+    font-size: .9375rem !important;
+    line-height: 1.5;
+}
+
+/* Login style 2 has a standalone table. The classic and mobile layouts have a masthead. */
+#backgroundImage + #centralTable {
+    width: min(100%, 40rem);
+    min-height: 100vh;
+    margin-inline: auto;
+    padding-inline: 16px;
+}
+
+#backgroundImage + #centralTable #logincell {
+    padding-block: 24px;
+    vertical-align: middle;
+}
+
+#masthead .title,
+#masthead .title2 { font-family: inherit; text-shadow: none; }
+
+#loginPicture { display: block; max-width: min(100%, 23rem); max-height: 6rem; margin: 0 auto 12px; }
+#loginPicture:not([src]) { display: none; }
+
+#loginPicture + div {
+    color: var(--login-text) !important;
+    font: 650 clamp(1.5rem, 5vw, 2.125rem)/1.15 system-ui, sans-serif !important;
+    overflow-wrap: anywhere;
+    padding-bottom: 16px !important;
+    text-shadow: none !important;
+}
+
+#loginPicture + div sup {
+    color: var(--login-muted);
+    font: 500 .875rem/1.5 system-ui, sans-serif !important;
+    vertical-align: baseline;
+}
+
+:is(#loginpanel, #createpanel, #resetpanel, #tokenpanel, #resettokenpanel, #resetpasswordpanel, #checkemailpanel, #waitpushpanel) {
+    box-sizing: border-box;
+    width: min(100%, 26rem) !important;
+    padding: clamp(16px, 5vw, 28px) !important;
+    border: 1px solid var(--login-border);
+    border-radius: 12px !important;
+    background: var(--login-surface) !important;
+    color: var(--login-text) !important;
+    box-shadow: var(--login-shadow) !important;
+    overflow-wrap: anywhere;
+}
+
+:is(#createpanel, #resetpanel, #tokenpanel, #resettokenpanel, #resetpasswordpanel, #checkemailpanel, #waitpushpanel) form > div > b {
+    font-size: 1.125rem;
+}
+
+form[method=post] table { width: 100%; }
+
+form[method=post] :is(input:not([type]), input[type=text], input[type=password], input[type=email], select) {
+    box-sizing: border-box;
+    width: 100% !important;
+    min-height: 44px;
+    margin-block: 4px;
+    padding: 8px 10px !important;
+    border: 1px solid var(--login-control-border) !important;
+    border-radius: 6px !important;
+    background: var(--login-surface) !important;
+    color: var(--login-text) !important;
+    font: inherit;
+}
+
+form[method=post] input::placeholder { color: var(--login-muted); opacity: 1; }
+
+form[method=post] :is(input[type=button], input[type=submit]) {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 44px;
+    margin-block: 4px;
+    padding: 8px 12px !important;
+    border: 1px solid var(--login-control-border) !important;
+    border-radius: 6px !important;
+    background: var(--login-surface) !important;
+    color: var(--login-text) !important;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+:is(#loginButton, #createButton, #eresetButton, #tokenOkButton, #resetTokenOkButton, #resetPassButton) {
+    width: 100% !important;
+    border-color: var(--login-primary) !important;
+    background-color: var(--login-primary) !important;
+    color: #fff !important;
+}
+
+:is(#loginButton, #createButton, #eresetButton, #tokenOkButton, #resetTokenOkButton, #resetPassButton):hover:not(:disabled) {
+    border-color: var(--login-primary-hover) !important;
+    background-color: var(--login-primary-hover) !important;
+}
+
+:is(#logincell, #page_content) form[method=post] :is(input[type=button], input[type=submit]):disabled {
+    border-color: var(--login-border) !important;
+    background: var(--login-background) !important;
+    color: var(--login-muted) !important;
+    cursor: default;
+}
+
+body :is(a, input, select, button):focus-visible {
+    outline: 3px solid var(--login-focus);
+    outline-offset: 2px;
+}
+
+body :is(#logincell, #page_content, #welcomeText, [id=flink], #footer) a:any-link {
+    color: var(--login-accent);
+    text-underline-offset: .2em;
+}
+
+.msg {
+    display: block;
+    padding: 8px 12px;
+    border-inline-start: 3px solid currentColor;
+    border-radius: 4px;
+    text-align: start;
+}
+
+.msg.error { color: var(--login-error); background: var(--login-error-bg); }
+.msg.success { color: var(--login-success); background: var(--login-success-bg); }
+.msg b { color: inherit !important; }
+.msg + br { display: none; }
+
+#showPassHintLink {
+    width: 100% !important;
+    border: 1px solid var(--login-border) !important;
+    background: var(--login-background) !important;
+}
+
+#authStrategies img { box-shadow: none !important; }
+#welcomeText { color: var(--login-muted) !important; }
+[id=flink], #footer { color: var(--login-muted) !important; font-size: .8125rem; }
+
+#container #footer { background-color: var(--login-surface) !important; border-top: 1px solid var(--login-border); }
+
+@media (max-width: 600px) {
+    #centralTable #welcomeimage { display: none; }
+    #centralTable #logincell { width: 100%; }
+    #backgroundImage + #centralTable { padding-inline: 12px; }
+    #loginPicture + div sup { display: block; margin-top: 4px; }
+    #backgroundImage + #centralTable [id=flink] { float: none !important; text-align: center; }
+}

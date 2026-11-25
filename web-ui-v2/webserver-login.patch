@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+diff --git a/webserver.js b/webserver.js
+--- a/webserver.js
++++ b/webserver.js
+@@ -10639,6 +10639,9 @@
+ 
+     // Render a page using the proper language
+     function render(req, res, filename, args, user) {
++        if ((req.webUiV2 === true) && /^login(?:2)?(?:-mobile)?(?:-min)?$/.test(obj.path.basename(filename))) {
++            args.customCSSTags = (args.customCSSTags || '') + '<link rel="stylesheet" href="styles/console-v2-login.css">';
++        }
+         if (obj.renderPages != null) {
+             // Get the list of acceptable languages in order
+             var acceptLanguages = obj.getLanguageCodes(req);

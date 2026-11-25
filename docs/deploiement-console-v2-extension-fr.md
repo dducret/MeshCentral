@@ -47,7 +47,12 @@ Le premier appel vérifie le gabarit et sélectionne le patch serveur qui
 correspond au code installé. Si un contexte upstream a changé, il indique
 les patchs à revoir. Parmi les fichiers fournis par MeshCentral, seul
 `webserver.js` est modifié par le second appel. Le module `server.cjs`, les
-deux ressources statiques et le gabarit généré sont ajoutés à la copie.
+ressources statiques et le gabarit généré sont ajoutés à la copie.
+
+Pour la mire de connexion, reprends le répertoire `web-ui-v2/` complet de
+la branche. `prepare.cjs` applique aussi `webserver-login.patch`, y compris
+sur un paquet où la console `/v2` est déjà installée. Ce patch charge la
+feuille de style de la mire dans les gabarits MeshCentral servis à `/v2`.
 
 Si le ZIP d’extension est déjà décompressé, extrais le correctif npm par-dessus
 ce lot dans `MC_LOT`, puis relance `--check`. Le correctif met à jour les
@@ -120,7 +125,7 @@ généré et les ressources déployées dans la copie de déploiement.
 
 Pour désactiver la route, retire l’option `webUiV2` et redémarre. Pour
 annuler le déploiement du code, repasse sur l’image ou la copie sauvegardée.
-Sur une copie de préparation, `git apply --reverse` avec le patch serveur
-correspondant (`webserver-npm-1.3.1.patch` pour le paquet npm officiel)
-retire l’intégration. Les fichiers générés peuvent alors être retirés de
-cette copie.
+Sur une copie de préparation, applique `git apply --reverse` d’abord à
+`webserver-login.patch`, puis au patch serveur correspondant
+(`webserver-npm-1.3.1.patch` pour le paquet npm officiel). Les fichiers
+générés peuvent ensuite être retirés de cette copie.

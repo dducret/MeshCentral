@@ -661,9 +661,9 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 +                                r += '<span class="console-group-name">' + "Individual Devices" + '</span>';
                                  current = '*';
                              }
-+                            r += '<span id=DevxHeader' + deviceHeaderId + ' class=devHeaderx></span>' + extra + '</div>';
++                            r += '<span id=DevxHeader' + deviceHeaderId + ' class=devHeaderx></span>';
 +                            if (mesh2) { r += getMeshActions(mesh2, meshrights); }
-+                            r += '</div>';
++                            r += extra + '</div></div>';
                              if (view == 2) { r += '</div>'; }
                              displayedMeshes[current] = 1;
                              c = 0;
@@ -694,8 +694,8 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
 +                            var collapsed = CollapsedGroups[mesh._id] === true;
 +                            r += '<div class="DevSt console-group-header"><div class="console-group-main">';
 +                            if ((mesh.mtype == 2) || (mesh.mtype == 3)) { r += renderGroupCollapse(deviceHeaderId2, mesh._id, 0, collapsed); }
-+                            r += renderGroupName(mesh) + '<span class=devHeaderx>' + format("{0} nodes", 0) + '</span></div>';
-+                            r += getMeshActions(mesh, meshrights) + '</div></td></tr><tr>';
++                            r += renderGroupName(mesh) + '<span class=devHeaderx>' + format("{0} nodes", 0) + '</span>';
++                            r += getMeshActions(mesh, meshrights) + '</div></div></td></tr><tr>';
                              if (mesh.mtype == 1) {
                                  r += '<td><div style=padding:10px><i>' + "No Intel&reg; AMT devices in this device group";
                                  if (((meshrights & 4) != 0) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) { r += ', <a href=# style=cursor:pointer onclick=\'return addDeviceToMesh("' + mesh._id + '")\'>' + "add one" + '</a>'; }

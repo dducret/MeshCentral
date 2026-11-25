@@ -393,21 +393,15 @@
 }
 
 #xdevices .console-group-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
     border: 1px solid var(--console-border);
     border-radius: 6px;
 }
 
 .console-group-main {
     display: flex;
-    flex: 1;
     flex-wrap: wrap;
     align-items: center;
     gap: 2px 8px;
-    min-width: 0;
 }
 
 .console-group-name {

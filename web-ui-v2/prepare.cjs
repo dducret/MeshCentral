@@ -35,8 +35,7 @@ function generateView(source) {
     }
 }
 
-function selectServerPatch(app) {
-    const patches = ['webserver', 'webserver-npm-1.3.1'];
+function selectServerPatch(app, patches) {
     const failures = [];
     for (const name of patches) {
         const check = applyPatch(app, name, '--check', '--ignore-space-change');
@@ -53,12 +52,16 @@ function prepare(app, checkOnly) {
     if (project.name !== 'meshcentral') throw Error('Indiquer la racine de MeshCentral.');
     const views = path.join(app, 'views');
     const view = generateView(path.join(views, 'default3.handlebars'));
-    const serverPatch = selectServerPatch(app);
+    const serverPatches = [
+        selectServerPatch(app, ['webserver', 'webserver-npm-1.3.1']),
+        selectServerPatch(app, ['webserver-login'])
+    ];
 
     const assets = [
         ['server.cjs', 'web-ui-v2/server.cjs'],
         ['legacy-switch.js', 'public/scripts/console-v2-legacy-switch.js'],
-        ['console-v2-devices.css', 'public/styles/console-v2-devices.css']
+        ['console-v2-devices.css', 'public/styles/console-v2-devices.css'],
+        ['console-v2-login.css', 'public/styles/console-v2-login.css']
     ].map(([source, target]) => [path.join(app, target), fs.readFileSync(path.join(__dirname, source))]);
     const target = path.join(views, 'default3-v2.handlebars');
     const translations = path.join(views, 'translations');
@@ -74,7 +77,9 @@ function prepare(app, checkOnly) {
         fs.writeFileSync(file, contents);
     }
     fs.writeFileSync(target, view);
-    if (!serverPatch.applied) requireSuccess(applyPatch(app, serverPatch.name, '--ignore-space-change'), 'Échec de l’application du patch serveur.');
+    for (const patch of serverPatches) {
+        if (!patch.applied) requireSuccess(applyPatch(app, patch.name, '--ignore-space-change'), 'Échec de l’application du patch serveur.');
+    }
 }
 
 try {

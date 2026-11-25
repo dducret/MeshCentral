@@ -255,3 +255,29 @@ droits et les dialogues déjà présents dans MeshCentral.
   Le contraste mesuré du compte, du lien légal et du bouton de groupe
   était compris entre 8,32:1 et 14,02:1 en clair, et entre 9,44:1 et
   13,55:1 en sombre. Aucune exception JavaScript n’a été relevée.
+
+### Mire de connexion et actions près du compteur sur `/v2`
+
+Le 25 novembre 2026, la reprise part du commit `263b94e2`. Les actions
+autorisées suivent le compteur dans les en-têtes de groupe, y compris
+lorsque le groupe est vide. La mire `/v2` utilise une feuille de style
+dédiée sur les gabarits de connexion MeshCentral existants.
+
+- La préparation a accepté la base `7d52d950` et le paquet npm officiel
+  1.3.1. Sur une copie npm qui servait déjà `/v2`, elle a ajouté le patch
+  de connexion. Le contrôle est aussi passé après installation. Les
+  variantes minifiée et française de `default3-v2` ont été générées.
+- Dans Edge sur npm 1.3.1, le formulaire a été validé au clavier à
+  1 280 px en clair et à 390 px en sombre sur le rendu français minifié.
+  Un mot de passe erroné a affiché une erreur lisible. La reprise ciblée
+  après correction du contraste du champ minifié a validé le formulaire,
+  la saisie d’un code TOTP réel du compte synthétique et l’ouverture de
+  la console. Le contraste mesuré des champs et du bouton a atteint au
+  moins 8,32:1, et le message d’erreur a mesuré 7,05:1.
+- Le bouton de groupe était à 8 px du compteur dans le groupe rempli
+  sur les deux largeurs, et dans le groupe vide au bureau. Le menu a
+  fonctionné au clavier et au toucher. Le groupe en lecture seule
+  n’affichait aucune action d’ajout. La mire de `/` avait sa présentation
+  habituelle et la session ouverte sur `/v2` y restait active.
+- La recette concerne l’authentification MeshCentral intégrée avec TOTP.
+  Aucune exception JavaScript n’a été relevée sur le parcours testé.
