@@ -16,9 +16,193 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
      {{{customCSSTags}}}
      <link rel="apple-touch-icon" href="/favicon-303x303.png" />
      <script type="text/javascript" src="scripts/common-0.0.1{{{min}}}.js"></script>
-@@ -359,34 +361,27 @@
+@@ -239,154 +241,153 @@
+     <!-- main page -->
+     <div id=container>
+         <div id="notifiyBox" class="notifiyBox" style="display:none"></div>
+-        <div id="masthead" class="noselect masthead-container">
+-            <div class="masthead-left">
++        <header id="masthead" class="noselect masthead-container console-masthead">
++            <div class="masthead-left{{#unless title1}} console-brand-picture{{/unless}}">
+                 <div class="masthead-title" onclick="go(1,event)">{{{titlehtml}}}</div>
+                 <div class="masthead-titles-container">
+-                    <div class="title" onclick="go(1,event)">{{{title1}}}</div>
+-                    <div class="title2" onclick="go(1,event)">{{{title2}}}</div>
++                    {{#if title1}}{{#unless titlehtml}}<img class="console-site-logo" src="favicon-303x303.png" alt="" />{{/unless}}
++                    <button type="button" class="title" onclick="go(1,event)">{{{title1}}}</button>{{/if}}
++                    {{#if title2}}<span class="title2">{{{title2}}}</span>{{/if}}
+                 </div>
              </div>
-         </div>
+ 
+             <div class="masthead-right">
+-                <div id="notificationCount"
+-                    class="notification-icon position-relative"
+-                    title="Click to view current notifications"
+-                    onclick="clickNotificationIcon()"
+-                    style="display: none;">
+-                    <i class="fa-solid fa-bell fa-xl text-white"></i>
+-                    <span id="notificationBadge"
+-                        class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+-                </div>
++                <span id="consoleConnectionStatus" class="console-connection-status" role="status"></span>
++                <button type="button" id="verifyEmailId2" class="console-header-control" style="display:none" title="Verify Email" onclick="account_showVerifyEmail()">
++                    <i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="console-verify-label">Verify Email</span>
++                </button>
++                <button type="button" id="notificationCount" class="console-header-control" title="Click to view current notifications"
++                    aria-label="Notifications" onclick="clickNotificationIcon()" style="display:none">
++                    <i class="fa-solid fa-bell" aria-hidden="true"></i>
++                    <span id="notificationBadge" class="badge rounded-pill bg-danger" aria-hidden="true">0</span>
++                </button>
+ 
+                 <div class="user-menu-container">
+                     <div id="userDropdown">
+-                        <div id="userDropdownButton">
+-                            <img id="userDropdownImage" src="images/user-256.png" alt="User" />
+-                            <span id="userDropdownName" class="LogoffLinkColor"></span>
+-                            <i class="fa fa-chevron-down LogoffLinkColor" style="font-size: 12px;"></i>
+-                        </div>
++                        <button type="button" id="userDropdownButton" class="console-header-control"
++                            aria-controls="userDropdownMenu" aria-expanded="false" aria-label="My Account">
++                            <img id="userDropdownImage" src="images/user-256.png" alt="" />
++                            <span id="userDropdownName"></span>
++                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
++                        </button>
+                         <div id="userDropdownMenu">
+                             <div id="userDropdownMenuContainer">
+-                                <div class="userDropdownMenuItem userDropdownMobileOnly mobile-menu-item" data-action="devices" onclick="handleUserMenuItem('devices')">
++                                <button type="button" class="userDropdownMenuItem userDropdownMobileOnly mobile-menu-item" data-action="devices" onclick="handleUserMenuItem('devices')">
+                                     <i class="fa fa-desktop userDropdownMenuIcon"></i>
+                                     <span>My Devices</span>
+-                                </div>
+-
+-                                <div class="userDropdownMenuItem userDropdownMobileOnly mobile-menu-item" data-action="events" onclick="handleUserMenuItem('events')">
++                                </button>
++
++                                <button type="button" class="userDropdownMenuItem userDropdownMobileOnly mobile-menu-item" data-action="events" onclick="handleUserMenuItem('events')">
+                                     <i class="fa fa-calendar userDropdownMenuIcon"></i>
+                                     <span>My Events</span>
+-                                </div>
+-
+-                                <div id="mobileUsersMenuItem" class="userDropdownMenuItem userDropdownMobileOnly users-menu-item mobile-menu-item d-none" data-action="users" onclick="handleUserMenuItem('users')">
++                                </button>
++
++                                <button type="button" id="mobileUsersMenuItem" class="userDropdownMenuItem userDropdownMobileOnly users-menu-item mobile-menu-item d-none" data-action="users" onclick="handleUserMenuItem('users')">
+                                     <i class="fa fa-users userDropdownMenuIcon"></i>
+                                     <span>My Users</span>
+-                                </div>
+-
+-                                <div id="mobileFilesMenuItem" class="userDropdownMenuItem userDropdownMobileOnly files-menu-item mobile-menu-item d-none" data-action="files" onclick="handleUserMenuItem('files')">
++                                </button>
++
++                                <button type="button" id="mobileFilesMenuItem" class="userDropdownMenuItem userDropdownMobileOnly files-menu-item mobile-menu-item d-none" data-action="files" onclick="handleUserMenuItem('files')">
+                                     <i class="fa fa-folder userDropdownMenuIcon"></i>
+                                     <span>My Files</span>
+-                                </div>
+-
+-                                <div id="mobileServerMenuItem" class="userDropdownMenuItem userDropdownMobileOnly server-menu-item mobile-menu-item d-none" data-action="server" onclick="handleUserMenuItem('server')">
++                                </button>
++
++                                <button type="button" id="mobileServerMenuItem" class="userDropdownMenuItem userDropdownMobileOnly server-menu-item mobile-menu-item d-none" data-action="server" onclick="handleUserMenuItem('server')">
+                                     <i class="fa fa-server userDropdownMenuIcon"></i>
+                                     <span>My Server</span>
+-                                </div>
++                                </button>
+ 
+                                 <div id="userDropdownMenuDivider" class="userDropdownMobileOnly mobile-menu-item"></div>
+ 
+-                                <div class="userDropdownMenuItem userDropdownUISettings" onclick="toggleUISubmenu(); event.stopPropagation();">
++                                <button type="button" class="userDropdownMenuItem userDropdownUISettings" aria-controls="uiSubmenu" aria-expanded="false" onclick="toggleUISubmenu(); event.stopPropagation();">
+                                     <i class="fa fa-sliders userDropdownMenuIcon"></i>
+                                     <span>UI Settings</span>
+                                     <i class="fa fa-chevron-right userDropdownMenuIcon submenu-arrow"></i>
+-                                </div>
++                                </button>
+ 
+                                 <div id="uiSubmenu" class="userDropdownSubmenu">
+-                                    <div id="toggleModernUIMenuItem" class="userDropdownMenuItem" data-action="toggle-modern-ui" onclick="handleUserMenuItem('toggle-modern-ui')">
++                                    <button type="button" id="toggleModernUIMenuItem" class="userDropdownMenuItem" data-action="toggle-modern-ui" onclick="handleUserMenuItem('toggle-modern-ui')">
+                                         <i class="fa fa-toggle-on userDropdownMenuIcon"></i>
+                                         <span>Toggle Modern UI</span>
+-                                    </div>
+-                                    <div class="userDropdownMenuItem" data-action="left-bar" onclick="handleUserMenuItem('left-bar')">
++                                    </button>
++                                    <button type="button" class="userDropdownMenuItem" data-action="left-bar" onclick="handleUserMenuItem('left-bar')">
+                                         <i class="fa fa-window-maximize fa-rotate-270 userDropdownMenuIcon"></i>
+                                         <span>Left Bar Interface</span>
+-                                    </div>
+-                                    <div class="userDropdownMenuItem" data-action="top-bar" onclick="handleUserMenuItem('top-bar')">
++                                    </button>
++                                    <button type="button" class="userDropdownMenuItem" data-action="top-bar" onclick="handleUserMenuItem('top-bar')">
+                                         <i class="fa fa-window-maximize userDropdownMenuIcon"></i>
+                                         <span>Top Bar Interface</span>
+-                                    </div>
+-                                    <div class="userDropdownMenuItem" data-action="fixed-width" onclick="handleUserMenuItem('fixed-width')">
++                                    </button>
++                                    <button type="button" class="userDropdownMenuItem" data-action="fixed-width" onclick="handleUserMenuItem('fixed-width')">
+                                         <i class="fa fa-columns userDropdownMenuIcon"></i>
+                                         <span>Fixed Width Interface</span>
+-                                    </div>
+-                                    <div id="toggleFooterMenuItem" class="userDropdownMenuItem" data-action="toggle-footer" onclick="handleUserMenuItem('toggle-footer')">
++                                    </button>
++                                    <button type="button" id="toggleFooterMenuItem" class="userDropdownMenuItem" data-action="toggle-footer" onclick="handleUserMenuItem('toggle-footer')">
+                                         <i class="fa fa-window-minimize userDropdownMenuIcon"></i>
+                                         <span>Toggle Footer Bar</span>
+-                                    </div>
+-                                    <div class="userDropdownMenuItem" data-action="browser-fullscreen" onclick="toggleBrowserFullscreen(); QV('userDropdownMenu', false); QV('uiSubmenu', false); resetChevronArrow();">
++                                    </button>
++                                    <button type="button" class="userDropdownMenuItem" data-action="browser-fullscreen" onclick="toggleBrowserFullscreen(); setUserDropdown(false);">
+                                         <i class="fa fa-expand userDropdownMenuIcon"></i>
+                                         <span>Browser Full Screen</span>
+-                                    </div>
++                                    </button>
+                                     <div id="userDropdownMenuDivider" class="userDropdownMobileOnly"></div>
+                                 </div>
+ 
+-                                <div id="toggleNightMenuItem" class="userDropdownMenuItem" data-action="toggle-night" onclick="toggleNightMode(); QV('userDropdownMenu', false); QV('uiSubmenu', false); resetChevronArrow();">
++                                <button type="button" id="toggleNightMenuItem" class="userDropdownMenuItem" data-action="toggle-night" onclick="toggleNightMode(); setUserDropdown(false);">
+                                     <i id="nightModeIcon" class="fa userDropdownMenuIcon night-mode-icon"></i>
+                                     <span id="nightModeText">Toggle night mode</span>
+-                                </div>
+-
+-
+-                                <div class="userDropdownMenuItem" data-action="notes" onclick="handleUserMenuItem('notes')">
++                                </button>
++
++
++                                <button type="button" class="userDropdownMenuItem" data-action="notes" onclick="handleUserMenuItem('notes')">
+                                     <i class="fa fa-sticky-note userDropdownMenuIcon"></i>
+                                     <span>Personal Notes</span>
+-                                </div>
+-
+-                                <div class="userDropdownMenuItem" data-action="account" onclick="handleUserMenuItem('account')">
++                                </button>
++
++                                <button type="button" class="userDropdownMenuItem" data-action="account" onclick="handleUserMenuItem('account')">
+                                     <i class="fa fa-user userDropdownMenuIcon"></i>
+                                     <span>My Account</span>
+-                                </div>
++                                </button>
++                                <a class="userDropdownMenuItem userDropdownMobileOnly" href="terms">
++                                    <i class="fa-solid fa-circle-info userDropdownMenuIcon" aria-hidden="true"></i>
++                                    <span>Terms &amp; Privacy</span>
++                                </a>
+ 
+                                 <div id="userDropdownMenuDivider"></div>
+ 
+-                                <div class="userDropdownMenuItem" data-action="logout" onclick="handleUserMenuItem('logout')">
++                                <button type="button" class="userDropdownMenuItem" data-action="logout" onclick="handleUserMenuItem('logout')">
+                                     <i class="fa fa-sign-out userDropdownMenuIcon"></i>
+                                     <span>Logout</span>
+-                                </div>
++                                </button>
+                             </div>
+                         </div>
+                     </div>
+                     <span id="idleTimeoutNotify" class="idle-timeout-notify"></span>
+                 </div>
+             </div>
+-        </div>
++        </header>
          <div class="sidebar flex-column" id="page_leftbar">
 -            <div style="height:24px"></div>
 -            <nav class="nav flex-column">
@@ -65,7 +249,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                              <td class="topbar_td_end style3">&nbsp;</td>
                          </tr>
                      </table>
-@@ -394,36 +389,26 @@
+@@ -394,36 +395,26 @@
                          <div class="mobile-submenu-scroll">
                              <button class="mobile-submenu-arrow" onclick="mobileSubMenuScroll('MainSubMenu',-1)" aria-label="Scroll left"><i class="fa fa-caret-square-left"></i></button>
                              <div class="mobile-submenu-scroll-inner" id="MainSubMenuScrollInner">
@@ -115,7 +299,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      </div>
                      <div id=MeshSubMenuSpan style="display:none">
                          <table id=MeshSubMenu cellpadding=0 cellspacing=0 class=style1>
-@@ -498,7 +483,7 @@
+@@ -498,7 +489,7 @@
              </div>
              <div id=p1 style="display:none">
                  <div id="p1title" class="d-flex justify-content-between align-items-center">
@@ -124,7 +308,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      <div style="display:none" id="devListToolbarViewIcons">
                          <div id=devViewPageState style="float:left;line-height:32px;height:32px;font-size:16px;display:none"></div>
                          <div tabindex=0 id=devViewPageButton1 class=viewSelector onclick=onDeviceViewPageChange(1)
-@@ -549,37 +534,42 @@
+@@ -549,37 +540,42 @@
                          </span>
                      </div>
                  </div>
@@ -191,7 +375,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                          <div class="form-check" title="Show devices operating system name"><input class="form-check-input me-1" type=checkbox id=RealNameCheckBox onclick=onRealNameCheckBox() /><label class="form-check-label" for="RealNameCheckBox">OS Name</label></div>
                          <label style="display:none"><input type=checkbox id=OnlineCheckBox class="form-check-input me-2" onclick=onOnlineCheckBox(event) /><span title="Only show devices that are online">Online</span></label>
                          <span id="devsCustomUIBar"></span>
-@@ -649,7 +639,9 @@
+@@ -649,7 +645,9 @@
                              </select>
                              &nbsp;
                          </div>
@@ -202,7 +386,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      </div>
                  </div>
                  <div id=NoMeshesPanel style="display:none">
-@@ -970,45 +962,37 @@
+@@ -970,45 +968,37 @@
              </div>
              <div id=p10 style="display:none">
                  <div id=p10title class="d-flex align-items-center">
@@ -277,7 +461,32 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      <div id=p10html2></div>
                      <div id=p10html3></div>
                      <div id=p10html4></div>
-@@ -2387,6 +2371,7 @@
+@@ -2066,19 +2056,12 @@
+             </div>
+             <br id="column_l_bottomgap" />
+         </div>
+-        <div id="footer">
+-            <div class="footer1">{{{footer}}}</div>
+-            <div class="footer2">
+-                <div class="row">
+-                    <div class="col-md-6 d-flex gap-2">
+-                    </div>
+-                    <div class="col-md-6">
+-                        <a id="verifyEmailId2" style="display:none" href=# onclick="account_showVerifyEmail()">Verify Email</a>
+-                        &nbsp;<a id="termsLinkFooter" href=terms>Terms &amp; Privacy</a>
+-                    </div>
+-                </div>
++        <footer id="footer" class="console-footer">
++            <div class="console-footer-inner">
++                <div class="footer1">{{{footer}}}</div>
++                <div class="footer2"><a id="termsLinkFooter" href="terms">Terms &amp; Privacy</a></div>
+             </div>
+-        </div>
++        </footer>
+         <div class="modal fade" id="xxAddAgentModal" tabindex="-1" aria-hidden="true">
+             <div class="modal-dialog modal-dialog-centered" id="xxAddAgentModalConf">
+                 <div class="modal-content">
+@@ -2387,6 +2370,7 @@
          var sessionRefreshTimer = null;
          var domain = '{{{domain}}}';
          var domainUrl = '{{{domainurl}}}';
@@ -285,7 +494,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          var authCookie = '{{{authCookie}}}';
          var authRelayCookie = '{{{authRelayCookie}}}';
          var logoutControls = JSON.parse(decodeURIComponent('{{{logoutControls}}}'));
-@@ -2417,6 +2402,9 @@
+@@ -2417,6 +2401,9 @@
          if (pluginHandlerBuilder != null) { pluginHandler = new pluginHandlerBuilder(); }
          var installedPluginList = null;
          var goBackStack = [];
@@ -295,7 +504,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          var CollapsedGroups = {};
          var collapseGroups = '{{{collapseGroups}}}';
          try { CollapsedGroups = JSON.parse(getstore('_collapse', '{}')); } catch (ex) { }
-@@ -2655,7 +2643,10 @@
+@@ -2655,7 +2642,10 @@
              // Deleted non-english style and fix all topbar titles
              if ((['en', 'ko', 'ja', 'zh-chs', 'zh-cht'].indexOf('{{{lang}}}') == -1) && ('{{{lang}}}'.toLowerCase() != '')) { QC('body').add('nonenglish'); }
              var elements = document.getElementsByClassName('topbar_td');
@@ -307,7 +516,58 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // Custom UI
              if (customui != null) {
-@@ -3194,12 +3185,10 @@
+@@ -2963,28 +2953,6 @@
+             if (footerBar) { Q('uiViewButton5').classList.add('uiSelectorSel'); }
+         }
+ 
+-        // Toggle user dropdown menu
+-        function toggleUserDropdown() {
+-            if (xxdialogMode) return;
+-            var userDropdownMenu = Q('userDropdownMenu');
+-            if (userDropdownMenu) {
+-                var isVisible = (userDropdownMenu.style.display == 'none' || userDropdownMenu.style.display == '');
+-                if (isVisible) {
+-                    userDropdownMenu.style.display = 'block';
+-                    QV('uiMenu', false);
+-                    QV('topMenu', false);
+-                    updateNightModeIcon();
+-                    updateMobileTopBarVisibility();
+-                } else {
+-                    userDropdownMenu.style.display = 'none';
+-                    var uiSubmenu = Q('uiSubmenu');
+-                    if (uiSubmenu) {
+-                        uiSubmenu.style.display = 'none';
+-                    }
+-                    resetChevronArrow();
+-                }
+-            }
+-        }
+         function updateUserDropdown() {
+             if (logoutControls && logoutControls.name) {
+                 var userImageSrc = 'images/user-256.png';
+@@ -2996,21 +2964,6 @@
+                 var userImage = Q('userDropdownImage');
+                 if (userImage) {
+                     userImage.src = userImageSrc;
+-                }
+-
+-                var userDropdownButton = Q('userDropdownButton');
+-                if (userDropdownButton) {
+-                    userDropdownButton.onclick = function(e) {
+-                        e.preventDefault();
+-                        e.stopPropagation();
+-                        toggleUserDropdown();
+-                        return false;
+-                    };
+-                }
+-
+-                var userDropdownMenu = Q('userDropdownMenu');
+-                if (userDropdownMenu) {
+-                    userDropdownMenu.style.display = 'none';
+                 }
+             }
+         }
+@@ -3194,12 +3147,10 @@
  
          function toggleBootstrapUIMode() {
              if (xxdialogMode) return;
@@ -324,7 +584,18 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function getNodeFromId(id) { if (nodes != null) { for (var i in nodes) { if (nodes[i]._id == id) return nodes[i]; } } return null; }
-@@ -5266,6 +5255,7 @@
+@@ -3211,7 +3162,10 @@
+         }
+ 
+         function onStateChanged(server, state, prevState, errorCode) {
++            if (state == 2) { QH('consoleConnectionStatus', ''); }
+             if (state == 0) {
++                QH('consoleConnectionStatus', (prevState == 2 && autoReconnect && errorCode != 'noauth' && errorCode != 'invalidorigin')
++                    ? "Reconnecting..." : "Server disconnected");
+                 // Control web socket disconnected
+                 setDialogMode(0); // Close any dialog boxes if present
+                 go(0); // Go to disconnection panel
+@@ -5266,6 +5220,7 @@
  
          function onDeviceViewChange(i) {
              if (i != null) { Q('viewselect').value = i; }
@@ -332,7 +603,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var j = 1; j < 6; j++) { Q('devViewButton' + j).classList.remove('viewSelectorSel'); }
              Q('devViewButton' + Q('viewselect').value).classList.add('viewSelectorSel');
              putstore('deviceView', Q('viewselect').value);
-@@ -5372,6 +5362,7 @@
+@@ -5372,6 +5327,7 @@
                  return;
              }
              if (e.ctrlKey == true || e.altKey == true || e.metaKey == true) return;
@@ -340,7 +611,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              if (Q('viewselect').value < 4) {
                  var processed = 0;
                  if (e.key) {
-@@ -5509,9 +5500,12 @@
+@@ -5509,9 +5465,12 @@
          var deviceHeaders = {};
          var oldviewmode = 0;
          function updateDevices() {
@@ -354,7 +625,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('xdevicesmap', view == 4);
              QVH('devListToolbar', view < 3);
              QVH('kvmListToolbar', (view == 3) || (view == 5));
-@@ -5563,9 +5557,8 @@
+@@ -5563,9 +5522,8 @@
                  }
  
                  // Compute the width of the device view.
@@ -366,7 +637,37 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Compute number of colums
                  var colcount = 4;
-@@ -5719,7 +5712,7 @@
+@@ -5592,20 +5550,21 @@
+                             if (meshes[node.meshid] && (meshes[node.meshid].mtype == 3)) { if (meshes[node.meshid].relayid) { extra = '<span class=devHeaderx>' + ", Relayed Devices" + '</span>'; } else { extra = '<span class=devHeaderx>' + ", Local Devices" + '</span>'; } }
+                             if ((view == 1) && (current != null)) { if (c == 2) { r += '<td><div style=width:301px></div></td>'; } if (r != '') { r += '</tr></table>'; } }
+                             if (view == 2) { r += '<div>'; }
+-                            r += '<div class=DevSt style=width:100%;padding-top:4px><span style=float:right>';
+-                            r += '<span id=DevxHeader' + deviceHeaderId + ' class=devHeaderx></span>' + extra;
+-                            r += '</span>';
++                            var collapsed = CollapsedGroups[node.meshid] === true;
++                            r += '<div class="DevSt console-group-header"><div class="console-group-main">';
+                             if ((view == 1) || (view == 2) || (view == 3) || (view == 5)) {
+-                                var collapsed = CollapsedGroups[node.meshid];
+-                                r += '<i role="button" cmenu=expandAllContextMenu onclick=toggleCollapseGroup("' + deviceHeaderId + '","' + node.meshid + '",' + view + ') class="fa-fw fa-solid ' + ((collapsed === true) ? 'fa-chevron-right' : 'fa-chevron-down') + '" id="DevxColImg' + deviceHeaderId + '"></i>';
++                                r += renderGroupCollapse(deviceHeaderId, node.meshid, view, collapsed);
+                             }
+-                            if (meshes[node.meshid]) {
+-                                r += '<span id=MxMESH cmenu=meshContextMenu tabindex=0 style=cursor:pointer onclick=gotoMesh("' + node.meshid + '") onkeypress="if (event.key==\'Enter\') gotoMesh(\'' + node.meshid + '\')">' + EscapeHtml(meshes[node.meshid].name) + '</span>' + getMeshActions(mesh2, meshrights) + '</div>';
++                            if (mesh2) {
++                                r += renderGroupName(mesh2);
+                                 current = node.meshid;
+                             } else {
+-                                r += '<span id=MxMESH><i>' + "Individual Devices" + '</i></span></div>';
++                                r += '<span class="console-group-name">' + "Individual Devices" + '</span>';
+                                 current = '*';
+                             }
++                            r += '<span id=DevxHeader' + deviceHeaderId + ' class=devHeaderx></span>' + extra + '</div>';
++                            if (mesh2) { r += getMeshActions(mesh2, meshrights); }
++                            r += '</div>';
+                             if (view == 2) { r += '</div>'; }
+                             displayedMeshes[current] = 1;
+                             c = 0;
+@@ -5719,7 +5678,7 @@
                      if (sort == 3) {
                          r = '<div style="margin:30px">' + "No devices are included in any groups, click on a device's \"Groups\" to add to a group." + '</div>';
                      } else {
@@ -375,7 +676,30 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  }
  
-@@ -5804,7 +5797,7 @@
+@@ -5734,16 +5693,13 @@
+                         var mesh = sortedMeshes[i], meshrights = GetMeshRights(mesh);
+                         if (displayedMeshes[mesh._id] == null) {
+                             if ((current != '') && (r != '')) { r += '</tr></table>'; }
+-                            r += '<table style=width:100%;padding-top:4px cellpadding=0 cellspacing=0><tr><td colspan=3 class=DevSt>';
+-
+-                            // Collapsing header & start collapsing area
++                            r += '<table style=width:100%;padding-top:4px cellpadding=0 cellspacing=0><tr><td colspan=3>';
+                             deviceHeaderId2++;
+-                            var collapsed = CollapsedGroups[mesh._id];
+-                            r += '<i role="button" cmenu=expandAllContextMenu onclick=toggleCollapseGroup("' + deviceHeaderId2 + '","' + mesh._id + '") class="fa-fw fa-solid ' + ((collapsed === true) ? 'fa-chevron-right' : 'fa-chevron-down') + '" id="DevxColImg' + deviceHeaderId2 + '"></i>'; // Collapse action
+-
+-                            r += '<span id=MxMESH style=cursor:pointer onclick=gotoMesh("' + mesh._id + '")>' + EscapeHtml(mesh.name) + '</span><span>';
+-                            r += getMeshActions(mesh, meshrights);
+-                            r += '</span></td></tr><tr>';
++                            var collapsed = CollapsedGroups[mesh._id] === true;
++                            r += '<div class="DevSt console-group-header"><div class="console-group-main">';
++                            if ((mesh.mtype == 2) || (mesh.mtype == 3)) { r += renderGroupCollapse(deviceHeaderId2, mesh._id, 0, collapsed); }
++                            r += renderGroupName(mesh) + '<span class=devHeaderx>' + format("{0} nodes", 0) + '</span></div>';
++                            r += getMeshActions(mesh, meshrights) + '</div></td></tr><tr>';
+                             if (mesh.mtype == 1) {
+                                 r += '<td><div style=padding:10px><i>' + "No Intel&reg; AMT devices in this device group";
+                                 if (((meshrights & 4) != 0) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) { r += ', <a href=# style=cursor:pointer onclick=\'return addDeviceToMesh("' + mesh._id + '")\'>' + "add one" + '</a>'; }
+@@ -5804,7 +5760,7 @@
                              if (requestedLastConnects == false) { requestedLastConnects = true; meshserver.send({ action: 'lastconnects' }); }
                          }
                          // This height of 1 div at the end to fix a problem in Linux firefox browsers
@@ -384,7 +708,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      }
                  } else {
                      r += '</table>';
-@@ -6028,10 +6021,17 @@
+@@ -6028,10 +5984,17 @@
  
              // Node
              var icon = node.icon;
@@ -404,7 +728,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              } else if (view == 2) {
                  var states = [];
                  if (node.conn) {
-@@ -6066,11 +6066,11 @@
+@@ -6066,11 +6029,11 @@
                  if (sort == 1) { collapseName = ('pwr:' + (node.pwr ? node.pwr : 0)); }
                  else if ((sort == 3) || (sort == 4)) { collapseName = 'tag:**xx**xx*TaG*xx**xx**'; }
                  var collapsed = (sort != 3) & (sort != 4) & CollapsedGroups[collapseName];
@@ -419,13 +743,91 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Use defaults if needed
                  if (deviceViewSettings == null) { deviceViewSettings = {}; }
-@@ -6143,4 +6143,4 @@
+@@ -6143,4 +6106,4 @@
 -                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center>' + states.join('&nbsp;+&nbsp;'); } // Connectivity
 +                if (deviceViewSettings.devsCols.indexOf('conn') >= 0) { r += '<td style=text-align:center><span class="device-status ' + statusClass + '">' + (offline ? "Offline" : states.join('&nbsp;+&nbsp;')) + '</span></td>'; } // Connectivity
                  if (deviceViewSettings.devsCols.indexOf('amthost') >= 0) { r += '<td style=text-align:center>' + (((node.intelamt == null) || (node.intelamt.host == null)) ? '' : EscapeHtml(node.intelamt.host)); }
                  if (deviceViewSettings.devsCols.indexOf('amtstate') >= 0) {
                      var amtstate = '';
-@@ -8044,7 +8044,7 @@
+@@ -6374,6 +6337,8 @@
+                 QC('DevxColImg' + id).remove('fa-chevron-down');
+                 QC('DevxColImg' + id).add('fa-chevron-right');
+             }
++            var collapseButton = Q('DevxColImg' + id).closest('.console-group-collapse');
++            if (collapseButton) { collapseButton.setAttribute('aria-expanded', x ? 'true' : 'false'); }
+             putstore('_collapse', JSON.stringify(CollapsedGroups));
+             updateCollapseAllButton();
+             onDevicesScrollEx();
+@@ -6551,29 +6516,49 @@
+             }
+         }
+ 
++        function renderGroupCollapse(id, meshid, view, collapsed) {
++            var name = meshes[meshid] ? meshes[meshid].name : "Individual Devices";
++            return '<button type="button" class="console-group-collapse" cmenu=expandAllContextMenu aria-label="' +
++                EscapeHtml("Device group" + ': ' + name) + '" aria-expanded="' + (collapsed ? 'false' : 'true') +
++                '" onclick=\'toggleCollapseGroup(' + id + ',"' + meshid + '",' + view + ')\'><i aria-hidden="true" class="fa-fw fa-solid ' +
++                (collapsed ? 'fa-chevron-right' : 'fa-chevron-down') + '" id="DevxColImg' + id + '"></i></button>';
++        }
++
++        function renderGroupName(mesh) {
++            return '<button type="button" class="console-group-name" cmenu=meshContextMenu onclick=\'gotoMesh("' + mesh._id + '")\'>' +
++                EscapeHtml(mesh.name) + '</button>';
++        }
++
+         function getMeshActions(mesh, meshrights) {
+             if ((meshrights & 4) == 0) return '';
+-            var r = '';
++            var actions = [];
+             if (mesh.mtype == 1) {
+                 if ((features & 1) == 0) { // If not WAN-Only
+-                    r += ' <a href=# role="button" title="' + "Add a new Intel&reg; AMT computer that is located on the local network." + '" onclick=\'return addDeviceToMesh("' + mesh._id + '")\'>' + "Add Local" + '</a>';
+-                    r += ' <a href=# role="button" title="' + "Add a new Intel&reg; AMT computer by scanning the local network." + '" onclick=\'return addAmtScanToMesh("' + mesh._id + '")\'>' + "Scan Network" + '</a>';
+-                }
+-                if (mesh.amt && (mesh.amt.type > 0)) { // CCM Deactivate, CCM or ACM activation, Full Automatic
+-                    r += ' <a href=# role="button" title="' + "Perform Intel&reg; AMT activation and configuration." + '" onclick=\'return showAmtSetup("' + mesh._id + '")\'>' + "Setup" + '</a>';
+-                }
+-            }
+-            if ((mesh.mtype == 2) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) { // Agent device group
+-                r += ' <a href=# role="button" title="' + "Add a new computer to this device group by installing the mesh agent." + '" onclick=\'return addAgentToMesh("' + mesh._id + '")\'>' + "Add Agent" + '</a>';
+-                if ((features & 2) == 0) { r += ' <a href=# role="button" title="' + "Invite someone to install the mesh agent on this device group." + '" onclick=\'return inviteAgentToMesh("' + mesh._id + '")\'>' + "Invite" + '</a>'; }
+-            }
+-            if (mesh.mtype == 3) { // Local device group
+-                r += ' <a href=# role="button" title="' + "Add device located on the local network." + '" onclick=\'return addLocalDeviceToMesh("' + mesh._id + '")\'>' + "Add Device" + '</a>';
+-            }
+-            //if (mesh.amt && (mesh.amt.type > 2)) { // ACM activation or Full Automatic
+-            //    r += ' <a href=# style=cursor:pointer;font-size:small title="' + "Switch Intel AMT to Admin Control Mode (ACM)." + '" onclick=\'return showAmtAcmSetup()\'>' + "ACM" + '</a>';
+-            //}
+-            return r;
++                    actions.push(['addDeviceToMesh', "Add Local"]);
++                    actions.push(['addAmtScanToMesh', "Scan Network"]);
++                }
++                if (mesh.amt && (mesh.amt.type > 0)) { actions.push(['showAmtSetup', "Setup"]); }
++            }
++            if ((mesh.mtype == 2) && ((userinfo.siteadmin == 0xFFFFFFFF) || ((userinfo.siteadmin & 4096) == 0))) {
++                actions.push(['addAgentToMesh', "Add Agent"]);
++                if ((features & 2) == 0) { actions.push(['inviteAgentToMesh', "Invite"]); }
++            }
++            if (mesh.mtype == 3) { actions.push(['addLocalDeviceToMesh', "Add Device"]); }
++            if (actions.length == 0) return '';
++
++            function actionButton(action, className) {
++                return '<button type="button" class="' + className + '" onclick=\'return ' + action[0] + '("' + mesh._id + '")\'>' +
++                    EscapeHtml(action[1]) + '</button>';
++            }
++            if (actions.length == 1) return '<div class="console-group-actions">' + actionButton(actions[0], 'console-group-control') + '</div>';
++
++            var label = (mesh.mtype == 2) ? "Add Device" : "Actions";
++            var r = '<div class="dropdown console-group-actions"><button type="button" class="console-group-control console-group-trigger"' +
++                ' data-bs-toggle="dropdown" aria-expanded="false" aria-label="' + EscapeHtml(label + ': ' + mesh.name) + '">' +
++                '<span class="console-group-trigger-label">' + EscapeHtml(label) + '</span><i class="fa-solid fa-chevron-down" aria-hidden="true"></i>' +
++                '<i class="fa-solid fa-ellipsis" aria-hidden="true"></i></button><ul class="dropdown-menu dropdown-menu-end console-group-menu">';
++            for (var i = 0; i < actions.length; i++) { r += '<li>' + actionButton(actions[i], 'dropdown-item') + '</li>'; }
++            return r + '</ul></div>';
+         }
+ 
+         function addLocalDeviceToMesh(meshid) {
+@@ -8044,7 +8029,7 @@
                  var panel = [0, 10, 12, 11, 13, 16, 17, 15, 19][action]; // (invalid), General, Desktop, Terminal, Files, Events, Console, Plugin
                  if (event && (event.shiftKey == true)) {
                      // Open the device in a different tab
@@ -434,7 +836,16 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  } else {
                      // Go to the right panel
                      gotoDevice(nodeid, panel);
-@@ -8941,7 +8941,7 @@
+@@ -8283,7 +8268,7 @@
+             QV('filesContextMenu', false);
+             QV('deskPlayerContextMenu', false);
+             QV('deskKeyShortcutContextMenu', false);
+-            QV('userDropdownMenu', false);
++            if (userDropdownOpen) { setUserDropdown(false); }
+             QV('deskPreConfigShortcutContextMenu', false);
+             QV('deskPreConfigScriptContextMenu', false);
+             QV('expandAllContextMenu', false);
+@@ -8941,7 +8926,7 @@
  
              if (event && ((event.shiftKey == true) || (event.which == 2) || (event.button == 1))) {
                  // Open the device in a different tab
@@ -443,7 +854,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  return;
              }
  
-@@ -8998,12 +8998,17 @@
+@@ -8998,12 +8983,17 @@
                  showStoreApps = false;
  
                  // Add node name
@@ -465,7 +876,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  QH('p11deviceName', nname);
                  QH('p12deviceName', nname);
                  QH('p13deviceName', nname);
-@@ -9016,7 +9021,7 @@
+@@ -9016,7 +9006,7 @@
                  QH('p19deviceName', nname);
  
                  // Node attributes
@@ -474,7 +885,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // If title bar is hidden, display the device name here
                  if ((args.hide & 8) != 0) { x += '<br />' + addDeviceAttribute("Name", nnameEx); }
-@@ -9279,11 +9284,11 @@
+@@ -9279,11 +9269,11 @@
                  for (var i in meshes) { if (meshes[i].relayid == node._id) { relayFor.push('<a href=# onclick=gotoMesh("' + meshes[i]._id + '") style=cursor:pointer>' + EscapeHtml(meshes[i].name) + '</a>'); } }
                  if (relayFor.length > 0) { x += addDeviceAttribute('<span title="' + "Device groups this device is a relay for" + '">' + "Relay for" + '</span>', relayFor.join(", ")); }
  
@@ -489,7 +900,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  if ((node.mtype == 2) && (connectivity & 1) && ((meshrights & 131072) != 0)) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" cmenu=deskPreConfigScriptContextMenu value="' + "Run" + '" title="' + "Run commands on this device" + '" onclick=runDeviceCmd("' + encodeURIComponentEx(node._id) + '") />'; }
                  if (node.mtype != 4) {
                      if ((meshrights & 8) && (connectivity & 1) && ((meshrights & 16384) != 0) || ((node.pmt == 1) && ((features2 & 2) != 0))) { x += '<input type=button class="btn btn-primary btn-sm me-2 mb-2" value="' + "Message" + '" title="' + "Display a text message on the remote device" + '" onclick=deviceMessageFunction() />'; }
-@@ -9325,7 +9330,7 @@
+@@ -9325,7 +9315,7 @@
                      }
                  }
  
@@ -498,7 +909,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Show node last 7 days timeline
                  mainUpdate(256);
-@@ -9449,6 +9454,8 @@
+@@ -9449,6 +9439,8 @@
                      else if ((node.pwr > 1) && (node.pwr != 7)) { powerstate += ('<br/>' + powerStateStrings[node.pwr]); }
                  }
                  QH('MainComputerState', powerstate);
@@ -507,7 +918,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
                  // Set the node icon
                  Q('MainComputerImage').setAttribute('src', 'images/icons256-' + node.icon + '-1.png');
-@@ -9484,10 +9491,10 @@
+@@ -9484,10 +9476,10 @@
  
                  // Set the Intel AMT / Intel SM tab name
                  if ((node.intelamt != null) && (typeof node.intelamt.sku == 'number') && ((node.intelamt.sku & 16) != 0)) {
@@ -520,7 +931,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                      QH('p14deviceNamePrefix', "Intel&reg; AMT");
                  }
  
-@@ -9645,7 +9652,11 @@
+@@ -9645,7 +9637,11 @@
              }
              setupDesktop(); // Always refresh the desktop, even if we are on the same device, we need to do some canvas switching.
              if (!panel) panel = 10;
@@ -532,7 +943,110 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function setIpPduState(op) {
-@@ -23317,11 +23328,49 @@
+@@ -21731,49 +21727,45 @@
+         var userDropdownOpen = false;
+         var uiSubmenuOpen = false;
+ 
+-        function initializeUserDropdown() {
+-            var dropdownButton = Q('userDropdownButton');
+-            var dropdownMenu = Q('userDropdownMenu');
+-            var uiSettingsButton = document.querySelector('.userDropdownUISettings');
+-            var uiSubmenu = Q('uiSubmenu');
+-
+-            if (!dropdownButton || !dropdownMenu) return;
+-
++        function setUserDropdown(open) {
++            userDropdownOpen = open;
++            Q('userDropdownButton').setAttribute('aria-expanded', open ? 'true' : 'false');
++            QC('userDropdownMenu').toggle('show', open);
++            QS('userDropdownMenu').display = open ? 'block' : 'none';
++            if (open) {
++                QV('uiMenu', false);
++                QV('topMenu', false);
++                updateNightModeIcon();
++                updateMobileTopBarVisibility();
++                return;
++            }
+             QS('uiSubmenu').display = 'none';
+             QS('uiSubmenu').opacity = '0';
+             QS('uiSubmenu').transform = 'translateX(12px)';
+-            dropdownMenu.classList.remove('show');
+-
+-                dropdownButton.onclick = function(e) {
+-                    e.preventDefault();
+-                    e.stopPropagation();
+-                    userDropdownOpen = !userDropdownOpen;
+-                    dropdownMenu.classList.toggle('show');
+-                    if (!userDropdownOpen) {
+-                        QS('uiSubmenu').display = 'none';
+-                        QS('uiSubmenu').opacity = '0';
+-                        QS('uiSubmenu').transform = 'translateX(12px)';
+-                        uiSubmenuOpen = false;
+-                        resetChevronArrow();
+-                    }
+-                };
+-
+-            document.addEventListener('click', function(e) {
+-                var uiSubmenu = Q('uiSubmenu');
+-                if (!dropdownMenu.contains(e.target) && !dropdownButton.contains(e.target) && !uiSubmenu.contains(e.target)) {
+-                    dropdownMenu.classList.remove('show');
+-                    QS('uiSubmenu').display = 'none';
+-                    QS('uiSubmenu').opacity = '0';
+-                    QS('uiSubmenu').transform = 'translateX(12px)';
+-                    userDropdownOpen = false;
+-                    uiSubmenuOpen = false;
+-                    resetChevronArrow();
++            uiSubmenuOpen = false;
++            resetChevronArrow();
++        }
++
++        function initializeUserDropdown() {
++            var button = Q('userDropdownButton');
++            var dropdown = Q('userDropdown');
++            button.onclick = function(event) {
++                event.stopPropagation();
++                if (!xxdialogMode) { setUserDropdown(!userDropdownOpen); }
++            };
++            dropdown.addEventListener('keydown', function(event) {
++                if (event.key == 'Escape' && userDropdownOpen) {
++                    event.preventDefault();
++                    event.stopPropagation();
++                    setUserDropdown(false);
++                    button.focus();
+                 }
+             });
+         }
+ 
+         function toggleUISubmenu() {
+             uiSubmenuOpen = !uiSubmenuOpen;
++            document.querySelector('.userDropdownUISettings').setAttribute('aria-expanded', uiSubmenuOpen ? 'true' : 'false');
+ 
+             var uiSubmenu = Q('uiSubmenu');
+             var isDesktop = window.innerWidth > 769;
+@@ -21812,13 +21804,7 @@
+         }
+ 
+         function handleUserMenuItem(action) {
+-            Q('userDropdownMenu').classList.remove('show');
+-            QS('uiSubmenu').display = 'none';
+-            QS('uiSubmenu').opacity = '0';
+-            QS('uiSubmenu').transform = 'translateX(12px)';
+-            userDropdownOpen = false;
+-            uiSubmenuOpen = false;
+-            resetChevronArrow();
++            setUserDropdown(false);
+ 
+             switch(action) {
+                 case 'devices': goForward('devices'); break;
+@@ -21843,6 +21829,7 @@
+         }
+ 
+         function resetChevronArrow() {
++            document.querySelector('.userDropdownUISettings').setAttribute('aria-expanded', 'false');
+             var arrow = document.querySelector('.userDropdownUISettings .fa-chevron-right');
+             if (arrow) arrow.style.transform = '';
+         }
+@@ -23317,11 +23304,49 @@
              if (((b & 8) || x) && f) f(x, t);
          }
  
@@ -583,7 +1097,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
          function messagebox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t, 1); }
          function statusbox(t, m) { setSessionActivity(); QH('id_dialogMessage', m); setDialogMode(1, t); }
-@@ -23331,8 +23380,13 @@
+@@ -23331,8 +23356,13 @@
              setSessionActivity();
              if (xxdialogMode || (goBackStack.length == 0)) return;
              if (fullscreen) { deskToggleFull(); }
@@ -597,7 +1111,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
          }
  
          function goForward(id) { if (xxdialogMode) return; backStack.push(id); goStack(); }
-@@ -23376,15 +23430,15 @@
+@@ -23376,15 +23406,15 @@
                  // Open the device in a different tab
                  event.preventDefault();
                  if ((x >= 9) && (x <= 19)) {
@@ -618,7 +1132,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
                  }
                  return;
              }
-@@ -23408,6 +23462,8 @@
+@@ -23408,6 +23438,8 @@
              if (xxcurrentView == 17) deviceDetailsStatsClear();
  
              // Edit this line when adding a new screen
@@ -627,7 +1141,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              for (var i = 0; i < 61; i++) { QV('p' + i, i == x); }
              xxcurrentView = x;
  
-@@ -23435,6 +23491,8 @@
+@@ -23435,6 +23467,8 @@
              for (var i in mainBarItems) {
                  QC(mainBarItems[i]).remove('fullselect');
                  QC(mainBarItems[i]).remove('semiselect');
@@ -636,7 +1150,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Remove left bar selection
-@@ -23442,6 +23500,7 @@
+@@ -23442,6 +23476,7 @@
              for (var i in leftBarItems) {
                  QC(leftBarItems[i]).remove('lbbuttonsel');
                  QC(leftBarItems[i]).remove('lbbuttonsel2');
@@ -644,7 +1158,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              }
  
              // Define class for Menu(s) as fully or semi active.
-@@ -23476,6 +23535,10 @@
+@@ -23476,6 +23511,10 @@
                  QC('MainMenuMyServer').add(mainMenuActiveClass);
                  QC('LeftMenuMyServer').add(leftMenuActiveClass);
              }
@@ -655,7 +1169,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
              QV('ServerPlugins', pluginHandler != null);
  
              // column_l max-height
-@@ -23498,7 +23561,14 @@
+@@ -23498,7 +23537,14 @@
                  QC(panels[i]).remove('style3x');
                  QC(panels[i]).remove('style3sel');
                  QC(panels[i]).add((x == i) ? 'style3sel' : 'style3x');
@@ -671,7 +1185,7 @@ diff --git a/views/default3.handlebars b/views/default3.handlebars
  
              // If going to the remote desktop tab, adjust the tab.
              if (x == 11) { deskAdjust(); }
-@@ -23509,7 +23579,7 @@
+@@ -23509,7 +23555,7 @@
              QV('p15BackButton', (x != 115) && ((args.hide & 32) == 0) && ('{{currentNode}}'.toLowerCase() == '')); // For device console, only show the back button if not hidden and not in single device view mode.
              if ((x == 15) || (x == 115)) { setupConsole(); }
  

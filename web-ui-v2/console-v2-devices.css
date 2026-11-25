@@ -30,18 +30,169 @@
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-#masthead .title {
-    font-family: inherit;
-    font-size: 1.375rem;
-    text-shadow: none;
+#masthead.console-masthead {
+    gap: 12px;
+    padding-inline: 16px;
+    border-block-end: 1px solid var(--console-border);
+    background: var(--console-surface);
+    color: var(--console-text);
 }
 
-#masthead .title2 {
-    font-family: inherit;
-    font-size: .8125rem;
-    padding-block: 0;
-    text-shadow: none;
+#masthead .masthead-left {
+    flex: 0 1 auto;
+    max-width: min(100%, 32rem);
+    min-height: 40px;
+    gap: 0;
+    padding-inline: 10px;
+    border-radius: 6px;
+    background: #163957 url(../logo.png) left center / auto 100% no-repeat;
 }
+
+#masthead .console-brand-picture {
+    width: min(54%, 24rem);
+    background-size: contain;
+}
+
+#masthead .masthead-title img {
+    float: none;
+    max-width: 8rem;
+    max-height: 36px;
+    object-fit: contain;
+}
+
+#masthead .console-site-logo {
+    float: none;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+}
+
+#masthead .masthead-titles-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+#masthead .title,
+#masthead .title2 {
+    padding: 3px 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    text-shadow: none;
+    font: inherit;
+}
+
+#masthead .title { font-size: 1rem; font-weight: 650; }
+#masthead .title2 { font-size: .8125rem; cursor: inherit; }
+#masthead .masthead-right { gap: 6px; margin-inline-start: auto; }
+#masthead #userDropdown { background: transparent; }
+
+.console-connection-status {
+    max-inline-size: 12em;
+    color: var(--console-muted);
+    font-size: .8125rem;
+}
+
+.console-connection-status:empty { display: none; }
+
+#masthead .console-header-control,
+.console-group-control,
+.console-group-collapse,
+.console-group-name {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+#masthead .console-header-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 44px;
+    height: 44px;
+    padding-inline: 8px;
+    font-size: .875rem;
+}
+
+#masthead #userDropdownImage {
+    float: none;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    border-color: var(--console-border);
+}
+
+#masthead #userDropdownName {
+    max-inline-size: 10rem;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#masthead #userDropdownMenu,
+#masthead #uiSubmenu,
+.console-group-menu {
+    border: 1px solid var(--console-border);
+    border-radius: 8px;
+    background: var(--console-surface);
+    color: var(--console-text);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 16%);
+}
+
+#masthead .userDropdownMenuItem {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--console-text);
+    text-decoration: none;
+}
+
+#masthead .console-header-control:hover,
+#masthead .console-header-control[aria-expanded="true"],
+#masthead .userDropdownMenuItem:hover,
+.console-group-menu .dropdown-item:hover,
+.console-group-menu .dropdown-item:focus {
+    background: var(--console-tint);
+    color: var(--console-text);
+}
+
+#masthead :is(button, a):focus-visible,
+#footer a:focus-visible,
+.console-group-header button:focus-visible {
+    outline: 2px solid var(--console-focus);
+    outline-offset: -2px;
+}
+
+#masthead .title:focus-visible { outline-color: #fff; }
+
+#footer.console-footer {
+    padding: 6px 16px;
+    border-block-start: 1px solid var(--console-border);
+    background: var(--console-surface);
+    color: var(--console-muted);
+    font-size: .8125rem;
+}
+
+.console-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 16px;
+    min-height: 30px;
+}
+
+#footer.console-footer :is(.footer1, .footer2, td) {
+    float: none;
+    padding: 0;
+    color: var(--console-muted);
+}
+
+.console-footer-inner .footer2 { margin-inline-start: auto; }
+#footer.console-footer a { color: var(--console-link); text-underline-offset: .2em; }
 
 #page_leftbar {
     border-inline-end: 1px solid var(--console-border);
@@ -239,6 +390,80 @@
     background: var(--console-tint);
     color: var(--console-text);
     font-weight: 600;
+}
+
+#xdevices .console-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border: 1px solid var(--console-border);
+    border-radius: 6px;
+}
+
+.console-group-main {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 8px;
+    min-width: 0;
+}
+
+.console-group-name {
+    min-width: 0;
+    padding: 3px 4px;
+    overflow-wrap: anywhere;
+    font-weight: 650;
+    text-align: start;
+}
+
+.console-group-collapse,
+.console-group-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 34px;
+    min-height: 34px;
+}
+
+.console-group-control {
+    border-color: var(--console-control-border);
+    padding-inline: 8px;
+    background: var(--console-surface);
+    font-size: .8125rem;
+    font-weight: 600;
+}
+
+.console-group-header button:hover,
+.console-group-trigger[aria-expanded="true"] { color: var(--console-link); }
+.console-group-actions { flex: 0 0 auto; max-inline-size: 46%; }
+.console-group-trigger .fa-ellipsis { display: none; }
+
+#xdevices .console-group-menu {
+    min-inline-size: min(11rem, calc(100vw - 24px));
+    max-inline-size: calc(100vw - 24px);
+}
+
+.console-group-menu .dropdown-item {
+    min-height: 38px;
+    color: var(--console-text);
+    font-size: .875rem;
+    font-weight: 500;
+    white-space: normal;
+}
+
+@media (max-width: 599px) {
+    #masthead.console-masthead { gap: 6px; padding-inline: 8px; }
+    #masthead :is(#userDropdownName, .console-verify-label, .title + .title2) { display: none; }
+    #masthead .console-connection-status { max-inline-size: 8em; }
+    #xdevices .console-group-header { padding: 5px 8px !important; }
+    .console-group-collapse,
+    .console-group-control { min-width: 44px; min-height: 44px; }
+    .console-group-trigger :is(.console-group-trigger-label, .fa-chevron-down) { display: none; }
+    .console-group-trigger .fa-ellipsis { display: inline-block; }
+    .console-group-menu .dropdown-item { min-height: 44px; }
 }
 
 #xdevices .device-tile {

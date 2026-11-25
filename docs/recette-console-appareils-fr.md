@@ -224,3 +224,34 @@ Le lot réuni a été appliqué avec `git am` sur une copie de `7d52d950`.
 Le contrôle de préparation depuis un checkout Windows en CRLF a accepté
 cette révision et le paquet npm officiel 1.3.1. La lecture des patchs
 convertit leurs fins de ligne en LF avant de les transmettre à Git.
+
+### En-tête, pied de page et actions de groupe sur `/v2`
+
+Le 25 novembre 2026, la reprise part du commit `d1de8ab3` du fork.
+Les modifications de présentation sont dans le patch du gabarit Bootstrap
+et sa feuille de style. Les commandes groupe utilisent les filtres de
+droits et les dialogues déjà présents dans MeshCentral.
+
+| Étape de la recette | Résultat attendu |
+| --- | --- |
+| Ouvrir `/v2` avec un compte restreint | L’en-tête contient le nom du serveur et le menu du compte. La vérification d’adresse e-mail apparaît dans l’en-tête lorsque le compte la permet. |
+| Sélectionner, replier puis rouvrir un groupe | Le nom donne accès à la fiche du groupe et le chevron indique l’état du groupe au clavier. Le compteur suit la liste affichée. |
+| Comparer un groupe modifiable à un groupe en lecture seule | Le menu du premier expose les actions permises par son type et ses paramètres. Le second n’affiche aucune commande d’ajout. Les boutons ouvrent les dialogues MeshCentral. |
+| Passer en thème sombre puis ouvrir la liste sur mobile | Les couleurs restent lisibles. À 390 px, le menu compact est utilisable et le lien légal est accessible depuis le compte. |
+| Consulter `/` depuis la même session | L’interface historique s’ouvre avec le même compte. |
+
+- `prepare.cjs --check` a accepté la base upstream `7d52d950` et le paquet
+  npm officiel `meshcentral@1.3.1`. La génération du gabarit minifié et de
+  sa version française a abouti avec le traducteur MeshCentral.
+- La recette Edge sur npm 1.3.1 a utilisé un compte sans droit
+  d’administration du site, avec droit d’ajout sur un seul groupe. En
+  mode Liste à 1 280 px, le clavier a replié le groupe, ouvert le menu
+  d’actions et restauré le focus avec Échap. Les dialogues d’ajout et
+  d’invitation se sont ouverts. Aucune commande d’ajout n’était affichée
+  dans le groupe en lecture seule.
+- La reprise ciblée après correction de l’ouverture du menu du compte a
+  validé l’accès au clavier, le pied de page personnalisé, le menu mobile
+  sur le rendu français minifié et la bascule vers `/` avec la même session.
+  Le contraste mesuré du compte, du lien légal et du bouton de groupe
+  était compris entre 8,32:1 et 14,02:1 en clair, et entre 9,44:1 et
+  13,55:1 en sombre. Aucune exception JavaScript n’a été relevée.
